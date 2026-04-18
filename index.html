@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Arquitectura RAG y Automatización con AI · AGENTIC</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/black.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #8a2be2; --secondary: #00f2fe; --bg-dark: #0f172a;
+      --glass-bg: rgba(255,255,255,0.05); --glass-border: rgba(255,255,255,0.1);
+      --text-main: #f8fafc; --text-muted: #94a3b8;
+      --accent: #f59e0b; --green: #22c55e; --red: #ef4444;
+    }
+    body { background: radial-gradient(circle at center, #1e293b 0%, var(--bg-dark) 100%); font-family: 'Inter', sans-serif; }
+    .reveal { font-family: 'Inter', sans-serif; color: var(--text-main); }
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 { font-family: 'Outfit', sans-serif; font-weight: 700; text-transform: none; letter-spacing: -0.02em; }
+    .text-gradient { background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
+    .text-gradient-amber { background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
+    .text-gradient-green { background: linear-gradient(135deg, #22c55e 0%, #00f2fe 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
+    .glass-card { background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; box-shadow: 0 8px 32px rgba(0,0,0,0.3); margin: 1rem auto; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .glass-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,242,254,0.15); }
+    .glass-pill { background: rgba(138,43,226,0.2); border: 1px solid rgba(138,43,226,0.4); color: #e2cbff; padding: 0.4rem 1.2rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; display: inline-block; margin-bottom: 1rem; letter-spacing: 0.05em; text-transform: uppercase; }
+    .glass-pill.cyan  { background: rgba(0,242,254,0.1); border: 1px solid rgba(0,242,254,0.3); color: var(--secondary); }
+    .glass-pill.green { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.4); color: #86efac; }
+    .glass-pill.amber { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.4); color: #fcd34d; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
+    .stat-box { text-align: center; padding: 1.2rem; }
+    .stat-number { font-size: 3rem; font-weight: 800; line-height: 1; margin-bottom: 0.4rem; }
+    .stat-label { font-size: 0.95rem; color: var(--text-muted); }
+    .reveal ul.premium-list { list-style: none; padding: 0; margin: 0; }
+    .reveal ul.premium-list li { margin-bottom: 0.9rem; font-size: 1.05rem; display: flex; align-items: flex-start; line-height: 1.4; }
+    .reveal ul.premium-list li i { color: var(--secondary); margin-right: 0.8rem; margin-top: 0.2rem; font-size: 1rem; flex-shrink: 0; }
+    .reveal pre.glass-code { background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.2rem 1.5rem; font-size: 0.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.5); line-height: 1.6; text-align: left; }
+    .highlight-box { border-left: 4px solid var(--primary); padding: 0.8rem 1rem 0.8rem 1.5rem; background: rgba(138,43,226,0.08); margin: 1rem 0; border-radius: 0 12px 12px 0; text-align: left; }
+    .highlight-box.cyan  { border-left-color: var(--secondary); background: rgba(0,242,254,0.06); }
+    .highlight-box.amber { border-left-color: var(--accent); background: rgba(245,158,11,0.08); }
+    .highlight-box.green { border-left-color: var(--green); background: rgba(34,197,94,0.08); }
+    .highlight-box.red   { border-left-color: var(--red); background: rgba(239,68,68,0.08); }
+    .reveal table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border); }
+    .reveal table th { background: rgba(255,255,255,0.1); padding: 0.75rem 1rem; font-size: 0.95rem; }
+    .reveal table td { padding: 0.7rem 1rem; border-top: 1px solid var(--glass-border); font-size: 0.9rem; }
+    .step-flow { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin: 1.5rem 0; }
+    .step-node { background: rgba(138,43,226,0.2); border: 1px solid rgba(138,43,226,0.5); border-radius: 12px; padding: 0.6rem 1rem; font-size: 0.9rem; text-align: center; min-width: 110px; }
+    .step-arrow { color: var(--secondary); font-size: 1.4rem; }
+    .tool-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(0,242,254,0.1); border: 1px solid rgba(0,242,254,0.25); border-radius: 8px; padding: 0.35rem 0.8rem; font-size: 0.85rem; font-weight: 600; color: var(--secondary); }
+    .reveal .progress span { background: var(--secondary) !important; }
+    .step-numbered { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; text-align: left; }
+    .step-num { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border-radius: 50%; width: 1.9rem; height: 1.9rem; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .step-content { font-size: 0.95rem; line-height: 1.5; }
+    .step-content strong { color: var(--secondary); }
+
+    /* New CSS for Pyramid and Tables */
+    .pyramid-wrapper { display: flex; align-items: center; justify-content: center; gap: 3rem; margin-top: 1rem; }
+    .pyramid-container { display: flex; flex-direction: column; align-items: center; gap: 8px; position: relative; width: 500px; }
+    .pyramid-layer { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; padding: 1.5rem; color: white; transition: all 0.3s ease; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); text-align: center; }
+    .pyramid-layer.cima { width: 40%; background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%); clip-path: polygon(50% 0%, 100% 100%, 0% 100%); height: 110px; align-items: flex-end; padding-bottom: 0.8rem; border-top: 1px solid rgba(255,255,255,0.3); }
+    .pyramid-layer.medio { width: 75%; background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%); clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%); height: 120px; border-top: 1px solid rgba(255,255,255,0.2); }
+    .pyramid-layer.base { width: 100%; background: rgba(51, 65, 85, 0.8); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%); height: 130px; }
+    .pyramid-label { position: absolute; font-weight: 800; font-family: 'Outfit', sans-serif; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+    .pyramid-layer:hover { transform: scale(1.05); z-index: 10; cursor: pointer; filter: brightness(1.2); }
+    .pyr-info-card { text-align: left; max-width: 450px; }
+    .pyr-entry { margin-bottom: 1.2rem; display: flex; gap: 1rem; }
+    .pyr-dot { width: 12px; height: 12px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+    
+    /* Improved Table Responsiveness for Bloque 6 */
+    .responsive-table-wrapper { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; border: 1px solid var(--glass-border); }
+    .premium-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .premium-table th { background: rgba(138,43,226,0.15); color: var(--secondary); text-align: left; padding: 1rem; border-bottom: 2px solid var(--glass-border); }
+    .premium-table td { padding: 1rem; border-bottom: 1px solid var(--glass-border); color: var(--text-main); transition: background 0.2s; }
+    .premium-table tr:hover td { background: rgba(255,255,255,0.03); }
+    .premium-table tr:last-child td { border-bottom: none; }
+    
+    @media (max-width: 768px) {
+      .premium-table { font-size: 0.75rem; }
+      .premium-table th, .premium-table td { padding: 0.6rem; }
+      .pyramid-wrapper { flex-direction: column; gap: 1rem; }
+      .pyramid-container { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<!-- PORTADA -->
+<section>
+  <span class="glass-pill"><i class="fa-solid fa-code"></i> Programa AGENTIC · Agentes de IA</span>
+  <h1 style="font-size:3.6rem; margin:1rem 0; line-height:1.1;">
+    Arquitectura <span class="text-gradient">RAG</span> y<br>Automatización con <span class="text-gradient">AI</span>
+  </h1>
+  <div class="glass-card" style="font-size:1.25rem; max-width:820px; line-height:1.6; padding:1.5rem 2rem;">
+    De un agente que responde desde su entrenamiento general<br>
+    a un agente que responde desde el <strong>conocimiento real de tu negocio</strong>.
+  </div>
+  <div style="margin-top:1.5rem; color:var(--text-muted); font-size:1.05rem; font-weight:600;">
+    <i class="fa-solid fa-clock"></i> Clase 2 · 60 minutos &nbsp;|&nbsp;
+    <i class="fa-solid fa-users"></i> Para Operadores / Builders &nbsp;|&nbsp;
+    <i class="fa-solid fa-terminal"></i> n8n Live Build
+  </div>
+</section>
+
+<!-- ÍNDICE -->
+<section>
+  <h2>Hoja de <span class="text-gradient">Ruta</span> — 60 minutos</h2>
+  <div class="glass-card" style="text-align:left; max-width:1000px; padding:1.5rem;">
+    <table style="width:100%;">
+      <tr>
+        <th style="width:15%;"><i class="fa-solid fa-layer-group"></i> Bloque</th>
+        <th style="width:63%;"><i class="fa-solid fa-book"></i> Eje Técnico</th>
+        <th style="width:22%; text-align:center;"><i class="fa-solid fa-clock"></i> Tiempo</th>
+      </tr>
+      <tr><td><span class="glass-pill cyan" style="margin:0;font-size:0.75rem;">BLOQUE 0</span></td><td><strong>El Problema:</strong> Alucinación y por qué RAG lo cambia todo.</td><td style="text-align:center;color:var(--text-muted);">5 min</td></tr>
+      <tr><td><span class="glass-pill cyan" style="margin:0;font-size:0.75rem;">BLOQUE 1</span></td><td><strong>El Ecosistema:</strong> Plataformas, modelos y Copilot vs. Autopilot.</td><td style="text-align:center;color:var(--text-muted);">10 min</td></tr>
+      <tr><td><span class="glass-pill cyan" style="margin:0;font-size:0.75rem;">BLOQUE 2</span></td><td><strong>Cerebro Operativo:</strong> Ciclo RAG completo, arquetipos y fuentes de conocimiento.</td><td style="text-align:center;color:var(--text-muted);">10 min</td></tr>
+      <tr><td><span class="glass-pill cyan" style="margin:0;font-size:0.75rem;">BLOQUE 3</span></td><td><strong>Fast Wins + Arquitectura:</strong> NotebookLM, contexto masivo, 8 casos de uso y backends RAG.</td><td style="text-align:center;color:var(--text-muted);">15 min</td></tr>
+      <tr><td><span class="glass-pill amber" style="margin:0;font-size:0.75rem;">BLOQUE 4</span></td><td><strong>⚙️ Live Build:</strong> Caso HolaVeggie · arquitectura RAG + HITL · prompts y costos.</td><td style="text-align:center;color:var(--accent);">15 min</td></tr>
+      <tr><td><span class="glass-pill amber" style="margin:0;font-size:0.75rem;">BLOQUE 5</span></td><td><strong>⚙️ Demo:</strong> Triaje de correos — Claude Cowork vs. n8n automatizado.</td><td style="text-align:center;color:var(--accent);">5 min</td></tr>
+      <tr><td><span class="glass-pill green" style="margin:0;font-size:0.75rem;">BLOQUE 6</span></td><td><strong>Cierre:</strong> Entregables, recursos y puente a la Clase 3.</td><td style="text-align:center;color:var(--green);">5 min</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- DEFINICIÓN RAG -->
+<section>
+  <span class="glass-pill"><i class="fa-solid fa-graduation-cap"></i> Conceptos Base</span>
+  <h2>¿Qué es exactamente <span class="text-gradient">RAG</span>?</h2>
+  <div class="grid-2" style="max-width:1100px; margin-top: 1.5rem;">
+    <div class="glass-card" style="border-top: 4px solid var(--secondary); text-align: left;">
+      <h4 style="color:var(--secondary); margin-bottom: 1rem;"><i class="fa-solid fa-briefcase"></i> Definición de Negocio</h4>
+      <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-main);">
+        Es la tecnología que permite que tu IA deje de responder basándose solo en lo que "aprendió" en internet y pase a responder desde el <strong>conocimiento real de tu empresa</strong>.
+      </p>
+      <ul class="premium-list" style="font-size: 0.85rem; margin-top: 1rem;">
+        <li><i class="fa-solid fa-shield-halved"></i> <strong>Reduce alucinaciones:</strong> solo habla de lo que sabe.</li>
+        <li><i class="fa-solid fa-handshake"></i> <strong>Construye Confianza:</strong> cita fuentes exactas.</li>
+        <li><i class="fa-solid fa-bolt"></i> <strong>Cero Reentrenamiento:</strong> actualizás el PDF y la IA ya lo sabe.</li>
+      </ul>
+    </div>
+    <div class="glass-card" style="border-top: 4px solid var(--primary); text-align: left;">
+      <h4 style="color:var(--primary); margin-bottom: 1rem;"><i class="fa-solid fa-gears"></i> Definición Técnica</h4>
+      <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-main);">
+        <strong>Retrieval-Augmented Generation:</strong> Una arquitectura que divide el proceso en dos etapas: primero <em>recupera</em> documentos relevantes y luego los <em>inyecta</em> en el prompt para <em>generar</em> la respuesta.
+      </p>
+      <div style="background:rgba(0,0,0,0.3); border-radius:12px; padding:1rem; margin-top:1rem;">
+        <div class="step-flow" style="margin:0; font-size:0.75rem; justify-content: space-around;">
+          <div style="text-align:center;"><i class="fa-solid fa-search"></i><br>Busca (Retrieval)</div>
+          <div class="step-arrow">→</div>
+          <div style="text-align:center;"><i class="fa-solid fa-plus"></i><br>Inyecta (Context)</div>
+          <div class="step-arrow">→</div>
+          <div style="text-align:center;"><i class="fa-solid fa-pen-nib"></i><br>Responde (Gen)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PIRÁMIDE DEL TRABAJO -->
+<section>
+  <section>
+    <h2>Pirámide de <span class="text-gradient">Foco Estratégico</span></h2>
+    <p style="color:var(--text-muted); font-size:1rem;">Diferenciar dónde aportás valor real vs. dónde la IA ya está tomando el control.</p>
+    
+    <div class="pyramid-wrapper">
+      <div class="pyramid-container">
+        <div class="pyramid-layer cima">
+          <span class="pyramid-label" style="bottom:15px; font-size:1.1rem;">CIMA: TRABAJO ESTRATÉGICO</span>
+        </div>
+        <div class="pyramid-layer medio">
+          <span class="pyramid-label" style="font-size:1rem;">MEDIO: TRABAJO ANALÍTICO</span>
+        </div>
+        <div class="pyramid-layer base">
+          <span class="pyramid-label" style="font-size:0.9rem;">BASE: TAREAS REPETITIVAS</span>
+        </div>
+      </div>
+      
+      <div class="pyr-info-card">
+        <div class="pyr-entry">
+          <div class="pyr-dot" style="background:#ef4444;"></div>
+          <div>
+            <strong style="color:#ef4444; font-size:0.9rem;">Cima: Decisión y Criterio</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.4;">Decisiones con info incompleta, contexto humano, confianza y criterio forjado en la experiencia. La IA cambiará cuánto de este trabajo requiere tu intervención.</p>
+          </div>
+        </div>
+        <div class="pyr-entry">
+          <div class="pyr-dot" style="background:var(--secondary);"></div>
+          <div>
+            <strong style="color:var(--secondary); font-size:0.9rem;">Medio: Síntesis y Análisis</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.4;">Síntesis de info, redacción técnica, análisis comparativos y coordinación operativa. La IA está llegando aquí <strong>ahora mismo</strong>.</p>
+          </div>
+        </div>
+        <div class="pyr-entry">
+          <div class="pyr-dot" style="background:var(--text-muted);"></div>
+          <div>
+            <strong style="color:var(--text-muted); font-size:0.9rem;">Base: Procesamiento y Reporte</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.4;">Procesar datos, redactar correos estándar y armar reportes. Este nivel <strong>ya está siendo automatizado</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="glass-pill amber">Acción Directa</span>
+    <h2>Un ejercicio simple para <span class="text-gradient">Potenciar tu valor</span></h2>
+    <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.5rem;">Dividí tus tareas de la semana en estas dos columnas. El resultado te va a sorprender.</p>
+    <div class="grid-2" style="max-width:1050px; margin:0 auto; gap:0;">
+      <div class="glass-card" style="border-radius:20px 0 0 20px; border-right:none; text-align:left; border-top:4px solid var(--text-muted); padding:1.5rem 2rem;">
+        <h4 style="color:var(--text-muted); margin-bottom:1rem; font-size:1.2rem;"><i class="fa-solid fa-robot" style="margin-right:0.5rem;"></i> Columna Izquierda</h4>
+        <p style="font-size:0.95rem; color:var(--accent); font-weight:600; margin-bottom:1rem;">Trabajo escriptado</p>
+        <ul class="premium-list" style="font-size:0.9rem;">
+          <li><i class="fa-solid fa-minus" style="color:var(--text-muted);"></i> Procesos paso a paso</li>
+          <li><i class="fa-solid fa-minus" style="color:var(--text-muted);"></i> Respuestas estándar</li>
+          <li><i class="fa-solid fa-minus" style="color:var(--text-muted);"></i> Reportes, datos, seguimiento</li>
+          <li><i class="fa-solid fa-minus" style="color:var(--text-muted);"></i> Tareas que podés documentar</li>
+        </ul>
+        <div style="margin-top:1.2rem; padding:0.8rem; background:rgba(239,68,68,0.08); border-radius:10px; font-size:0.85rem; text-align:center;">
+          <i class="fa-solid fa-arrow-down" style="color:var(--red);"></i> <strong style="color:var(--red);">La IA comprime esto</strong><br>
+          <span style="color:var(--text-muted);">De 3 horas → 40 minutos</span>
+        </div>
+      </div>
+      <div class="glass-card" style="border-radius:0 20px 20px 0; border-left:2px solid var(--secondary); text-align:left; border-top:4px solid var(--secondary); padding:1.5rem 2rem;">
+        <h4 style="color:var(--secondary); margin-bottom:1rem; font-size:1.2rem;"><i class="fa-solid fa-brain" style="margin-right:0.5rem;"></i> Columna Derecha</h4>
+        <p style="font-size:0.95rem; color:var(--accent); font-weight:600; margin-bottom:1rem;">Trabajo estratégico</p>
+        <ul class="premium-list" style="font-size:0.9rem;">
+          <li><i class="fa-solid fa-star" style="color:var(--secondary);"></i> Criterio forjado en experiencia</li>
+          <li><i class="fa-solid fa-star" style="color:var(--secondary);"></i> Relaciones y confianza</li>
+          <li><i class="fa-solid fa-star" style="color:var(--secondary);"></i> Decisiones con info incompleta</li>
+          <li><i class="fa-solid fa-star" style="color:var(--secondary);"></i> Contexto humano irremplazable</li>
+        </ul>
+        <div style="margin-top:1.2rem; padding:0.8rem; background:rgba(0,242,254,0.06); border-radius:10px; font-size:0.85rem; text-align:center;">
+          <i class="fa-solid fa-arrow-up" style="color:var(--green);"></i> <strong style="color:var(--green);">Invertí acá tu tiempo liberado</strong><br>
+          <span style="color:var(--text-muted);">Profesional + profundidad + IA = imbatible</span>
+        </div>
+      </div>
+    </div>
+    <div class="highlight-box cyan" style="max-width:1050px; margin: 1.5rem auto 0; font-size: 0.95rem;">
+      Descubrimiento común: entre el <strong>50% y 70%</strong> del tiempo profesional se gasta en la columna izquierda. Ahí está tu primera gran victoria con IA.
+    </div>
+  </section>
+</section>
+
+<!-- DEFINICIONES -->
+<section>
+  <h2>Tres conceptos que se confunden</h2>
+  <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1.2rem;">En este programa construimos las tres capas. Saber dónde está parado cada cosa evita confusión.</p>
+  <table class="glass-card" style="font-size:0.82rem; max-width:1050px; text-align:left;">
+    <tr style="color:var(--secondary);">
+      <th style="width:18%;"></th>
+      <th style="width:27%; text-align:center;">⚙️ Automatización</th>
+      <th style="width:27%; text-align:center;">🤖 AI Workflow</th>
+      <th style="width:28%; text-align:center;">🧠 Agente IA</th>
+    </tr>
+    <tr>
+      <td style="color:var(--text-muted);">Definición</td>
+      <td style="text-align:center;">Ejecuta tareas predefinidas con reglas fijas</td>
+      <td style="text-align:center;">Llama a un LLM via API en uno o más pasos</td>
+      <td style="text-align:center;">Realiza tareas no-determinísticas de forma autónoma</td>
+    </tr>
+    <tr style="background:rgba(255,255,255,0.03);">
+      <td style="color:var(--text-muted);">Base lógica</td>
+      <td style="text-align:center;">Lógica booleana (if/then)</td>
+      <td style="text-align:center;">Booleana + razonamiento flexible</td>
+      <td style="text-align:center;">Razonamiento + autonomía</td>
+    </tr>
+    <tr>
+      <td style="color:var(--text-muted);">Fortaleza</td>
+      <td style="text-align:center; color:var(--green);">Rápido, confiable, predecible</td>
+      <td style="text-align:center; color:var(--green);">Maneja complejidad y reconocimiento de patrones</td>
+      <td style="text-align:center; color:var(--green);">Adaptable a variables nuevas, razona como humano</td>
+    </tr>
+    <tr style="background:rgba(255,255,255,0.03);">
+      <td style="color:var(--text-muted);">Debilidad</td>
+      <td style="text-align:center; color:var(--red);">No se adapta. Solo hace lo que fue programado.</td>
+      <td style="text-align:center; color:var(--red);">Más difícil de depurar e interpretar</td>
+      <td style="text-align:center; color:var(--red);">Menos predecible, puede producir resultados inesperados</td>
+    </tr>
+    <tr>
+      <td style="color:var(--text-muted);">Ejemplo</td>
+      <td style="text-align:center; font-size:0.78rem; color:var(--text-muted);">Notificación en Slack cada vez que entra un lead</td>
+      <td style="text-align:center; font-size:0.78rem; color:var(--text-muted);">Clasificar y puntuar cada lead con un LLM</td>
+      <td style="text-align:center; font-size:0.78rem; color:var(--text-muted);">Investigar el lead, actualizar el CRM y redactar el email de seguimiento</td>
+    </tr>
+  </table>
+  <div class="highlight-box cyan" style="max-width:1050px; margin:1rem auto 0; font-size:0.9rem;">
+    En esta clase construimos <strong>AI Workflows con comportamiento agente</strong> — RAG, HITL y autonomía parcial. En la Clase 3 llegamos a <strong>Agentes IA</strong> proactivos y multiagente. n8n orquesta las tres capas.
+  </div>
+</section>
+
+<!-- BLOQUE 0 -->
+<section>
+  <section>
+    <span class="glass-pill"><i class="fa-solid fa-bug"></i> BLOQUE 0 · 5 MIN</span>
+    <h2>El Paradigma de la <span class="text-gradient">Alucinación</span></h2>
+    <p style="font-size:1.15rem;color:var(--text-muted);max-width:800px;margin:0 auto 1.5rem;">Ya tenés un agente con rol y personalidad. El problema aparece cuando tiene que responder algo específico de tu negocio.</p>
+    <div class="grid-3" style="max-width:1050px; margin: 0 auto 2rem;">
+      <div class="glass-card stat-box" style="border-top: 4px solid var(--red); padding: 1.2rem;">
+        <div class="stat-number text-gradient-amber" style="font-size:2.8rem;">88%</div>
+        <div class="stat-label" style="font-size:0.85rem;">de los equipos que usaron IA sin RAG en producción reportaron al menos un error crítico de datos en el primer mes.</div>
+      </div>
+      <div class="glass-card stat-box" style="border-top: 4px solid var(--accent); padding: 1.2rem;">
+        <div class="stat-number text-gradient-amber" style="font-size:2.8rem;">3x</div>
+        <div class="stat-label" style="font-size:0.85rem;">más tiempo tarda un equipo en limpiar un error de alucinación en producción que en prevenirlo con RAG desde el principio.</div>
+      </div>
+      <div class="glass-card stat-box" style="border-top: 4px solid var(--green); padding: 1.2rem;">
+        <div class="stat-number text-gradient-green" style="font-size:2.8rem;">$0</div>
+        <div class="stat-label" style="font-size:0.85rem;">cuesta agregar RAG con NotebookLM o Gemini File Search sobre un agente que ya tenés. El costo de no hacerlo es otro número.</div>
+      </div>
+    </div>
+    <div class="highlight-box red" style="max-width:900px; margin: 0 auto; font-size:1.05rem;">
+      <strong>El problema:</strong> La IA generativa sin contexto propio inventa — con el mismo tono seguro y convincente que cuando tiene razón. En un proceso real, eso no es un bug menor: es un problema de confianza que se paga caro.
+    </div>
+    <p style="color:var(--text-muted); font-size:0.68rem; max-width:900px; margin:0.8rem auto 0; text-align:left; line-height:1.5;">
+      Fuentes: (88%) Gartner AI in Production Survey 2024 — "AI Hallucination Incidents in Enterprise Deployments"; (3×) Databricks "Long Context RAG Performance of LLMs" — análisis de tiempo de corrección vs. prevención; ($0) Google AI Developer Blog, nov. 2025 — Google File Search API pricing.
+    </p>
+  </section>
+
+  <section>
+    <h2>Sin RAG vs. <span class="text-gradient">Con RAG</span></h2>
+    <div class="grid-2" style="max-width:1000px;">
+      <div class="glass-card" style="border-top:4px solid var(--red); text-align:left;">
+        <h4 style="color:var(--red);margin-bottom:0.8rem;">❌ Agente SIN RAG</h4>
+        <ul class="premium-list" style="font-size:0.95rem;">
+          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> Responde desde entrenamiento obsoleto.</li>
+          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> Inventa políticas y datos con total seguridad.</li>
+          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> No puede citar fuentes — no tiene de dónde.</li>
+          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> Destruye confianza en el primer error real.</li>
+        </ul>
+      </div>
+      <div class="glass-card" style="border-top:4px solid var(--green); text-align:left;">
+        <h4 style="color:var(--green);margin-bottom:0.8rem;">✅ Agente CON RAG</h4>
+        <ul class="premium-list" style="font-size:0.95rem;">
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Consulta tus documentos reales antes de responder.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Dice "no tengo esa info" cuando no la hay.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Cita el documento y la sección exacta.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Actualizable sin reentrenar el modelo.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-box cyan" style="max-width:1000px;margin:1.5rem auto 0;font-size:1rem;">
+      <strong>Objetivo de la clase:</strong> Que tu agente deje de responder con información genérica y empiece a responder desde el conocimiento real de tu negocio — y sepa cuándo y cómo derivar a un humano.
+    </div>
+  </section>
+</section>
+
+<!-- BLOQUE 1 -->
+<section>
+  <section>
+    <span class="glass-pill"><i class="fa-solid fa-chess-knight"></i> BLOQUE 1 · 10 MIN</span>
+    <h2 style="font-size:3.2rem;">Orquestadores: ¿Por qué <span class="text-gradient">n8n</span>?</h2>
+    <p style="color:var(--text-muted);font-size:1.05rem;margin-bottom:1.5rem;">El criterio no es cuál tiene más features — es cuál da el control necesario para RAG, HITL y multiagente.</p>
+    <table class="glass-card" style="font-size:0.9rem;max-width:1050px;text-align:left;">
+      <tr style="color:var(--secondary);">
+        <th>Plataforma</th><th>Curva</th><th>IA / RAG nativo</th><th>Costo</th><th style="text-align:center;">Score</th>
+      </tr>
+      <tr>
+        <td><strong>n8n</strong> <span style="font-size:0.8rem;color:var(--green);">⭐ Recomendado</span></td>
+        <td>Media-Alta</td>
+        <td>Excelente. Nodos nativos de AI Agent, memoria y LLMs. Self-hosted gratis.</td>
+        <td>Gratis / Cloud $24/mes</td>
+        <td style="text-align:center;color:var(--green);font-weight:700;">10/10</td>
+      </tr>
+      <tr>
+        <td><strong>Make.com</strong></td><td>Baja</td>
+        <td>Buena. Visual potente, HTTP calls para RAG complejo.</td>
+        <td>Desde $9/mes</td>
+        <td style="text-align:center;color:var(--accent);font-weight:700;">7/10</td>
+      </tr>
+      <tr>
+        <td><strong>Zapier</strong></td><td>Nula</td>
+        <td>Básica. No escala para multiagente ni RAG real.</td>
+        <td>Desde $20/mes</td>
+        <td style="text-align:center;color:var(--red);font-weight:700;">4/10</td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Modelos y Tokens <span class="text-gradient">(El Motor)</span></h2>
+    <div class="highlight-box cyan" style="font-size:1rem;max-width:900px;margin:0 auto 1.5rem;">
+      <i class="fa-solid fa-quote-left" style="color:var(--secondary);opacity:0.5;margin-right:0.5rem;"></i>
+      "El token no es una medida fija. Para un RAG eficiente, el balance real está en el costo total, la calidad del razonamiento y la ventana de contexto aprovechable."
+    </div>
+    
+    <div class="responsive-table-wrapper" style="max-height: 480px; overflow-y: auto;">
+      <table class="premium-table" style="font-size:0.88rem;max-width:1050px;text-align:left;">
+        <tr style="color:var(--secondary);">
+          <th style="width:25%;">Modelo</th>
+          <th style="width:13%; text-align:center;">Ventana ctx.</th>
+          <th style="width:15%; text-align:center;">Costo input <br><span style="font-size:0.75rem;font-weight:400;">(USD/1M)</span></th>
+          <th style="width:47%;">Cuándo usarlo</th>
+        </tr>
+        <tr>
+          <td><i class="fa-solid fa-robot" style="color:#10a37f; margin-right:0.6rem; width:16px;"></i><strong>GPT-5.4 nano</strong></td>
+          <td style="text-align:center;">400K</td>
+          <td style="text-align:center; color:var(--green); font-weight:700;">$0.20</td>
+          <td style="line-height:1.4;">Clasificación, routing y tareas de baja complejidad.</td>
+        </tr>
+        <tr>
+          <td><i class="fa-solid fa-robot" style="color:#10a37f; margin-right:0.6rem; width:16px;"></i><strong>GPT-5.4 mini</strong></td>
+          <td style="text-align:center;">400K</td>
+          <td style="text-align:center;">$0.75</td>
+          <td style="line-height:1.4;">Agente principal económico dentro del stack OpenAI.</td>
+        </tr>
+        <tr>
+          <td><i class="fa-solid fa-cube" style="color:#d97757; margin-right:0.6rem; width:16px;"></i><strong>Claude Haiku 4.5</strong></td>
+          <td style="text-align:center;">200K</td>
+          <td style="text-align:center;">$1.00</td>
+          <td style="line-height:1.4;">RAG rápido, extracción de datos y clasificación precisa.</td>
+        </tr>
+        <tr>
+          <td><i class="fa-solid fa-cube" style="color:#d97757; margin-right:0.6rem; width:16px;"></i><strong>Claude Sonnet 4.6</strong></td>
+          <td style="text-align:center;">200K–1M</td>
+          <td style="text-align:center;">$3.00</td>
+          <td style="line-height:1.4;">Máxima calidad. Ideal para la respuesta final al usuario.</td>
+        </tr>
+        <tr>
+          <td><i class="fa-brands fa-google" style="color:#4285F4; margin-right:0.6rem; width:16px;"></i><strong>Gemini 2.5 Flash-Lite</strong></td>
+          <td style="text-align:center; color:var(--secondary); font-weight:700;">1M</td>
+          <td style="text-align:center; color:var(--green); font-weight:700;">$0.10</td>
+          <td style="line-height:1.4;">RAG masivo ultra-barato sobre FAQs, logs y bases grandes.</td>
+        </tr>
+        <tr>
+          <td><i class="fa-brands fa-google" style="color:#4285F4; margin-right:0.6rem; width:16px;"></i><strong>Gemini 2.5 Flash</strong></td>
+          <td style="text-align:center; color:var(--secondary); font-weight:700;">1M</td>
+          <td style="text-align:center;">$0.30</td>
+          <td style="line-height:1.4;">El mejor balance costo/ventana para flujos complejos.</td>
+        </tr>
+      </table>
+    </div>
+
+    <div style="text-align:left; max-width:1050px; margin: 0.8rem auto 0;">
+      <p style="color:var(--text-muted); font-size:0.75rem; margin-bottom:0.4rem; line-height:1.4;">
+        <strong style="color:var(--secondary);">* Nota sobre RAG:</strong> La ventana de 1M de tokens permite arquitecturas de "Long Context" que simplifican el flujo, permitiendo RAG sin bases vectoriales en casos de uso de escala media.
+      </p>
+      <p style="color:var(--text-muted); font-size:0.75rem; margin-bottom:0; line-height:1.4;">
+        <strong style="color:var(--secondary);">* Nota sobre Costos:</strong> El costo de <em>output</em> suele ser 3-5x mayor. El costo final depende del <em>chunking</em>, número de llamadas y políticas de <em>caching</em>.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2 style="font-size:3.5rem;">De <span class="text-gradient">Copilot</span> a <span class="text-gradient">Autopilot</span></h2>
+    <p style="font-size:1.15rem;color:var(--text-muted);margin-bottom:1.5rem;">La decisión más importante antes de escribir el primer nodo.</p>
+    <div class="grid-2" style="max-width:1050px;">
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--secondary);">
+        <h4 style="color:var(--secondary);margin-bottom:0.8rem;">🧑‍✈️ Copilot — Empezamos acá siempre</h4>
+        <ul class="premium-list" style="font-size:0.92rem;">
+          <li><i class="fa-solid fa-check"></i> El agente propone — el humano aprueba y ejecuta.</li>
+          <li><i class="fa-solid fa-check"></i> Draft listo → humano revisa → humano envía.</li>
+          <li><i class="fa-solid fa-check"></i> Riesgo bajo. Ideal para procesos nuevos o críticos.</li>
+          <li><i class="fa-solid fa-check"></i> Genera los datos que necesitamos para confiar en el sistema.</li>
+        </ul>
+      </div>
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--primary);">
+        <h4 style="color:var(--primary);margin-bottom:0.8rem;">🤖 Autopilot — Llegamos acá con datos</h4>
+        <ul class="premium-list" style="font-size:0.92rem;">
+          <li><i class="fa-solid fa-check"></i> El agente propone Y ejecuta solo.</li>
+          <li><i class="fa-solid fa-check"></i> Nadie revisa — el sistema actúa autónomamente.</li>
+          <li><i class="fa-solid fa-check"></i> Solo para procesos ya validados con métricas reales.</li>
+          <li><i class="fa-solid fa-check"></i> Requiere >95% de precisión sostenida en ese proceso.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-box amber" style="max-width:1050px;margin:1.5rem auto 0;font-size:1rem;">
+      <strong>Regla del programa:</strong> Empezamos en Copilot. Pasamos a Autopilot cuando los datos muestran <strong>>95% de decisiones correctas</strong> para ese proceso específico. No antes. — Los procesos con Agentic RAG bien implementado muestran -78% de errores operativos respecto a flujos sin RAG.
+    </div>
+  </section>
+</section>
+
+<!-- BLOQUE 2 -->
+<section>
+  <section>
+    <span class="glass-pill"><i class="fa-solid fa-network-wired"></i> BLOQUE 2 · 10 MIN</span>
+    <h2>El Ciclo de <span class="text-gradient">6 Pasos RAG</span></h2>
+    <p style="color:var(--text-muted);font-size:1rem;margin-bottom:1.5rem;">Lo que pasa entre que el usuario pregunta y el agente responde con información real.</p>
+    <div class="step-flow" style="flex-wrap:wrap;gap:0.8rem;max-width:1000px;margin:0 auto;">
+      <div class="step-node" style="min-width:130px;">1. Pregunta<br><small>del usuario</small></div>
+      <div class="step-arrow">→</div>
+      <div class="step-node" style="min-width:130px;background:rgba(245,158,11,0.2);border-color:rgba(245,158,11,0.5);">2. Embedding<br><small>(vector numérico)</small></div>
+      <div class="step-arrow">→</div>
+      <div class="step-node" style="min-width:130px;background:rgba(0,242,254,0.15);border-color:var(--secondary);">3. Búsqueda<br><small>semántica</small></div>
+      <div style="width:100%;height:0;"></div>
+      <div class="step-node" style="min-width:130px;background:rgba(0,242,254,0.15);border-color:var(--secondary);">4. Recuperación<br><small>top 3-5 chunks</small></div>
+      <div class="step-arrow">→</div>
+      <div class="step-node" style="min-width:130px;background:rgba(34,197,94,0.2);border-color:rgba(34,197,94,0.5);">5. Generación<br><small>(prompt + contexto)</small></div>
+      <div class="step-arrow">→</div>
+      <div class="step-node" style="min-width:130px;background:rgba(34,197,94,0.2);border-color:rgba(34,197,94,0.5);">6. Respuesta<br><small>fundamentada</small></div>
+    </div>
+    <div class="highlight-box green" style="max-width:900px;margin:1.5rem auto 0;font-size:0.95rem;">
+      <strong>Dos momentos clave.</strong> <em>Preparación</em> (pasa una sola vez): tus docs se dividen en fragmentos → cada fragmento se convierte en un número que representa su significado → esos números se guardan en la base vectorial. <em>Consulta</em> (pasa en cada interacción): la pregunta del usuario también se convierte en número → el sistema busca los fragmentos más "cercanos" semánticamente → los inyecta en el prompt → el LLM responde con ese contexto como base. Si en el paso 4 no encuentra nada relevante → el agente responde "no tengo esa info". Eso es RAG bien implementado.
+    </div>
+  </section>
+
+  <section>
+    <h2>La Taxonomía de las <span class="text-gradient">Arquitecturas RAG</span></h2>
+    <table class="glass-card" style="font-size:0.82rem;max-width:1050px;text-align:left;">
+      <tr style="color:var(--secondary);">
+        <th style="width:4%;">Nivel</th><th style="width:16%;">Arquitectura</th>
+        <th style="width:35%;">Mecánica principal</th><th style="width:24%;">Caso de uso ideal</th><th>Herramientas en n8n</th>
+      </tr>
+      <tr><td>1</td><td><strong>Naive RAG</strong></td><td>Divide docs en chunks fijos → vectoriza → busca → genera.</td><td>FAQs, bases de conocimiento Pyme. <span style="color:var(--green);font-size:0.8rem;">← Menor complejidad técnica</span></td><td style="font-size:0.78rem;">Google File Search · Supabase+pgvector</td></tr>
+      <tr><td>2</td><td><strong>Re-ranking</strong></td><td>Recupera top-20 chunks, usa LLM rápido para re-ordenar los 5 más relevantes.</td><td>Cuando Naive RAG trae resultados mediocres o la base crece.</td><td style="font-size:0.78rem;">Supabase + nodo LLM para rerank · Cohere Rerank API</td></tr>
+      <tr><td>3</td><td><strong>Híbrido</strong></td><td>Búsqueda semántica (vectores) + búsqueda por keyword (BM25). Mejor recall.</td><td>Usuarios con términos exactos: SKUs, códigos, nombres propios.</td><td style="font-size:0.78rem;">Supabase (full-text + vector) · Pinecone sparse+dense</td></tr>
+      <tr><td>4</td><td><strong>GraphRAG</strong></td><td>Mapea entidades y relaciones como un grafo. Razona sobre conexiones.</td><td>Análisis complejo: legal, auditoría, compliance.</td><td style="font-size:0.78rem;">Neo4j + n8n HTTP · LlamaIndex Graph</td></tr>
+      <tr><td>5</td><td><strong>Agentic RAG</strong></td><td>El agente decide qué fuentes consultar, en qué orden y cuántas búsquedas hacer.</td><td>Casos multi-paso con múltiples fuentes. Clase 3.</td><td style="font-size:0.78rem;">n8n AI Agent node con múltiples tools · MCP</td></tr>
+    </table>
+    <p style="color:var(--text-muted); font-size:0.78rem; max-width:1050px; margin:0.6rem auto 0; text-align:left;">Nivel 1 = menor complejidad de implementación, no menor calidad. Para la mayoría de los casos del programa, Naive RAG con Google File Search o Supabase es la elección correcta. <strong style="color:var(--accent);">Nota:</strong> en producción, Re-ranking e Híbrido casi siempre van juntos — no son alternativas sino capas que se combinan cuando Naive RAG empieza a fallar.</p>
+  </section>
+
+  <section>
+    <h2>Las 3 Fuentes de <span class="text-gradient">Conocimiento RAG</span></h2>
+    <p style="color:var(--text-muted);font-size:1.05rem;margin-bottom:1.5rem;">Tres tipos de información que un agente puede necesitar. Cada una se conecta de forma distinta al flujo de n8n.</p>
+    <div class="grid-3" style="max-width:1050px;margin:0 auto;">
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--primary);">
+        <h4 style="color:var(--primary);margin-bottom:0.8rem;"><i class="fa-solid fa-file-lines"></i> Estático</h4>
+        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.5;">Manuales, políticas, FAQs, contratos tipo, guías de onboarding, compliance.</p>
+        <div style="margin-top:0.8rem;font-size:0.82rem;color:var(--accent);">PDF · Google Docs · Notion<br>Cargás una vez, actualizás cuando cambia.</div>
+      </div>
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--secondary);">
+        <h4 style="color:var(--secondary);margin-bottom:0.8rem;"><i class="fa-solid fa-database"></i> Dinámico</h4>
+        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.5;">Stock, precios, estado de pedidos, tickets abiertos, datos de CRM.</p>
+        <div style="margin-top:0.8rem;font-size:0.82rem;color:var(--accent);">Google Sheets (catálogos simples) · API REST de tu plataforma (Shopify, Tiendanube) · DB directa (Postgres/Supabase)<br>No es RAG semántico — es consulta estructurada. Nodo separado en n8n.</div>
+      </div>
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--green);">
+        <h4 style="color:var(--green);margin-bottom:0.8rem;"><i class="fa-solid fa-comments"></i> Conversacional</h4>
+        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.5;">Historial de chats anteriores con ese usuario, transcripciones, emails previos.</p>
+        <div style="margin-top:0.8rem;font-size:0.82rem;color:var(--accent);">Base vectorial con metadata del usuario<br>Memoria persistente entre sesiones — distinto del contexto de la conversación actual que va en el prompt.<br><span style="color:var(--text-muted);">Clave de diseño: definir cada cuánto se re-indexa el historial y cómo evitar que datos stale degraden la calidad.</span></div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- BLOQUE 3 -->
+<section>
+  <section>
+    <span class="glass-pill"><i class="fa-solid fa-trophy"></i> BLOQUE 3 · FAST WINS · 15 MIN</span>
+    <h2>NotebookLM: tu primer RAG <span class="text-gradient">en 15 minutos</span></h2>
+    <p style="color:var(--text-muted);font-size:1.05rem;margin-bottom:1.5rem;">Sin código. Sin infraestructura vectorial. Para validar que tu base de conocimiento funciona antes de invertir en arquitectura.</p>
+    <div class="glass-card" style="max-width:950px;text-align:left;padding:1.5rem 2rem;">
+      <div class="step-numbered"><div class="step-num">1</div><div class="step-content"><strong>Crear el notebook</strong> → notebooklm.google.com → New notebook → nombre de tu caso de uso.</div></div>
+      <div class="step-numbered"><div class="step-num">2</div><div class="step-content"><strong>Cargar documentos</strong> → Add source: PDFs, Google Docs, links de Drive, URLs, texto pegado directo.</div></div>
+      <div class="step-numbered"><div class="step-num">3</div><div class="step-content"><strong>Esperar el procesamiento</strong> → 2-3 min para 10 docs · 5-10 min para 50 docs. Vectorización automática.</div></div>
+      <div class="step-numbered"><div class="step-num">4</div><div class="step-content"><strong>Testear con preguntas reales</strong> → Las mismas que te hacen tus clientes o tu equipo hoy.</div></div>
+      <div class="step-numbered"><div class="step-num">5</div><div class="step-content"><strong>Revisar las citas</strong> → Cada respuesta cita el doc y sección exacta. Si cita mal → ese doc necesita mejor estructura.</div></div>
+      <div class="step-numbered"><div class="step-num">6</div><div class="step-content"><strong>Compartir con tu equipo</strong> → Share → acceso directo. Ya tienen un asistente RAG funcionando hoy.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>NotebookLM: <span class="text-gradient">cuándo usarlo y cuándo dar el salto a n8n</span></h2>
+    <div class="grid-2" style="max-width:1050px;text-align:left;">
+      <div class="glass-card" style="border-top:4px solid var(--green);">
+        <h4 style="color:var(--green);margin-bottom:0.8rem;">✅ Lo que hace bien</h4>
+        <ul class="premium-list" style="font-size:0.9rem;">
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Cita fuentes con precisión — doc + sección exacta.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Hasta 50 documentos por notebook.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Genera FAQs, resúmenes y guías automáticamente.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Audio overview: podcast generado desde tus docs.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Cero código, cero infra, listo en 15 minutos.</li>
+        </ul>
+      </div>
+      <div class="glass-card" style="border-top:4px solid var(--accent);">
+        <h4 style="color:var(--accent);margin-bottom:0.8rem;">⚠️ Cuándo necesitás n8n</h4>
+        <ul class="premium-list" style="font-size:0.9rem;">
+          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> La versión consumer no tiene API pública — no conecta con n8n, WhatsApp ni Telegram.</li>
+          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> Solo integra con ecosistema Google (Drive, Docs, Workspace).</li>
+          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> Necesitás lógica HITL o condiciones de escalada.</li>
+          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> Necesitás registrar métricas y conversaciones.</li>
+          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> Necesitás personalización de flujo o integraciones custom.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-box green" style="max-width:1050px;margin:1.5rem auto 0;font-size:0.92rem;">
+      <strong>Victoria rápida real:</strong> Cargá tu manual de producto o política de atención en NotebookLM y compartí el link con tu equipo hoy. En 15 min tienen un asistente que cita el documento exacto.<br><br>
+      <strong>⚠️ Regla para que funcione bien:</strong> Cada doc responde UNA pregunta concreta. Los títulos son preguntas reales del cliente, no categorías internas. Las respuestas incluyen números y condiciones específicas — no generalidades. Garbage in, garbage out.
+    </div>
+  </section>
+
+  <section>
+    <h2>Contexto masivo: <span class="text-gradient">dos plataformas clave</span></h2>
+    <div class="grid-2" style="max-width:1050px; text-align:left; align-items:start;">
+      <div class="glass-card" style="border-top:4px solid var(--secondary);">
+        <h4 style="color:var(--secondary); margin-bottom:0.8rem;"><i class="fa-solid fa-window-maximize"></i> Caso 1: NotebookLM nativo</h4>
+        <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.5; margin-bottom:0.8rem;">Uso directo desde su plataforma web. Hoy es la herramienta gratuita más poderosa para manejar grandes contextos de múltiples fuentes simultáneamente.</p>
+        <ul class="premium-list" style="font-size:0.85rem;">
+          <li><i class="fa-solid fa-check" style="color:var(--secondary);"></i> <strong>Poder Multimodal:</strong> Analiza PDFs, YouTube, audios y webs juntos</li>
+          <li><i class="fa-solid fa-check" style="color:var(--secondary);"></i> <strong>Audio Overview:</strong> Genera podcasts sobre tus propios documentos</li>
+          <li><i class="fa-solid fa-check" style="color:var(--secondary);"></i> Sin código, cero infra, ideal para investigar y crear</li>
+          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> No tiene API pública para conectar con WhatsApp o Telegram</li>
+        </ul>
+      </div>
+      <div class="glass-card" style="border-top:4px solid var(--accent);">
+        <h4 style="color:var(--accent); margin-bottom:0.8rem;"><i class="fa-brands fa-google"></i> Caso 2: Google Gemini + NotebookLM</h4>
+        <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.5; margin-bottom:0.8rem;">Desde la app de Gemini podés conectar con un notebook de NotebookLM como fuente de grounding (respuestas ancladas).</p>
+        <ul class="premium-list" style="font-size:0.85rem;">
+          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> Modo conversacional directo sobre tus documentos</li>
+          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> Incorpora visualización de citas exactas en las respuestas</li>
+          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> Ventana de 1M tokens — hasta 700 páginas de contexto</li>
+          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> No escalable mediante integraciones automatizadas o n8n</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-box amber" style="max-width:1050px; margin:1.2rem auto 0; font-size:0.88rem;">
+      <strong>Regla práctica:</strong> Estas herramientas nativas son imbatibles para explorar bases documentales grandes porque absorben el costo del contexto masivo y la complejidad del chunking. El verdadero desafío surge cuando querés llevar este nivel de contexto e interacción hacia un agente automatizado en n8n orientado a cliente.
+    </div>
+  </section>
+</section>
+
+<!-- USE CASES — MISMA ARQUITECTURA -->
+<section>
+  <section>
+    <span class="glass-pill"><i class="fa-solid fa-arrows-split-up-and-left"></i> BLOQUE 3 · APLICACIONES</span>
+    <h2>Misma arquitectura, <span class="text-gradient">8 casos de uso distintos</span></h2>
+    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1rem;">El flujo no cambia. Lo que cambia son los documentos del RAG y el system prompt del agente.</p>
+    <div class="grid-2" style="max-width:1050px; gap:1rem;">
+      <table style="font-size:0.76rem; text-align:left; border:1px solid var(--glass-border); border-radius:12px; overflow:hidden; width:100%;">
+        <tr style="color:var(--secondary); background:rgba(255,255,255,0.08);">
+          <th style="padding:0.6rem 0.8rem; width:28%;">Caso de uso</th>
+          <th style="padding:0.6rem 0.8rem; width:37%;">Documentos del RAG</th>
+          <th style="padding:0.6rem 0.8rem;">RAG recomendado</th>
+        </tr>
+        <tr style="border-top:1px solid var(--glass-border);">
+          <td style="padding:0.6rem 0.8rem;"><strong>Atención al cliente</strong></td>
+          <td style="padding:0.6rem 0.8rem;">FAQ + políticas + catálogo (dinámico)</td>
+          <td style="padding:0.6rem 0.8rem;">File Search. +1000 SKUs → Supabase</td>
+        </tr>
+        <tr style="border-top:1px solid var(--glass-border); background:rgba(255,255,255,0.03);">
+          <td style="padding:0.6rem 0.8rem;"><strong>Onboarding RRHH</strong></td>
+          <td style="padding:0.6rem 0.8rem;">Manual empleado + políticas + beneficios</td>
+          <td style="padding:0.6rem 0.8rem;">NotebookLM → File Search producción</td>
+        </tr>
+        <tr style="border-top:1px solid var(--glass-border);">
+          <td style="padding:0.6rem 0.8rem;"><strong>Asistente técnico</strong></td>
+          <td style="padding:0.6rem 0.8rem;">Manuales + guías + tickets resueltos</td>
+          <td style="padding:0.6rem 0.8rem;">File Search. Muchos tickets → Supabase</td>
+        </tr>
+        <tr style="border-top:1px solid var(--glass-border); background:rgba(255,255,255,0.03);">
+          <td style="padding:0.6rem 0.8rem;"><strong>Asistente comercial</strong></td>
+          <td style="padding:0.6rem 0.8rem;">Catálogo + precios + casos de éxito</td>
+          <td style="padding:0.6rem 0.8rem;">System Prompt simple. Híbrido si las queries mezclan lenguaje natural con códigos exactos (SKUs, IDs)</td>
+        </tr>
+      </table>
+      <table style="font-size:0.76rem; text-align:left; border:1px solid var(--glass-border); border-radius:12px; overflow:hidden; width:100%;">
+        <tr style="color:var(--secondary); background:rgba(255,255,255,0.08);">
+          <th style="padding:0.6rem 0.8rem; width:28%;">Caso de uso</th>
+          <th style="padding:0.6rem 0.8rem; width:37%;">Documentos del RAG</th>
+          <th style="padding:0.6rem 0.8rem;">RAG recomendado</th>
+        </tr>
+        <tr style="border-top:1px solid var(--glass-border);">
+          <td style="padding:0.6rem 0.8rem;"><strong>Legal / compliance</strong></td>
+          <td style="padding:0.6rem 0.8rem;">Contratos + regulaciones + precedentes</td>
+          <td style="padding:0.6rem 0.8rem;">Supabase / Pinecone. GraphRAG si hay relaciones</td>
+        </tr>
+        <tr style="border-top:1px solid var(--glass-border); background:rgba(255,255,255,0.03);">
+          <td style="padding:0.6rem 0.8rem;"><strong>Soporte IT / helpdesk</strong></td>
+          <td style="padding:0.6rem 0.8rem;">Runbooks + SOPs + historial incidentes</td>
+          <td style="padding:0.6rem 0.8rem;">File Search. Alto volumen → Pinecone</td>
+        </tr>
+        <tr style="border-top:1px solid var(--glass-border);">
+          <td style="padding:0.6rem 0.8rem;"><strong>Educación / formación</strong></td>
+          <td style="padding:0.6rem 0.8rem;">Materiales + transcripciones + evaluaciones</td>
+          <td style="padding:0.6rem 0.8rem;">NotebookLM → File Search producción</td>
+        </tr>
+        <tr style="border-top:1px solid var(--glass-border); background:rgba(255,255,255,0.03);">
+          <td style="padding:0.6rem 0.8rem;"><strong>Triaje de correos</strong></td>
+          <td style="padding:0.6rem 0.8rem;">Historial respuestas + plantillas</td>
+          <td style="padding:0.6rem 0.8rem;">Claude Cowork (sin auto). n8n si automatizás</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>El criterio de decisión RAG: <span class="text-gradient">3 preguntas</span></h2>
+    <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.5rem;">La decisión no es técnica primero — es de negocio. Respondé estas tres preguntas y la respuesta es clara.</p>
+    <div class="grid-3" style="max-width:1050px; margin: 0 auto;">
+      <div class="glass-card" style="text-align:left; border-top: 4px solid var(--primary);">
+        <h4 style="color:var(--primary); margin-bottom:0.8rem; font-size:1rem;">① ¿Cuántos docs y cuánto cambian?</h4>
+        <ul class="premium-list" style="font-size:0.85rem;">
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--primary);"></i> <strong>Pocos, estáticos:</strong> System Prompt (hack)</li>
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--primary);"></i> <strong>Muchos, estáticos:</strong> Google File Search</li>
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--primary);"></i> <strong>Crecen constantemente:</strong> Supabase / Pinecone</li>
+        </ul>
+      </div>
+      <div class="glass-card" style="text-align:left; border-top: 4px solid var(--secondary);">
+        <h4 style="color:var(--secondary); margin-bottom:0.8rem; font-size:1rem;">② ¿Necesitás datos dinámicos?</h4>
+        <ul class="premium-list" style="font-size:0.85rem;">
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--secondary);"></i> Stock, pedidos, CRM en tiempo real</li>
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--secondary);"></i> Si sí → nodo adicional en n8n que consulta la API</li>
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--secondary);"></i> El RAG solo maneja documentos, no datos en vivo</li>
+        </ul>
+      </div>
+      <div class="glass-card" style="text-align:left; border-top: 4px solid var(--accent);">
+        <h4 style="color:var(--accent); margin-bottom:0.8rem; font-size:1rem;">③ ¿Cuál es el volumen de consultas?</h4>
+        <ul class="premium-list" style="font-size:0.85rem;">
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--accent);"></i> <strong>Bajo-medio:</strong> cualquier opción</li>
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--accent);"></i> <strong>Alto (miles/día):</strong> Pinecone o Supabase con HNSW</li>
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--accent);"></i> <strong>Muy alto B2C:</strong> Pinecone serverless</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-box cyan" style="max-width:1050px; margin:1.5rem auto 0; font-size:0.92rem;">
+      <strong>Regla práctica:</strong> Empezá con System Prompt o Google File Search — hoy, sin infra. Cuando el sistema crezca y los límites aparezcan, migrás. La migración toma horas, no semanas.
+    </div>
+  </section>
+</section>
+
+<!-- VECTOR STORES COMPARISON -->
+<section>
+  <section>
+    <span class="glass-pill"><i class="fa-solid fa-database"></i> BLOQUE 3 · INFRAESTRUCTURA</span>
+    <h2>Tabla de decisión</h2>
+    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1.2rem;">No existe una solución única — depende de tu infra, el volumen y cuánto control necesitás. MCP (Model Context Protocol) es el estándar emergente para conectar agentes con fuentes externas — lo profundizamos en la Clase 3.</p>
+    <div class="responsive-table-wrapper" style="max-height: 480px; overflow-y: auto;">
+      <table class="premium-table" style="font-size:0.8rem; text-align:left;">
+        <tr style="color:var(--secondary);">
+          <th style="width:20%;">Opción</th><th style="width:18%;">Costo base</th><th style="width:8%;">n8n</th><th style="width:20%;">Embeddings</th><th>Cuándo usarla</th>
+        </tr>
+        <tr>
+          <td><strong>System Prompt (hack)</strong></td>
+          <td style="color:var(--green);">Gratis</td>
+          <td style="color:var(--green);">✅</td>
+          <td style="font-size:0.75rem; color:var(--text-muted);">No aplica — texto plano en el prompt</td>
+          <td>Docs pequeños (~20-50K tokens óptimos, no el máximo técnico). Sin infra. Hoy. <span style="color:var(--accent);font-size:0.78rem;">⚠ A mayor contexto, mayor costo por llamada — analizá el trade-off si el volumen es alto.</span></td>
+        </tr>
+        <tr>
+          <td><strong>NotebookLM (consumer)</strong></td>
+          <td style="color:var(--green);">Gratis</td>
+          <td style="color:var(--red);">❌ solo web</td>
+          <td style="font-size:0.75rem; color:var(--text-muted);">Gestionado por Google</td>
+          <td>Uso interno del equipo vía browser. Sin API pública: no conecta con n8n, WhatsApp ni Telegram.</td>
+        </tr>
+        <tr>
+          <td><strong>Google File Search</strong></td>
+          <td>$0.15/1M al indexar<br><span style="color:var(--green);font-size:0.75rem;">Storage gratis</span></td>
+          <td style="color:var(--green);">✅</td>
+          <td style="font-size:0.75rem; color:var(--text-muted);">Gestionado por Google (automático)</td>
+          <td>RAG gestionado sin infra. Chunking y embeddings automáticos. Lanzado nov 2025.</td>
+        </tr>
+        <tr>
+          <td><strong>Supabase + pgvector</strong></td>
+          <td>Free tier disponible<br><span style="color:var(--text-muted);font-size:0.75rem;">Pro desde $25/mes</span></td>
+          <td style="color:var(--green);">✅</td>
+          <td style="font-size:0.75rem; color:var(--text-muted);">OpenAI text-embedding-3-small · $0.02/1M tokens</td>
+          <td>SQL + vectores en un lugar. Ideal B2B con filtros complejos por metadata.</td>
+        </tr>
+        <tr>
+          <td><strong>Pinecone</strong></td>
+          <td>Free tier disponible<br><span style="color:var(--text-muted);font-size:0.75rem;">Standard desde $25/mes</span></td>
+          <td style="color:var(--green);">✅</td>
+          <td style="font-size:0.75rem; color:var(--text-muted);">Cualquier modelo — OpenAI text-embedding-3-small recomendado</td>
+          <td>RAG a escala. Latencia baja y consistente. Mejor para B2C alto tráfico.</td>
+        </tr>
+        <tr>
+          <td><strong>Qdrant (self-hosted)</strong></td>
+          <td style="color:var(--green);">Gratis</td>
+          <td style="color:var(--green);">✅</td>
+          <td style="font-size:0.75rem; color:var(--text-muted);">Cualquier modelo — open-source (nomic-embed, e5) si la privacidad es crítica</td>
+          <td>Control total sin SaaS. Privacidad crítica. Integrable vía MCP (Clase 3).</td>
+        </tr>
+      </table>
+    </div>
+    <div class="highlight-box green" style="max-width:1050px; margin:1rem auto 0; font-size:0.88rem;">
+      <strong>Camino recomendado:</strong> (1) System Prompt o Google File Search — cero infra, hoy mismo. (2) Si necesitás SQL + filtros complejos → Supabase. (3) Millones de vectores, B2C alto tráfico → Pinecone o Qdrant.
+    </div>
+  </section>
+</section>
+
+<!-- BLOQUE 4 — LIVE BUILD -->
+<section>
+
+  <!-- SLIDE 1: INTRO — hoja de ruta -->
+  <section>
+    <span class="glass-pill"><i class="fa-solid fa-hammer"></i> BLOQUE 4 · LIVE BUILD · 15 MIN</span>
+    <h2 style="font-size:2.8rem;">3 Demos en Vivo:<br><span class="text-gradient">RAG + HITL en n8n</span></h2>
+    <div class="glass-card" style="max-width:1000px; padding:1.5rem;">
+      <table style="width:100%; font-size:0.95rem;">
+        <tr>
+          <th style="width:10%; text-align:center;">Min</th>
+          <th style="width:30%;">Demo</th>
+          <th style="width:30%;">Foco</th>
+          <th style="width:30%;">Stack</th>
+        </tr>
+        <tr>
+          <td style="text-align:center; color:var(--accent); font-weight:700;">0–5'</td>
+          <td><strong>⛳ Reglas del Golf</strong><br><span style="color:var(--text-muted); font-size:0.85rem;">RAG con File Search</span></td>
+          <td style="font-size:0.88rem;">Google File Search + Google Sheets (datos dinámicos). <strong>Sin HITL.</strong></td>
+          <td style="font-size:0.85rem;">n8n · File Search · Sheets · Gemini</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; color:var(--primary); font-weight:700;">5–10'</td>
+          <td><strong>📚 Saga Hormozi</strong><br><span style="color:var(--text-muted); font-size:0.85rem;">RAG avanzado · Telegram</span></td>
+          <td style="font-size:0.88rem;">Pinecone + <strong>reranking explícito</strong>. Control total del retrieval.</td>
+          <td style="font-size:0.85rem;">n8n · Telegram · Pinecone · OpenAI · Re-ranker</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; color:var(--secondary); font-weight:700;">10–15'</td>
+          <td><strong>🌿 HolaVeggie</strong><br><span style="color:var(--text-muted); font-size:0.85rem;">Infoproducto · WA</span></td>
+          <td style="font-size:0.88rem;">System Prompt como RAG hack + <strong>HITL con Chatwoot</strong></td>
+          <td style="font-size:0.85rem;">n8n · WhatsApp · Chatwoot</td>
+        </tr>
+      </table>
+      <div class="highlight-box cyan" style="margin-top:1rem; font-size:0.9rem;">
+        <strong>Tres arquitecturas, tres niveles.</strong> Golf = File Search con datos dinámicos. Hormozi = Pinecone con reranking (control total). HolaVeggie = System prompt hack + HITL (sin vectores). El 60% de cada flujo ya está pre-armado.
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ DEMO 1: REGLAS DEL GOLF ═══ -->
+
+  <!-- SLIDE 2: CASO REGLAS DEL GOLF -->
+  <section>
+    <span class="glass-pill amber">Demo 1 · Reglas del Golf</span>
+    <h2>RAG con File Search: <span class="text-gradient">Asistente de Reglas del Golf</span></h2>
+    <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.2rem;">
+      Un asistente que responde preguntas sobre reglamento, handicaps y torneos — con RAG semántico sobre documentos oficiales usando Google File Search.
+    </p>
+    <div class="glass-card" style="max-width:950px;text-align:left;padding:1.2rem 1.5rem;">
+      <h4 style="color:var(--green);margin-bottom:0.6rem;"><i class="fa-solid fa-layer-group"></i> Stack de esta demo</h4>
+      <div class="step-flow" style="justify-content:flex-start;flex-wrap:wrap;margin:0.4rem 0 0.8rem;">
+        <span class="tool-badge">n8n</span> +
+        <span class="tool-badge">Google File Search (RAG docs)</span> +
+        <span class="tool-badge">Google Sheets (datos dinámicos)</span> +
+        <span class="tool-badge">Gemini 2.5 Flash (agente)</span>
+      </div>
+      <div style="font-size:0.85rem; color:var(--text-muted); padding-top:0.5rem; border-top:1px solid var(--glass-border);">
+        <strong style="color:var(--secondary);">Google File Search</strong> para reglamento y documentos oficiales (semántico, sin infra) &nbsp;+&nbsp;
+        <strong style="color:var(--accent);">Google Sheets</strong> para datos dinámicos (calendario de torneos, handicaps, scores). <strong>Sin HITL</strong> — el agente resuelve todo solo.
+      </div>
+    </div>
+    <div class="highlight-box amber" style="max-width:950px;margin:0.8rem auto 0;font-size:0.92rem;">
+      <strong>¿Por qué este caso?</strong> Demuestra RAG puro: documentos densos + preguntas específicas + datos dinámicos. La misma arquitectura aplica a atención al cliente, soporte técnico, onboarding o cualquier caso con base de conocimiento real.
+    </div>
+  </section>
+
+  <!-- SLIDE 3: ARQUITECTURA DEL FLUJO RAG -->
+  <section>
+    <h2>Arquitectura del <span class="text-gradient">Flujo RAG</span></h2>
+    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1rem;">El flujo genérico de RAG con File Search + datos dinámicos. Aplicable a cualquier caso de uso.</p>
+    <div class="glass-card" style="max-width:1000px;text-align:left;padding:1.2rem 1.5rem;">
+      <div class="step-numbered"><div class="step-num">1</div><div class="step-content"><strong>Trigger</strong> — Webhook recibe mensaje → normaliza: message_text, sender_id, chat_id.</div></div>
+      <div class="step-numbered"><div class="step-num">2</div><div class="step-content"><strong>Búsqueda RAG (Google File Search)</strong> — n8n consulta la base de conocimiento semántica con la pregunta del usuario. Si no encuentra → el agente responde "no tengo esa info" y ofrece alternativas.</div></div>
+      <div class="step-numbered"><div class="step-num">3</div><div class="step-content"><strong>Datos dinámicos (Google Sheets)</strong> — Si el caso necesita datos en tiempo real (calendario, scores, stock), n8n consulta el Sheet con los parámetros extraídos.</div></div>
+      <div class="step-numbered"><div class="step-num">4</div><div class="step-content"><strong>Generación</strong> — Agente genera respuesta con contexto RAG + datos dinámicos + historial de conversación. Máx. 4-5 líneas.</div></div>
+      <div class="step-numbered"><div class="step-num">5</div><div class="step-content"><strong>Respuesta</strong> — n8n envía la respuesta. Sin escalada humana — el agente resuelve autónomamente.</div></div>
+    </div>
+    <div class="highlight-box green" style="max-width:1000px; margin:1rem auto 0; font-size:0.88rem;">
+      <strong>File Search = RAG sin infra:</strong> El conocimiento está en documentos indexados por Google File Search, no en el system prompt. Es plug-and-play: subís los PDFs, File Search los indexa automáticamente, y el agente recupera los chunks relevantes. Zero config.
+    </div>
+  </section>
+
+  <!-- ═══ DEMO 2: SAGA HORMOZI ═══ -->
+
+  <!-- SLIDE 4: CASO SAGA HORMOZI -->
+  <section>
+    <span class="glass-pill" style="background: rgba(138, 43, 226, 0.2); border: 1px solid rgba(138, 43, 226, 0.4); color: #e2cbff;">Demo 2 · Saga Hormozi</span>
+    <h2>RAG Avanzado: <span class="text-gradient">Saga de libros Alex Hormozi</span></h2>
+    <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.2rem;">
+      Asistente en Telegram que responde preguntas sobre los 3 libros de Hormozi ($100M Offers, $100M Leads, $100M Legacy) — con RAG usando Pinecone y reranking explícito.
+    </p>
+    <div class="glass-card" style="max-width:950px;text-align:left;padding:1.2rem 1.5rem;">
+      <h4 style="color:var(--green);margin-bottom:0.6rem;"><i class="fa-solid fa-layer-group"></i> Stack de esta demo</h4>
+      <div class="step-flow" style="justify-content:flex-start;flex-wrap:wrap;margin:0.4rem 0 0.8rem;">
+        <span class="tool-badge">n8n</span> +
+        <span class="tool-badge">Telegram</span> +
+        <span class="tool-badge">Pinecone (vector store)</span> +
+        <span class="tool-badge">OpenAI (embeddings)</span> +
+        <span class="tool-badge">Re-ranker</span>
+      </div>
+      <div style="font-size:0.85rem; color:var(--text-muted); padding-top:0.5rem; border-top:1px solid var(--glass-border);">
+        <strong style="color:var(--secondary);">Pinecone</strong> para almacenar y buscar vectores de los 3 libros &nbsp;+&nbsp;
+        <strong style="color:var(--accent);">Re-ranker</strong> para reordenar resultados por relevancia. <strong>Control total</strong> — ves cada paso del retrieval: embeddings, similarity search, reranking.
+      </div>
+    </div>
+    <div class="highlight-box" style="background: rgba(138, 43, 226, 0.1); border-left: 4px solid var(--primary); max-width:950px;margin:0.8rem auto 0;font-size:0.92rem;">
+      <strong>¿Por qué este caso?</strong> Demuestra RAG con control total. A diferencia de File Search (caja negra), acá ves el scoring, podés ajustar thresholds, filtrar por metadata, y reordenar chunks antes de generar la respuesta. Misma arquitectura para docs técnicos, bases de conocimiento enterprise, o cualquier caso donde necesitás afinar el retrieval.
+    </div>
+  </section>
+
+  <!-- SLIDE 5: ARQUITECTURA PINECONE + RERANKING -->
+  <section>
+    <h2>Arquitectura <span class="text-gradient">Pinecone + Reranking</span></h2>
+    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1rem;">El flujo RAG con control total. Cada paso es visible y ajustable.</p>
+    <div class="glass-card" style="max-width:1000px;text-align:left;padding:1.2rem 1.5rem;">
+      <div class="step-numbered"><div class="step-num">1</div><div class="step-content"><strong>Trigger</strong> — Webhook recibe mensaje de Telegram → normaliza: message_text, sender_id, chat_id.</div></div>
+      <div class="step-numbered"><div class="step-num">2</div><div class="step-content"><strong>Embed Query</strong> — OpenAI convierte la pregunta del usuario en un vector (1536 dimensiones). Este vector es la representación semántica de la pregunta.</div></div>
+      <div class="step-numbered"><div class="step-num">3</div><div class="step-content"><strong>Vector Search (Pinecone)</strong> — Busca los top 10-20 chunks más similares en el vector store usando cosine similarity. Cada chunk tiene su score de 0 a 1.</div></div>
+      <div class="step-numbered"><div class="step-num">4</div><div class="step-content"><strong>Reranking</strong> — El nodo Re-ranker reordena los chunks usando un modelo especializado. Los top 3-5 chunks con mayor score pasan al agente.</div></div>
+      <div class="step-numbered"><div class="step-num">5</div><div class="step-content"><strong>Generación</strong> — Agente genera respuesta con el contexto rerankeado + historial de conversación. Máx. 4-5 líneas.</div></div>
+      <div class="step-numbered"><div class="step-num">6</div><div class="step-content"><strong>Respuesta</strong> — n8n envía la respuesta por Telegram.</div></div>
+    </div>
+    <div class="highlight-box" style="background: rgba(138, 43, 226, 0.1); border-left: 4px solid var(--primary); max-width:1000px; margin:1rem auto 0; font-size:0.88rem;">
+      <strong>Diferencia clave con File Search:</strong> File Search es plug-and-play pero caja negra. Pinecone te da control: ves los scores, podés filtrar por metadata (ej: solo capítulo 3), ajustar cuántos chunks recuperar, y el reranker mejora la precisión un 20-30% vs. similarity pura.
+    </div>
+  </section>
+
+  <!-- ═══ DEMO 3: HOLAVEGGIE ═══ -->
+
+  <!-- SLIDE 6: HOLAVEGGIE — el caso real -->
+  <section>
+    <span class="glass-pill green">Demo 3 · HolaVeggie</span>
+    <h2>Caso Real: <span class="text-gradient-green">HolaVeggie</span> — Venta autónoma 24/7</h2>
+    <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.2rem;">
+      E-book de nutrición y recetas plant-based. Venta 100% conversacional y autónoma — arranca en Instagram (CTWA), cierra en WhatsApp, responde consultas, cobra y entrega el ebook sin intervención humana.
+    </p>
+    <div class="grid-2" style="max-width:1050px; text-align:left;">
+      <div class="glass-card" style="border-top: 4px solid var(--accent);">
+        <h4 style="color:var(--accent); margin-bottom:0.8rem;"><i class="fa-solid fa-layer-group"></i> El stack real</h4>
+        <ul class="premium-list" style="font-size:0.88rem;">
+          <li><i class="fa-brands fa-instagram" style="color:#E1306C;"></i> <strong>Entrada:</strong> Anuncio IG → CTWA → WhatsApp Business API</li>
+          <li><i class="fa-solid fa-brain"></i> <strong>Agente:</strong> Indio — el gato de HolaVeggie (personalidad de marca)</li>
+          <li><i class="fa-solid fa-file-invoice-dollar"></i> <strong>RAG:</strong> System prompt como base de conocimiento (hack) — info del ebook, precio, garantía, muestra gratuita</li>
+          <li><i class="fa-solid fa-headset"></i> <strong>HITL:</strong> Chatwoot — labels: carrito_abandonado · compró · duda_precio</li>
+          <li><i class="fa-solid fa-diagram-project"></i> <strong>Orquestación:</strong> n8n self-hosted</li>
+        </ul>
+      </div>
+      <div class="glass-card" style="border-top: 4px solid var(--green);">
+        <h4 style="color:var(--green); margin-bottom:0.8rem;"><i class="fa-solid fa-bolt"></i> Qué hace el agente solo</h4>
+        <ul class="premium-list" style="font-size:0.88rem;">
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Responde consultas sobre el ebook 24/7</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Entrega la muestra gratuita cuando el usuario la pide</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Cierra la venta y da los datos de pago ($19 USD)</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> <strong>Al recibir "PAGO HECHO" + email → entrega el link del ebook</strong></li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Bot se desactiva si el humano toma la conv., se reactiva al cerrarla</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-box cyan" style="max-width:1050px; margin:1.2rem auto 0; font-size:0.88rem;">
+      <strong>El hack RAG aquí:</strong> No hay stock ni catálogo. Toda la "base de conocimiento" está en el system prompt — precio, garantía, CTA, muestra, instrucciones de entrega. El agente nunca improvisa: cada respuesta tiene una regla explícita.
+    </div>
+  </section>
+
+  <!-- SLIDE 7: SYSTEM PROMPT DE INDIO -->
+  <section>
+    <h2>Indio: el agente que <span class="text-gradient">cobra y entrega solo</span></h2>
+    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1rem;">El System Prompt real en producción. Cada decisión tiene un por qué.</p>
+    <div class="grid-2" style="max-width:1100px; text-align:left; align-items:start;">
+      <pre class="glass-code" style="font-size:0.75rem; max-height:380px; overflow-y:auto; border-left:4px solid var(--secondary);">
+<code style="color:#f8fafc;"># ROL
+Sos Indio, el gato asistente oficial de HolaVeggie
+y del ebook "El Gran Recetario Plant-Based".
+Tu misión: informar sobre el ebook, cómo comprarlo
+y entregar el link de descarga cuando corresponda.
+
+# PERSONALIDAD
+Simpático, alegre, empático. Cálido y divertido.
+Usá emojis naturales 🐾🌿💚. Cerrá con gratitud.
+Usá siempre tuteo: "cuéntame", "quieres".
+
+# REGLAS CLAVE
+- No inventes precios, alias ni enlaces.
+- Solo entregás el link del ebook si recibís
+  "PAGO HECHO" + el email del comprador.
+- Si dicen "MUESTRA" → enviá ÚNICAMENTE
+  el texto exacto de la sección de muestra.
+- Si hay duda de precio → ofrecé cuotas primero.
+- Garantía de reembolso total, sin preguntas.
+
+# PRECIO Y PAGO
+💰 19 USD
+📧 paypal.me/AXELLABANARZUBI
+🔒 Sin riesgo: devolvemos si no convence.
+
+# SECUENCIA DE VENTA
+1. Ofrecé info del ebook o muestra gratuita
+2. CTA: "Si quieres reservar el precio de hoy,
+   decime QUIERO MI COPIA"
+3. Al confirmar → datos de pago
+4. Al recibir "PAGO HECHO" + email → link del ebook</code></pre>
+      <div style="border-left:1px solid var(--glass-border); padding-left:1.5rem;">
+        <h4 style="color:var(--accent); margin-bottom:1rem;">🔍 Por qué cada decisión</h4>
+        <ul class="premium-list" style="font-size:0.85rem;">
+          <li><i class="fa-solid fa-cat" style="color:var(--secondary);"></i> <strong>"Indio el gato":</strong> Identidad de marca real. No parece un bot genérico. Aumenta confianza y conversión.</li>
+          <li><i class="fa-solid fa-lock" style="color:var(--red);"></i> <strong>"PAGO HECHO" + email:</strong> Guardrail anti-fraude manual. El ebook no se entrega sin confirmación explícita.</li>
+          <li><i class="fa-solid fa-text-slash" style="color:var(--accent);"></i> <strong>Texto EXACTO de la muestra:</strong> Evita que el LLM improvise el onboarding. La muestra es siempre la misma.</li>
+          <li><i class="fa-solid fa-money-bill" style="color:var(--green);"></i> <strong>Cuotas antes de descuento:</strong> El agente nunca negocia precio sin autorización.</li>
+          <li><i class="fa-solid fa-rotate-left" style="color:var(--primary);"></i> <strong>Garantía sin preguntas:</strong> Elimina la objeción de riesgo antes de que aparezca.</li>
+        </ul>
+        <div class="highlight-box green" style="margin-top:1rem; font-size:0.85rem;">
+          <strong>El resultado:</strong> Este agente vende, cobra y entrega el ebook sin que nadie lo atienda. Funciona a las 3 AM en cualquier país.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 8: HITL CON CHATWOOT (solo en Demo 3) -->
+  <section>
+    <h2>HITL en HolaVeggie: <span class="text-gradient">Chatwoot en acción</span></h2>
+    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1.2rem;">El agente maneja el 80-90% de interacciones. Chatwoot recibe el 10-20% de mayor valor.</p>
+    <div class="grid-2" style="max-width:1050px;text-align:left;">
+      <div class="glass-card" style="border-top:4px solid var(--secondary);">
+        <h4 style="color:var(--secondary);margin-bottom:0.8rem;">🤖 Indio resuelve solo</h4>
+        <ul class="premium-list" style="font-size:0.88rem;">
+          <li><i class="fa-solid fa-check"></i> Consultas sobre el ebook y contenido</li>
+          <li><i class="fa-solid fa-check"></i> Entrega de muestra gratuita</li>
+          <li><i class="fa-solid fa-check"></i> Cierre de venta y datos de pago</li>
+          <li><i class="fa-solid fa-check"></i> Entrega del ebook post-pago</li>
+        </ul>
+      </div>
+      <div class="glass-card" style="border-top:4px solid var(--accent);">
+        <h4 style="color:var(--accent);margin-bottom:0.8rem;">👤 Deriva a humano</h4>
+        <ul class="premium-list" style="font-size:0.88rem;">
+          <li><i class="fa-solid fa-tag" style="color:var(--red);"></i> Label <strong>"duda_precio"</strong> → vendedor humano</li>
+          <li><i class="fa-solid fa-tag" style="color:var(--accent);"></i> Label <strong>"carrito_abandonado"</strong> → secuencia de recuperación</li>
+          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> 3+ intercambios sin cierre</li>
+          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> Usuario pide hablar con persona</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-box cyan" style="max-width:1050px; margin:1.2rem auto 0; font-size:0.9rem;">
+      <strong>Reglas del bot en Chatwoot:</strong> Si el agente humano responde → bot se desactiva automáticamente. Si el humano cierra la conv. → bot se reactiva. Timeout: si el humano no responde en 10 min → bot retoma.
+    </div>
+  </section>
+
+  <!-- ═══ CONTENIDO COMPARTIDO: GUARDRAILS + PROMPTS + COSTOS ═══ -->
+
+  <!-- SLIDE 9: GUARDRAILS -->
+  <section>
+    <h2><span class="text-gradient">Guardrails</span> — Los límites del agente</h2>
+    <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.2rem;">Aplican a las tres demos. Podemos implementarlas como reglas explícitas en el system prompt, o utilizar el <strong style="color:var(--secondary);">nuevo nodo de Guardrails nativo de n8n</strong> para validar la respuesta antes de que salga al usuario.</p>
+    <div class="grid-2" style="max-width:1050px; text-align:left;">
+      <div class="glass-card" style="border-top:4px solid var(--red);">
+        <h4 style="color:var(--red); margin-bottom:0.8rem;"><i class="fa-solid fa-ban"></i> Guardrails de datos</h4>
+        <ul class="premium-list" style="font-size:0.88rem;">
+          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> <strong>Stock/info:</strong> No confirmar sin consultar la fuente real</li>
+          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> <strong>Precios:</strong> No inventar descuentos ni condiciones fuera del prompt</li>
+          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> <strong>Links/alias:</strong> No generar URLs ni datos de contacto inventados</li>
+          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> <strong>Loop:</strong> Máx. 3 turnos sin resolución → escalar o redirigir</li>
+        </ul>
+      </div>
+      <div class="glass-card" style="border-top:4px solid var(--accent);">
+        <h4 style="color:var(--accent); margin-bottom:0.8rem;"><i class="fa-solid fa-sliders"></i> Guardrails de marca</h4>
+        <ul class="premium-list" style="font-size:0.88rem;">
+          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> <strong>Tono:</strong> El agente habla como la marca — definido en el prompt</li>
+          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> <strong>Longitud:</strong> Máx. 3-4 líneas — chats no son emails</li>
+          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> <strong>Temas off-limit:</strong> Competidores, política → redirigir siempre</li>
+          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> <strong>Fuera de scope:</strong> "No tengo esa info" → ofrecer alternativa</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 10: PROMPT AGENTE PRINCIPAL -->
+  <section>
+    <h2>Prompt: <span class="text-gradient">Agente Principal</span></h2>
+    <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1rem;">Estructura parametrizable — funciona para Golf, Hormozi, atención al cliente, soporte o cualquier agente con RAG.</p>
+    <pre class="glass-code" style="max-width:1000px; max-height:520px; overflow-y:auto;">
+<code style="color:#f8fafc;">SYSTEM:
+# ROL Y MISIÓN
+Sos [NOMBRE_AGENTE], [ROL] de [EMPRESA/TEMA].
+Tu misión: [OBJETIVO_CLARO] — [ejemplo: "responder consultas sobre 
+el reglamento", "ayudar a elegir el producto correcto", "resolver 
+dudas técnicas"].
+
+Tono: [profesional y preciso / cercano y conversacional / técnico y conciso]
+Idioma: español [o el que corresponda]
+
+# BASE DE CONOCIMIENTO
+Contexto recuperado de la base de datos (RAG):
+{{ $json.rag_context }}
+
+Datos dinámicos en tiempo real (stock, precios, calendario):
+{{ $json.dynamic_data }}
+
+# HISTORIAL DE LA CONVERSACIÓN
+{{ $json.conversation_history }}
+
+# MENSAJE ACTUAL DEL USUARIO
+{{ $json.message_text }}
+
+# REGLAS INVIOLABLES
+1. **Solo usás info de la base de conocimiento o datos dinámicos.**
+   - Si no está → "No tengo esa información disponible" + sugerí alternativa.
+   - Si el contexto RAG está vacío o irrelevante → admitilo.
+
+2. **NUNCA inventés:**
+   - Stock, precios, plazos, políticas, datos técnicos.
+   - Si el usuario pregunta algo fuera de scope → "Eso no lo manejo, 
+     pero puedo ayudarte con [X, Y, Z]."
+
+3. **Estructura de respuesta:**
+   - Máximo 3-4 líneas (excepto si listás productos/opciones).
+   - Si diste info → cerrá con próximo paso o pregunta concreta.
+   - Si derivaste → explicá por qué.
+
+4. **Guardrails de marca:**
+   - No hables de competidores.
+   - No des opiniones políticas ni temas sensibles.
+   - [AGREGAR REGLAS ESPECÍFICAS DEL NEGOCIO]
+
+5. **Manejo de casos edge:**
+   - Info contradictoria entre RAG y datos dinámicos → priorizá datos dinámicos.
+   - Usuario frustrado después de 3 intercambios sin resolver → 
+     [DERIVAR A HUMANO / ESCALAR].
+
+# EJEMPLO DE RESPUESTA CORRECTA
+Usuario: "¿Tenés las Nike Air Force en talle 42?"
+RAG context: "Nike Air Force 1 - zapatilla clásica de cuero, 
+disponible en 6 colores..."
+Dynamic data: "talle 42: sin stock | talle 41: 2 unidades | talle 43: 5 unidades"
+
+Respuesta:
+"Las Nike Air Force 1 son de cuero clásico. El talle 42 está agotado, 
+pero tengo el 41 (2 unidades) y el 43 (5 unidades). ¿Alguno de esos te sirve?"</code></pre>
+  </section>
+
+  <!-- SLIDE 11: COSTOS -->
+  <section>
+    <h2>Costos del <span class="text-gradient">Stack Completo</span></h2>
+    <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:0.6rem;">Estimación para ~2.000 consultas/mes. Punto de partida real.</p>
+    <table class="glass-card" style="font-size:0.78rem; max-width:1050px; text-align:left; margin-bottom:0.5rem;">
+      <tr style="color:var(--secondary);">
+        <th style="width:22%;">Herramienta</th>
+        <th style="width:18%;">Rol</th>
+        <th style="width:16%;">Plan</th>
+        <th style="width:14%; text-align:center;">Costo</th>
+        <th style="width:30%;">Nota clave</th>
+      </tr>
+      <tr>
+        <td><strong>Meta (WhatsApp API)</strong></td><td>Canal de mensajería</td><td>Por conversación</td>
+        <td style="text-align:center; color:var(--accent);">~$0.01–0.06/conv.</td>
+        <td>Las primeras 1.000 conv. de servicio son gratis/mes</td>
+      </tr>
+      <tr>
+        <td><strong>n8n</strong></td><td>Orquestador central</td><td>Cloud Starter</td>
+        <td style="text-align:center; color:var(--accent);">~$20/mes</td>
+        <td>Self-hosted en VPS ~$5–10/mes (más técnico)</td>
+      </tr>
+      <tr>
+        <td><strong>Google File Search</strong></td><td>RAG de documentos</td><td>Pay per index</td>
+        <td style="text-align:center; color:var(--green);">~$0–2/mes</td>
+        <td>Storage gratis · $0.15/1M tokens al indexar. 100 páginas &lt;$0.02</td>
+      </tr>
+      <tr>
+        <td><strong>Google Sheets</strong></td><td>Datos dinámicos</td><td>Gratis</td>
+        <td style="text-align:center; color:var(--green);">$0</td>
+        <td>Catálogo, stock, precios en tiempo real vía nodo n8n</td>
+      </tr>
+      <tr>
+        <td><strong>LLM (GPT-4o / Gemini)</strong></td><td>Cerebro del agente</td><td>Pay per token</td>
+        <td style="text-align:center; color:var(--accent);">~$5–25/mes</td>
+        <td>Gemini 2.5 Flash-Lite es ~10× más barato que GPT-4o para el mismo resultado</td>
+      </tr>
+      <tr>
+        <td><strong>Chatwoot</strong></td><td>HITL + bandeja humana</td><td>Self-hosted</td>
+        <td style="text-align:center; color:var(--green);">Gratis</td>
+        <td>Self-hosted gratis (recomendado). Cloud desde $19/mes con soporte.</td>
+      </tr>
+    </table>
+    <div class="grid-2" style="max-width:1050px; margin-top:0.5rem; gap:0.6rem;">
+      <div class="highlight-box green" style="margin:0; font-size:0.82rem; padding:0.6rem 1rem 0.6rem 1.2rem;">
+        <strong>Stack mínimo:</strong> n8n + File Search + Gemini 2.5 Flash-Lite + Chatwoot self-hosted → <strong>≈ $25–35 USD/mes</strong>
+      </div>
+      <div class="highlight-box amber" style="margin:0; font-size:0.82rem; padding:0.6rem 1rem 0.6rem 1.2rem;">
+        <strong>Variable clave:</strong> El LLM. Gemini 2.5 Flash-Lite vs GPT-4o puede ser 10× de diferencia de costo con resultados similares.
+      </div>
+    </div>
+  </section>
+
+</section>
+
+<!-- BLOQUE 5 — DEMO -->
+<section>
+  <section>
+    <span class="glass-pill"><i class="fa-solid fa-envelope-open-text"></i> BLOQUE 5 · DEMO · 5 MIN</span>
+    <h2>Triaje de <span class="text-gradient">Correos</span></h2>
+    <p style="font-size:1.05rem;color:var(--text-muted);margin-bottom:1.2rem;">Dos caminos según tu caso — el 40-60% del tiempo de soporte y ventas se gasta en leer emails para decidir qué contestar.</p>
+    <div class="grid-2" style="max-width:1050px; text-align:left; margin-bottom:1.5rem;">
+      <div class="glass-card" style="border-top:4px solid var(--secondary);">
+        <h4 style="color:var(--secondary); margin-bottom:0.8rem;"><i class="fa-solid fa-desktop"></i> Claude Cowork (recomendado para empezar)</h4>
+        <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.5; margin-bottom:0.8rem;">Al abrir la computadora, Claude Cowork procesa tu bandeja, categoriza y redacta borradores. Vos revisás y enviás.</p>
+        <ul class="premium-list" style="font-size:0.85rem;">
+          <li><i class="fa-solid fa-check" style="color:var(--secondary);"></i> Curva de aprendizaje mínima — sin código</li>
+          <li><i class="fa-solid fa-check" style="color:var(--secondary);"></i> Copilot puro — el humano siempre tiene control</li>
+          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> Requiere que alguien abra la computadora</li>
+        </ul>
+      </div>
+      <div class="glass-card" style="border-top:4px solid var(--accent);">
+        <h4 style="color:var(--accent); margin-bottom:0.8rem;"><i class="fa-solid fa-terminal"></i> n8n + Gmail (si querés que corra solo)</h4>
+        <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.5; margin-bottom:0.8rem;">Flujo automatizado que corre cada 15 minutos. Clasifica, puntúa y genera drafts sin que nadie lo active.</p>
+        <ul class="premium-list" style="font-size:0.85rem;">
+          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> Corre 24/7 sin intervención</li>
+          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> La misma lógica del live build — mismos prompts</li>
+          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> Requiere setup en n8n y conexión Gmail API</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-box cyan" style="max-width:1050px;margin:0 auto;font-size:0.95rem;">
+      <strong>Misma lógica del Live Build.</strong> El sistema clasifica el email, genera un draft contextualizado y lo deja en Borradores. El humano solo decide si enviar — elimina el 70% del trabajo de lectura y redacción. Los prompts están en los entregables de la clase.
+    </div>
+  </section>
+</section>
+
+<!-- BLOQUE 6 — CIERRE -->
+<section>
+  <!-- SLIDE ENTREGABLES -->
+  <section>
+    <span class="glass-pill"><i class="fa-solid fa-flag-checkered"></i> BLOQUE 6 · 5 MIN</span>
+    <h2>Lo que <span class="text-gradient">construiste hoy</span></h2>
+    <div style="max-width:1100px;margin:0 auto;">
+      
+      <!-- Flujos n8n -->
+      <div class="glass-card" style="padding:1.5rem; border-top:4px solid var(--secondary); margin-bottom:1.2rem;">
+        <h4 style="color:var(--secondary);margin-bottom:1rem;font-size:1.1rem;"><i class="fa-solid fa-diagram-project"></i> 3 Flujos n8n — listos para importar</h4>
+        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem;">
+          
+          <a href="https://github.com/axellaban/recursos/blob/main/Holaveggie_%20Indio%20Agente%20eBook%20Whatsapp%20(twlio)%20y%20HITL%20(Chatwoot).json" target="_blank" style="text-decoration:none;">
+            <div style="background:rgba(0,242,254,0.05);border:2px solid rgba(0,242,254,0.2);border-radius:12px;padding:1rem;text-align:center;transition:all 0.3s;height:100%;" onmouseover="this.style.borderColor='rgba(0,242,254,0.5)'; this.style.background='rgba(0,242,254,0.08)';" onmouseout="this.style.borderColor='rgba(0,242,254,0.2)'; this.style.background='rgba(0,242,254,0.05)';">
+              <i class="fa-solid fa-cat" style="font-size:2rem;color:var(--green);display:block;margin-bottom:0.6rem;"></i>
+              <strong style="font-size:0.85rem;color:var(--text-main);display:block;margin-bottom:0.3rem;">HolaVeggie</strong>
+              <p style="font-size:0.7rem;color:var(--text-muted);margin:0;line-height:1.4;">Agente eBook + WhatsApp + HITL Chatwoot</p>
+            </div>
+          </a>
+
+          <a href="https://github.com/axellaban/recursos/blob/main/%F0%9F%94%A5%20RAG%20System%20__%20Reglamento%20de%20Golf%20%2B%20Shop__%20GEMINI%20FILE%20SEARCH.json" target="_blank" style="text-decoration:none;">
+            <div style="background:rgba(245,158,11,0.05);border:2px solid rgba(245,158,11,0.2);border-radius:12px;padding:1rem;text-align:center;transition:all 0.3s;height:100%;" onmouseover="this.style.borderColor='rgba(245,158,11,0.5)'; this.style.background='rgba(245,158,11,0.08)';" onmouseout="this.style.borderColor='rgba(245,158,11,0.2)'; this.style.background='rgba(245,158,11,0.05)';">
+              <i class="fa-solid fa-golf-ball-tee" style="font-size:2rem;color:var(--accent);display:block;margin-bottom:0.6rem;"></i>
+              <strong style="font-size:0.85rem;color:var(--text-main);display:block;margin-bottom:0.3rem;">Reglas del Golf</strong>
+              <p style="font-size:0.7rem;color:var(--text-muted);margin:0;line-height:1.4;">File Search + Google Sheets + Gemini</p>
+            </div>
+          </a>
+
+          <a href="https://github.com/axellaban/recursos/blob/main/%F0%9F%94%A5%20RAG%20System%20__%20Saga%20de%20libros%20de%20100M%20de%20Alex%20Hormozi%20__%20PINECONE.json" target="_blank" style="text-decoration:none;">
+            <div style="background:rgba(138,43,226,0.05);border:2px solid rgba(138,43,226,0.2);border-radius:12px;padding:1rem;text-align:center;transition:all 0.3s;height:100%;" onmouseover="this.style.borderColor='rgba(138,43,226,0.5)'; this.style.background='rgba(138,43,226,0.08)';" onmouseout="this.style.borderColor='rgba(138,43,226,0.2)'; this.style.background='rgba(138,43,226,0.05)';">
+              <i class="fa-solid fa-book" style="font-size:2rem;color:var(--primary);display:block;margin-bottom:0.6rem;"></i>
+              <strong style="font-size:0.85rem;color:var(--text-main);display:block;margin-bottom:0.3rem;">Saga Hormozi</strong>
+              <p style="font-size:0.7rem;color:var(--text-muted);margin:0;line-height:1.4;">Pinecone + Reranking + Telegram</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- System Prompts y Skill -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.2rem;">
+        
+        <!-- Prompts -->
+        <div class="glass-card" style="padding:1.5rem; border-top:4px solid var(--accent);">
+          <h4 style="color:var(--accent);margin-bottom:1rem;font-size:1rem;"><i class="fa-solid fa-copy"></i> System Prompts</h4>
+          <div style="display:flex;flex-direction:column;gap:0.7rem;">
+            <div style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.15);border-radius:8px;padding:0.7rem;">
+              <i class="fa-solid fa-robot" style="color:var(--accent);margin-right:0.5rem;"></i>
+              <strong style="font-size:0.8rem;">Agente Principal</strong>
+              <p style="font-size:0.7rem;color:var(--text-muted);margin:0.3rem 0 0;">Estructura genérica RAG (en SLIDE 10)</p>
+            </div>
+            <a href="https://github.com/axellaban/recursos/blob/main/vault_assets/160_Claude_Skills/gmail-triage.zip" target="_blank" style="text-decoration:none;">
+              <div style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.15);border-radius:8px;padding:0.7rem;transition:all 0.3s;" onmouseover="this.style.background='rgba(245,158,11,0.1)'; this.style.borderColor='rgba(245,158,11,0.3)';" onmouseout="this.style.background='rgba(245,158,11,0.05)'; this.style.borderColor='rgba(245,158,11,0.15)';">
+                <i class="fa-solid fa-envelope" style="color:var(--accent);margin-right:0.5rem;"></i>
+                <strong style="font-size:0.8rem;color:var(--text-main);">Triaje de Emails</strong>
+                <p style="font-size:0.7rem;color:var(--text-muted);margin:0.3rem 0 0;">Skill de Claude con prompts</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- RAG Architect Skill -->
+        <div class="glass-card" style="padding:1.5rem; border-top:4px solid var(--primary);">
+          <h4 style="color:var(--primary);margin-bottom:0.8rem;font-size:1rem;"><i class="fa-solid fa-brain"></i> Skill — RAG Architect</h4>
+          <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.6;margin-bottom:1rem;">Analizá tus datos, recibí la arquitectura RAG óptima y el código de implementación — en minutos.</p>
+          <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:0.7rem;font-size:0.7rem;font-family:monospace;color:var(--secondary);word-break:break-all;margin-bottom:0.7rem;">
+            raw.githubusercontent.com/axellaban/recursos/main/<br>vault_assets/160_Claude_Skills/rag-architect.zip
+          </div>
+          <p style="font-size:0.75rem;color:var(--text-muted);margin:0;">Claude → Settings → Skills → Upload ZIP</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE FLUJOS EXTRA -->
+  <section>
+    <span class="glass-pill cyan"><i class="fa-solid fa-circle-plus"></i> Flujos de referencia</span>
+    <h2>Casos adicionales: <span class="text-gradient">flujos listos para importar</span></h2>
+    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1.5rem; max-width:900px; margin-left:auto; margin-right:auto;">No los cubrimos en detalle hoy, pero si tu negocio encaja en alguno de estos casos — el flujo completo y el video de configuración están disponibles.</p>
+
+    <div class="grid-2" style="max-width:1000px; margin:0 auto; gap:1.5rem; align-items:stretch;">
+
+      <!-- Card 1: Consultorio / Dentista -->
+      <div class="glass-card" style="border-top:4px solid var(--secondary); padding:1.5rem; text-align:left; display:flex; flex-direction:column; gap:0.8rem;">
+        <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.3rem;">
+          <span style="font-size:2rem;">🦷</span>
+          <div>
+            <strong style="font-size:1rem; color:var(--text-main); display:block;">Agente de voz para consultorios</strong>
+            <span style="font-size:0.78rem; color:var(--text-muted);">Odontología · Médicos · Turnos en general</span>
+          </div>
+        </div>
+        <ul class="premium-list" style="font-size:0.82rem; margin:0;">
+          <li><i class="fa-solid fa-microphone" style="color:var(--secondary);"></i> <strong>Agente de voz con ElevenLabs</strong> que atiende llamadas</li>
+          <li><i class="fa-brands fa-google" style="color:var(--secondary);"></i> Agenda citas directo en <strong>Google Calendar</strong></li>
+          <li><i class="fa-solid fa-rotate" style="color:var(--secondary);"></i> Maneja confirmaciones, cancelaciones y recordatorios</li>
+        </ul>
+        <div style="display:flex; gap:0.6rem; margin-top:auto; padding-top:0.8rem; border-top:1px solid var(--glass-border); flex-wrap:wrap;">
+          <a href="https://youtu.be/vQ5Z8-f-xw4" target="_blank" style="text-decoration:none; flex:1; min-width:120px;">
+            <div style="background:#FF0000; border-radius:8px; padding:0.5rem 0.8rem; text-align:center; font-size:0.78rem; font-weight:700; color:white; display:flex; align-items:center; justify-content:center; gap:0.4rem; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+              <i class="fa-brands fa-youtube"></i> Ver tutorial
+            </div>
+          </a>
+          <a href="https://github.com/axellaban/recursos/blob/main/%F0%9F%A6%B7%20Agente%20de%20Voz%20__%20Consultorio%20Odontologico%20__%20Agenda%20en%20Calendar%20__%20ELEVENLABS.json" target="_blank" style="text-decoration:none; flex:1; min-width:120px;">
+            <div style="background:rgba(0,242,254,0.1); border:1px solid rgba(0,242,254,0.3); border-radius:8px; padding:0.5rem 0.8rem; text-align:center; font-size:0.78rem; font-weight:700; color:var(--secondary); display:flex; align-items:center; justify-content:center; gap:0.4rem; transition:all 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.2)'" onmouseout="this.style.background='rgba(0,242,254,0.1)'">
+              <i class="fa-brands fa-github"></i> Descargar flujo
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2: WhatsApp + Web Scraper -->
+      <div class="glass-card" style="border-top:4px solid var(--accent); padding:1.5rem; text-align:left; display:flex; flex-direction:column; gap:0.8rem;">
+        <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.3rem;">
+          <span style="font-size:2rem;">🤖</span>
+          <div>
+            <strong style="font-size:1rem; color:var(--text-main); display:block;">WhatsApp chatbot con web scraper</strong>
+            <span style="font-size:0.78rem; color:var(--text-muted);">Pequeños negocios · Info siempre actualizada de tu web</span>
+          </div>
+        </div>
+        <ul class="premium-list" style="font-size:0.82rem; margin:0;">
+          <li><i class="fa-brands fa-whatsapp" style="color:#25D366;"></i> Agente de <strong>WhatsApp</strong> que responde 24/7</li>
+          <li><i class="fa-solid fa-spider" style="color:var(--accent);"></i> Usa <strong>Firecrawl</strong> para scrapear tu web en tiempo real</li>
+          <li><i class="fa-solid fa-rotate" style="color:var(--accent);"></i> Responde con info actualizada sin reconfigurar el agente</li>
+        </ul>
+        <div style="display:flex; gap:0.6rem; margin-top:auto; padding-top:0.8rem; border-top:1px solid var(--glass-border); flex-wrap:wrap;">
+          <a href="https://youtu.be/IpWx1ubSnH4" target="_blank" style="text-decoration:none; flex:1; min-width:120px;">
+            <div style="background:#FF0000; border-radius:8px; padding:0.5rem 0.8rem; text-align:center; font-size:0.78rem; font-weight:700; color:white; display:flex; align-items:center; justify-content:center; gap:0.4rem; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+              <i class="fa-brands fa-youtube"></i> Ver tutorial
+            </div>
+          </a>
+          <a href="https://github.com/axellaban/recursos/blob/main/%F0%9F%A4%96%20WhatsApp%20Chatbot%20con%20Web%20Scraper%20__%20FIRECRAWL.json" target="_blank" style="text-decoration:none; flex:1; min-width:120px;">
+            <div style="background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3); border-radius:8px; padding:0.5rem 0.8rem; text-align:center; font-size:0.78rem; font-weight:700; color:var(--accent); display:flex; align-items:center; justify-content:center; gap:0.4rem; transition:all 0.2s;" onmouseover="this.style.background='rgba(245,158,11,0.2)'" onmouseout="this.style.background='rgba(245,158,11,0.1)'">
+              <i class="fa-brands fa-github"></i> Descargar flujo
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="highlight-box cyan" style="max-width:1000px; margin:1.2rem auto 0; font-size:0.88rem;">
+      <strong>¿Cómo usarlos?</strong> Descargá el JSON → en n8n: <em>Workflows → Import from file</em>. Mirá el tutorial del caso antes de importar para entender las credenciales necesarias.
+    </div>
+  </section>
+
+  <!-- SLIDE RECURSOS -->
+  <section>
+    <h2>Recursos de la <span class="text-gradient">clase</span></h2>
+    <div class="grid-3" style="max-width:1050px; gap:1rem;">
+
+      <!-- Columna 1: Stack técnico -->
+      <div class="glass-card" style="padding:1.2rem; border-top:4px solid var(--secondary);">
+        <h4 style="color:var(--secondary);margin-bottom:0.8rem;font-size:0.95rem;"><i class="fa-brands fa-youtube"></i> Setup del stack</h4>
+        <ul style="list-style:none;padding:0;margin:0;font-size:0.78rem;line-height:1.7;">
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.45rem;margin-bottom:0.45rem;">
+            <a href="https://youtu.be/eyY-S5Ta1bs" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-solid fa-server" style="color:var(--secondary);margin-right:0.4rem;"></i><strong>n8n: self-hosted vs. cloud vs. local</strong>
+            </a><br><span style="color:var(--text-muted);">Comparativa completa para elegir tu setup</span>
+          </li>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.45rem;margin-bottom:0.45rem;">
+            <a href="https://youtu.be/Cm0GhnHYlVw" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-brands fa-whatsapp" style="color:#25D366;margin-right:0.4rem;"></i><strong>Conectar API WhatsApp Business</strong>
+            </a><br><span style="color:var(--text-muted);">Setup completo paso a paso en n8n</span>
+          </li>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.45rem;margin-bottom:0.45rem;">
+            <a href="https://youtube.com/shorts/QO-eWeTowrw" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-brands fa-telegram" style="color:#2AABEE;margin-right:0.4rem;"></i><strong>Conectar API Telegram en n8n</strong>
+            </a><br><span style="color:var(--text-muted);">Alternativa a WhatsApp — más simple de configurar</span>
+          </li>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.45rem;margin-bottom:0.45rem;">
+            <a href="https://youtu.be/g_LUH-W45PQ" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-solid fa-key" style="color:var(--accent);margin-right:0.4rem;"></i><strong>Token permanente Meta (WhatsApp API)</strong>
+            </a><br><span style="color:var(--text-muted);">Evitá que el token expire cada 60 días</span>
+          </li>
+          <li>
+            <a href="https://youtu.be/Ty3JQMT96pg" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-solid fa-headset" style="color:var(--primary);margin-right:0.4rem;"></i><strong>Instalar Chatwoot en VPS (HITL)</strong>
+            </a><br><span style="color:var(--text-muted);">Self-hosted gratis para bandeja unificada</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Columna 2: RAG y flujos -->
+      <div class="glass-card" style="padding:1.2rem; border-top:4px solid var(--accent);">
+        <h4 style="color:var(--accent);margin-bottom:0.8rem;font-size:0.95rem;"><i class="fa-solid fa-database"></i> RAG y flujos</h4>
+        <ul style="list-style:none;padding:0;margin:0;font-size:0.8rem;line-height:1.8;">
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.5rem;margin-bottom:0.5rem;">
+            <a href="https://www.notion.so/103-Powerful-AI-RAG-System-32ac7845a1f581058501defeb9ab5052" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-solid fa-diagram-project" style="color:var(--accent);margin-right:0.4rem;"></i><strong>Flujo RAG con Pinecone en n8n</strong>
+            </a><br><span style="color:var(--text-muted);">Sistema RAG completo para escalar a vector store dedicado</span>
+          </li>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.5rem;margin-bottom:0.5rem;">
+            <a href="https://ai.google.dev/gemini-api/docs/file-search" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-brands fa-google" style="color:var(--secondary);margin-right:0.4rem;"></i><strong>Google File Search — docs oficiales</strong>
+            </a><br><span style="color:var(--text-muted);">API de RAG gestionado de Gemini (nov 2025)</span>
+          </li>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.5rem;margin-bottom:0.5rem;">
+            <a href="https://www.youtube.com/watch?v=irg-2IfAjpo" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-brands fa-youtube" style="color:#FF0000;margin-right:0.4rem;"></i><strong>Flujo RAG de Google File Search en n8n</strong>
+            </a><br><span style="color:var(--text-muted);">Tutorial paso a paso del flujo completo</span>
+          </li>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.5rem;margin-bottom:0.5rem;">
+            <a href="https://support.claude.com/en/articles/12123587-import-and-export-your-memory-from-claude" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-solid fa-brain" style="color:var(--primary);margin-right:0.4rem;"></i><strong>Importar / exportar memoria de Claude</strong>
+            </a><br><span style="color:var(--text-muted);">Prompt para migrar la memoria completa entre instancias</span>
+          </li>
+          <li>
+            <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent);margin-right:0.4rem;"></i><strong>Claude Prompt Engineering Guide</strong>
+            </a><br><span style="color:var(--text-muted);">Guía oficial de Anthropic para dominar prompts complejos</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Modelos y evaluación -->
+      <div class="glass-card" style="padding:1.2rem; border-top:4px solid var(--green);">
+        <h4 style="color:var(--green);margin-bottom:0.8rem;font-size:0.95rem;"><i class="fa-solid fa-chart-bar"></i> Comparar y elegir modelos</h4>
+        <ul style="list-style:none;padding:0;margin:0;font-size:0.8rem;line-height:1.8;">
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.5rem;margin-bottom:0.5rem;">
+            <a href="https://artificialanalysis.ai" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-solid fa-magnifying-glass-chart" style="color:var(--green);margin-right:0.4rem;"></i><strong>Artificial Analysis</strong>
+            </a><br><span style="color:var(--text-muted);">Benchmarks de performance, latencia y costo por modelo. La referencia para elegir.</span>
+          </li>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.5rem;margin-bottom:0.5rem;">
+            <a href="https://lmarena.ai" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-solid fa-trophy" style="color:var(--accent);margin-right:0.4rem;"></i><strong>LM Arena</strong>
+            </a><br><span style="color:var(--text-muted);">Probá modelos en ciego y votá cuál responde mejor a tu caso.</span>
+          </li>
+          <li>
+            <div style="color:var(--text-muted);font-size:0.78rem;margin-top:0.5rem;padding:0.6rem;background:rgba(0,242,254,0.05);border-radius:8px;border:1px solid var(--glass-border);">
+              <strong style="color:var(--secondary);">Tip:</strong> Antes de elegir el LLM para tu agente, testeá tu prompt exacto en LM Arena con tus datos reales. Lo que funciona en el benchmark puede no ser lo mejor para tu caso de uso específico.
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>KPIs: cómo medís el <span class="text-gradient">impacto real</span></h2>
+    <div class="grid-4" style="max-width:1050px;margin:2rem auto;">
+      <div class="glass-card stat-box" style="padding:1.2rem;">
+        <div class="stat-number text-gradient" style="font-size:2.2rem;">&gt;70%</div>
+        <div class="stat-label" style="font-size:0.82rem;">Consultas resueltas sin humano<br><span style="color:var(--accent);font-size:0.78rem;">Agente de atención</span></div>
+      </div>
+      <div class="glass-card stat-box" style="padding:1.2rem;">
+        <div class="stat-number text-gradient-green" style="font-size:2.2rem;">&lt;2 min</div>
+        <div class="stat-label" style="font-size:0.82rem;">Tiempo de triaje de email<br><span style="color:var(--accent);font-size:0.78rem;">vs. lectura manual actual</span></div>
+      </div>
+      <div class="glass-card stat-box" style="padding:1.2rem;">
+        <div class="stat-number text-gradient-amber" style="font-size:2.2rem;">&lt;5%</div>
+        <div class="stat-label" style="font-size:0.82rem;">Tasa de falsos positivos RAG<br><span style="color:var(--accent);font-size:0.78rem;">Respuestas con datos inventados</span></div>
+      </div>
+      <div class="glass-card stat-box" style="padding:1.2rem;">
+        <div class="stat-number text-gradient" style="font-size:2.2rem;">-50%</div>
+        <div class="stat-label" style="font-size:0.82rem;">Tiempo de respuesta al cliente<br><span style="color:var(--accent);font-size:0.78rem;">Primer contacto → resolución</span></div>
+      </div>
+    </div>
+    <div class="glass-card" style="max-width:1050px; margin:1rem auto 0; padding:0; text-align:left; overflow: hidden;">
+      <div class="responsive-table-wrapper">
+        <table class="premium-table">
+          <thead>
+            <tr><th>KPI</th><th>Si está bien</th><th>Si está mal → acción</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>&gt;70% autónomo</strong></td><td style="color:var(--green);">El RAG está funcionando</td><td>Revisá los chunks donde el agente falló — docs mal estructurados</td></tr>
+            <tr><td><strong>&lt;2 min triaje</strong></td><td style="color:var(--green);">El clasificador es preciso</td><td>Revisá las categorías del prompt — puede estar mal definida una intención</td></tr>
+            <tr><td><strong>&lt;5% falsos positivos</strong></td><td style="color:var(--green);">Los guardrails funcionan</td><td>Reforzá las restricciones absolutas en el system prompt</td></tr>
+            <tr><td><strong>-50% tiempo respuesta</strong></td><td style="color:var(--green);">El HITL está bien calibrado</td><td>Revisá si el agente está escalando demasiado — ajustá condiciones del IF</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="highlight-box green" style="max-width:1050px;margin:0.8rem auto 0;font-size:0.9rem;">
+      <strong>Empezás a medir desde hoy.</strong> Registrá la línea de base actual antes de lanzar — sin ese número, no podés demostrar el impacto ni justificar la inversión.
+    </div>
+  </section>
+
+  <section>
+    <h2>El puente a la <span class="text-gradient">Clase 3</span></h2>
+    <div class="glass-card" style="max-width:900px;text-align:left;padding:1.8rem 2rem;">
+      <div class="highlight-box cyan" style="margin-top:0;font-size:1.05rem;">
+        En esta clase construiste <strong>agentes reactivos</strong> — responden cuando los llaman.
+      </div>
+      <p style="font-size:1.1rem;line-height:1.7;margin-top:1.2rem;">En la Clase 3 construís <strong>agentes proactivos y sistemas multiagente</strong>:</p>
+      <ul class="premium-list" style="font-size:0.95rem;margin-top:0.8rem;">
+        <li><i class="fa-solid fa-calendar-check"></i> <strong>Meeting Prep Agent</strong> — trabaja a las 7 AM sin que nadie lo llame. Revisa tu calendario, investiga participantes y publica un briefing antes de la reunión.</li>
+        <li><i class="fa-solid fa-robot"></i> <strong>Crew de agentes</strong> — múltiples IAs con roles distintos que colaboran para resolver un proceso completo de forma autónoma.</li>
+      </ul>
+      <div class="highlight-box amber" style="margin-top:1.2rem;font-size:0.95rem;">
+        El RAG que armaste hoy es la memoria de largo plazo de esos sistemas. Todo lo que construiste hoy se reutiliza en la Clase 3.
+      </div>
+    </div>
+  </section>
+
+  <!-- APÉNDICE: CANVAS -->
+  <section>
+    <h2>Apéndice: <span class="text-gradient">Canvas de Diseño RAG</span></h2>
+    <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1rem;">Completalo ANTES de construir cualquier agente. Define el norte del sistema.</p>
+    <div class="responsive-table-wrapper" style="max-width:1050px; margin: 0 auto;">
+      <table class="premium-table">
+        <thead>
+          <tr>
+            <th style="width:34%;">Campo del Canvas</th>
+            <th style="width:66%;">Guía</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>1. El problema que resuelve</strong></td><td>¿Qué proceso duele hoy? Sé específico.</td></tr>
+          <tr><td><strong>2. Canal de entrada</strong></td><td>WhatsApp · Telegram · Email · Slack · API interna</td></tr>
+          <tr><td><strong>3. Nombre y rol del agente</strong></td><td>Ej. "Nina, especialista en soporte técnico de [EMPRESA]"</td></tr>
+          <tr><td><strong>4. Fuentes de conocimiento</strong></td><td>¿Qué docs va a consultar? Lista los 3 principales.</td></tr>
+          <tr><td><strong>5. Arquitectura RAG</strong></td><td>Naive · Re-ranking · Híbrido · GraphRAG · Agentic RAG</td></tr>
+          <tr><td><strong>6. Herramienta RAG</strong></td><td>System Prompt · File Search · Supabase · Pinecone · Qdrant</td></tr>
+          <tr><td><strong>7. Datos dinámicos necesarios</strong></td><td>¿Stock, pedidos, calendario o CRM en tiempo real?</td></tr>
+          <tr><td><strong>8. Condición de HITL</strong></td><td>¿Cuándo y cómo deriva? Define la regla exacta.</td></tr>
+          <tr><td><strong>9. Modo de inicio</strong></td><td>Copilot (humano aprueba) · Autopilot (ejecuta solo)</td></tr>
+          <tr><td><strong>10. KPI primario de éxito</strong></td><td>¿Cómo medís si funciona? Métrica + objetivo.</td></tr>
+          <tr><td><strong>11. Responsable de mantenimiento</strong></td><td>¿Quién actualiza la base de conocimiento?</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h2 class="text-gradient" style="margin-top:1.5rem;font-size:2.8rem;">Gracias. A construir.</h2>
+  </section>
+</section>
+
+</div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
+<script>
+  Reveal.initialize({ hash: true, transition: 'fade', backgroundTransition: 'slide', controls: true, progress: true, center: true });
+</script>
+</body>
+</html>
