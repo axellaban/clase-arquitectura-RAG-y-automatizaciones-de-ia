@@ -14,249 +14,227 @@
   <style>
     :root {
       --primary: #8a2be2; --secondary: #00f2fe; --bg-dark: #0f172a;
-      --glass-bg: rgba(255,255,255,0.05); --glass-border: rgba(255,255,255,0.1);
+      --glass-bg: rgba(255,255,255,0.05); --glass-border: rgba(255,255,255,0.11);
       --text-main: #f8fafc; --text-muted: #94a3b8;
       --accent: #f59e0b; --green: #22c55e; --red: #ef4444;
     }
     body { background: radial-gradient(circle at center, #1e293b 0%, var(--bg-dark) 100%); font-family: 'Inter', sans-serif; }
-    .reveal { font-family: 'Inter', sans-serif; color: var(--text-main); }
-    .reveal h1, .reveal h2, .reveal h3, .reveal h4 { font-family: 'Outfit', sans-serif; font-weight: 700; text-transform: none; letter-spacing: -0.02em; }
+    /* Override Reveal's 42px base font size so line-boxes and cards have clean desktop proportions */
+    .reveal { font-family: 'Inter', sans-serif; color: var(--text-main); font-size: 18px; line-height: 1.42; }
+    .reveal .slides section { line-height: 1.42; }
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 { font-family: 'Outfit', sans-serif; font-weight: 700; text-transform: none; letter-spacing: -0.02em; line-height: 1.18; }
+    .reveal h1 { font-size: 2.55rem; margin: 0.35rem 0 0.5rem; }
+    .reveal h2 { font-size: 2.05rem; margin: 0.15rem 0 0.55rem; }
+    .reveal h3 { font-size: 1.45rem; margin: 0.2rem 0 0.45rem; }
+    .reveal h4 { font-size: 1.02rem; margin: 0 0 0.45rem; line-height: 1.3; }
+    .reveal p { margin: 0.35rem 0; line-height: 1.45; }
+    .reveal small { font-size: 0.76rem; line-height: 1.35; vertical-align: baseline; }
+
     .text-gradient { background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
     .text-gradient-amber { background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
     .text-gradient-green { background: linear-gradient(135deg, #22c55e 0%, #00f2fe 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
-    .glass-card { background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 2rem; box-shadow: 0 8px 32px rgba(0,0,0,0.3); margin: 1rem auto; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .glass-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,242,254,0.15); }
-    .glass-pill { background: rgba(138,43,226,0.2); border: 1px solid rgba(138,43,226,0.4); color: #e2cbff; padding: 0.4rem 1.2rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; display: inline-block; margin-bottom: 1rem; letter-spacing: 0.05em; text-transform: uppercase; }
+
+    .glass-card { background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1.1rem 1.35rem; box-shadow: 0 8px 28px rgba(0,0,0,0.28); margin: 0.35rem auto; transition: transform 0.25s ease, box-shadow 0.25s ease; font-size: 0.9rem; line-height: 1.42; }
+    .glass-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,242,254,0.13); }
+    .glass-pill { background: rgba(138,43,226,0.2); border: 1px solid rgba(138,43,226,0.4); color: #e2cbff; padding: 0.28rem 0.95rem; border-radius: 50px; font-size: 0.74rem; font-weight: 600; display: inline-block; margin-bottom: 0.45rem; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.2; }
     .glass-pill.cyan  { background: rgba(0,242,254,0.1); border: 1px solid rgba(0,242,254,0.3); color: var(--secondary); }
     .glass-pill.green { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.4); color: #86efac; }
     .glass-pill.amber { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.4); color: #fcd34d; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
-    .stat-box { text-align: center; padding: 1.2rem; }
-    .stat-number { font-size: 3rem; font-weight: 800; line-height: 1; margin-bottom: 0.4rem; }
-    .stat-label { font-size: 0.95rem; color: var(--text-muted); }
+    .badge-mini { display: inline-block; background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border); border-radius: 6px; padding: 0.18rem 0.55rem; font-size: 0.74rem; font-weight: 600; line-height: 1.2; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; align-items: stretch; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; align-items: stretch; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 0.9rem; align-items: stretch; }
+    .stat-box { text-align: center; padding: 1rem 1.1rem; }
+    .stat-number { font-size: 2.5rem; font-weight: 800; line-height: 1.05; margin-bottom: 0.35rem; }
+    .stat-label { font-size: 0.84rem; color: var(--text-muted); line-height: 1.4; }
+
     .reveal ul.premium-list { list-style: none; padding: 0; margin: 0; }
-    .reveal ul.premium-list li { margin-bottom: 0.9rem; font-size: 1.05rem; display: flex; align-items: flex-start; line-height: 1.4; }
-    .reveal ul.premium-list li i { color: var(--secondary); margin-right: 0.8rem; margin-top: 0.2rem; font-size: 1rem; flex-shrink: 0; }
-    .reveal pre.glass-code { background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1.2rem 1.5rem; font-size: 0.8rem; box-shadow: 0 4px 15px rgba(0,0,0,0.5); line-height: 1.6; text-align: left; }
-    .highlight-box { border-left: 4px solid var(--primary); padding: 0.8rem 1rem 0.8rem 1.5rem; background: rgba(138,43,226,0.08); margin: 1rem 0; border-radius: 0 12px 12px 0; text-align: left; }
+    .reveal ul.premium-list li { margin-bottom: 0.55rem; font-size: 0.88rem; display: flex; align-items: flex-start; line-height: 1.4; }
+    .reveal ul.premium-list li:last-child { margin-bottom: 0; }
+    .reveal ul.premium-list li i { color: var(--secondary); margin-right: 0.65rem; margin-top: 0.18rem; font-size: 0.88rem; flex-shrink: 0; }
+    .reveal pre.glass-code { background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); border-radius: 12px; padding: 0.95rem 1.2rem; font-size: 0.76rem; box-shadow: 0 4px 15px rgba(0,0,0,0.5); line-height: 1.5; text-align: left; }
+
+    .highlight-box { border-left: 4px solid var(--primary); padding: 0.6rem 1rem 0.6rem 1.2rem; background: rgba(138,43,226,0.08); margin: 0.65rem auto; border-radius: 0 10px 10px 0; text-align: left; font-size: 0.86rem; line-height: 1.42; }
     .highlight-box.cyan  { border-left-color: var(--secondary); background: rgba(0,242,254,0.06); }
     .highlight-box.amber { border-left-color: var(--accent); background: rgba(245,158,11,0.08); }
     .highlight-box.green { border-left-color: var(--green); background: rgba(34,197,94,0.08); }
     .highlight-box.red   { border-left-color: var(--red); background: rgba(239,68,68,0.08); }
-    .reveal table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border); }
-    .reveal table th { background: rgba(255,255,255,0.1); padding: 0.75rem 1rem; font-size: 0.95rem; }
-    .reveal table td { padding: 0.7rem 1rem; border-top: 1px solid var(--glass-border); font-size: 0.9rem; }
-    .step-flow { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin: 1.5rem 0; }
-    .step-node { background: rgba(138,43,226,0.2); border: 1px solid rgba(138,43,226,0.5); border-radius: 12px; padding: 0.6rem 1rem; font-size: 0.9rem; text-align: center; min-width: 110px; }
-    .step-arrow { color: var(--secondary); font-size: 1.4rem; }
-    .tool-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(0,242,254,0.1); border: 1px solid rgba(0,242,254,0.25); border-radius: 8px; padding: 0.35rem 0.8rem; font-size: 0.85rem; font-weight: 600; color: var(--secondary); }
+
+    .reveal table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border); font-size: 0.84rem; }
+    .reveal table th { background: rgba(255,255,255,0.09); padding: 0.55rem 0.85rem; font-size: 0.84rem; }
+    .reveal table td { padding: 0.55rem 0.85rem; border-top: 1px solid var(--glass-border); font-size: 0.82rem; line-height: 1.38; }
+
+    .step-flow { display: flex; align-items: center; gap: 0.45rem; flex-wrap: wrap; justify-content: center; margin: 0.8rem 0; }
+    .step-node { background: rgba(138,43,226,0.2); border: 1px solid rgba(138,43,226,0.5); border-radius: 10px; padding: 0.45rem 0.85rem; font-size: 0.82rem; text-align: center; min-width: 100px; }
+    .step-arrow { color: var(--secondary); font-size: 1.15rem; font-weight: 700; }
+    .tool-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(0,242,254,0.1); border: 1px solid rgba(0,242,254,0.25); border-radius: 8px; padding: 0.28rem 0.65rem; font-size: 0.78rem; font-weight: 600; color: var(--secondary); }
     .reveal .progress span { background: var(--secondary) !important; }
-    .step-numbered { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; text-align: left; }
-    .step-num { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border-radius: 50%; width: 1.9rem; height: 1.9rem; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; flex-shrink: 0; margin-top: 0.1rem; }
-    .step-content { font-size: 0.95rem; line-height: 1.5; }
+    .step-numbered { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.55rem; text-align: left; }
+    .step-num { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border-radius: 50%; width: 1.65rem; height: 1.65rem; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.78rem; flex-shrink: 0; margin-top: 0.08rem; }
+    .step-content { font-size: 0.86rem; line-height: 1.42; }
     .step-content strong { color: var(--secondary); }
 
-    /* New CSS for Pyramid and Tables */
-    .pyramid-wrapper { display: flex; align-items: center; justify-content: center; gap: 3rem; margin-top: 1rem; }
-    .pyramid-container { display: flex; flex-direction: column; align-items: center; gap: 8px; position: relative; width: 500px; }
-    .pyramid-layer { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; padding: 1.5rem; color: white; transition: all 0.3s ease; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); text-align: center; }
-    .pyramid-layer.cima { width: 40%; background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%); clip-path: polygon(50% 0%, 100% 100%, 0% 100%); height: 110px; align-items: flex-end; padding-bottom: 0.8rem; border-top: 1px solid rgba(255,255,255,0.3); }
-    .pyramid-layer.medio { width: 75%; background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%); clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%); height: 120px; border-top: 1px solid rgba(255,255,255,0.2); }
-    .pyramid-layer.base { width: 100%; background: rgba(51, 65, 85, 0.8); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%); height: 130px; }
+    /* Pyramid and Tables */
+    .pyramid-wrapper { display: flex; align-items: center; justify-content: center; gap: 2.2rem; margin-top: 0.6rem; }
+    .pyramid-container { display: flex; flex-direction: column; align-items: center; gap: 6px; position: relative; width: 440px; }
+    .pyramid-layer { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; padding: 1.1rem; color: white; transition: all 0.3s ease; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); text-align: center; }
+    .pyramid-layer.cima { width: 42%; background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%); clip-path: polygon(50% 0%, 100% 100%, 0% 100%); height: 92px; align-items: flex-end; padding-bottom: 0.6rem; border-top: 1px solid rgba(255,255,255,0.3); }
+    .pyramid-layer.medio { width: 74%; background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%); clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%); height: 96px; border-top: 1px solid rgba(255,255,255,0.2); }
+    .pyramid-layer.base { width: 100%; background: rgba(51, 65, 85, 0.8); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%); height: 100px; }
     .pyramid-label { position: absolute; font-weight: 800; font-family: 'Outfit', sans-serif; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-    .pyramid-layer:hover { transform: scale(1.05); z-index: 10; cursor: pointer; filter: brightness(1.2); }
-    .pyr-info-card { text-align: left; max-width: 450px; }
-    .pyr-entry { margin-bottom: 1.2rem; display: flex; gap: 1rem; }
-    .pyr-dot { width: 12px; height: 12px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+    .pyramid-layer:hover { transform: scale(1.03); z-index: 10; cursor: pointer; filter: brightness(1.15); }
+    .pyr-info-card { text-align: left; max-width: 460px; }
+    .pyr-entry { margin-bottom: 0.9rem; display: flex; gap: 0.8rem; }
+    .pyr-dot { width: 11px; height: 11px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
     
     /* Improved Table Responsiveness */
     .responsive-table-wrapper { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; border: 1px solid var(--glass-border); }
-    .premium-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-    .premium-table th { background: rgba(138,43,226,0.15); color: var(--secondary); text-align: left; padding: 1rem; border-bottom: 2px solid var(--glass-border); }
-    .premium-table td { padding: 1rem; border-bottom: 1px solid var(--glass-border); color: var(--text-main); transition: background 0.2s; }
+    .premium-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    .premium-table th { background: rgba(138,43,226,0.15); color: var(--secondary); text-align: left; padding: 0.65rem 0.9rem; border-bottom: 2px solid var(--glass-border); }
+    .premium-table td { padding: 0.65rem 0.9rem; border-bottom: 1px solid var(--glass-border); color: var(--text-main); transition: background 0.2s; }
     .premium-table tr:hover td { background: rgba(255,255,255,0.03); }
     .premium-table tr:last-child td { border-bottom: none; }
 
-    /* Clawd Hand-Painted Animation Stage & Slide Animations */
+    /* Clawd Hand-Painted Animation Stage & Compact Flow Diagrams */
     .clawd-stage {
       display: block;
-      margin: 0.6rem auto;
-      border-radius: 18px;
+      margin: 0.35rem auto 0.55rem;
+      border-radius: 14px;
       background: #F3EBDC;
-      border: 3px solid #2B2233;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.45), inset 0 0 24px rgba(217,119,87,0.12);
-    }
-    @keyframes floatSlow {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-6px); }
-    }
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(0,242,254,0.25); }
-      50% { box-shadow: 0 0 22px 4px rgba(0,242,254,0.35); }
+      border: 2.5px solid #2B2233;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.4), inset 0 0 20px rgba(217,119,87,0.12);
     }
     .reveal section.present .glass-card {
-      animation: cardIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: cardIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    .reveal section.present .glass-card:nth-child(2) { animation-delay: 0.08s; }
-    .reveal section.present .glass-card:nth-child(3) { animation-delay: 0.16s; }
-    .reveal section.present .glass-card:nth-child(4) { animation-delay: 0.24s; }
+    .reveal section.present .glass-card:nth-child(2) { animation-delay: 0.06s; }
+    .reveal section.present .glass-card:nth-child(3) { animation-delay: 0.12s; }
+    .reveal section.present .glass-card:nth-child(4) { animation-delay: 0.18s; }
     @keyframes cardIn {
-      from { opacity: 0; transform: translateY(16px) scale(0.98); }
+      from { opacity: 0; transform: translateY(12px) scale(0.985); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
     .flow-diagram {
-      display: flex; align-items: center; justify-content: center; gap: 0.9rem; flex-wrap: wrap; margin: 1.2rem auto; max-width: 1050px;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: nowrap; margin: 0.65rem auto; max-width: 1040px;
     }
     .flow-box {
-      background: rgba(255,255,255,0.05); border: 1.5px solid var(--glass-border); border-radius: 16px;
-      padding: 1rem 1.3rem; min-width: 165px; text-align: center; transition: transform 0.25s, border-color 0.25s;
+      background: rgba(255,255,255,0.05); border: 1.5px solid var(--glass-border); border-radius: 12px;
+      padding: 0.6rem 0.85rem; min-width: 125px; flex: 1; max-width: 220px; text-align: center; transition: transform 0.2s, border-color 0.2s; line-height: 1.3;
     }
-    .flow-box:hover { transform: translateY(-4px); border-color: var(--secondary); }
-    .flow-box i { font-size: 1.8rem; margin-bottom: 0.45rem; display: block; }
-    .flow-box strong { display: block; font-size: 0.95rem; color: var(--text-main); }
-    .flow-box span { font-size: 0.78rem; color: var(--text-muted); }
+    .flow-box.cyan  { border-color: rgba(0,242,254,0.4); background: rgba(0,242,254,0.06); }
+    .flow-box.amber { border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.06); }
+    .flow-box.green { border-color: rgba(34,197,94,0.4); background: rgba(34,197,94,0.06); }
+    .flow-box:hover { transform: translateY(-2px); border-color: var(--secondary); }
+    .flow-box i { font-size: 1.25rem; margin-bottom: 0.25rem; display: block; }
+    .flow-box strong { display: block; font-size: 0.84rem; color: var(--text-main); line-height: 1.25; }
+    .flow-box span, .flow-box small { display: block; font-size: 0.74rem; color: var(--text-muted); margin-top: 0.15rem; line-height: 1.25; }
+    .flow-connector { color: var(--secondary); font-size: 1.15rem; font-weight: 700; padding: 0 0.1rem; flex-shrink: 0; }
 
     @media (max-width: 768px) {
       .premium-table { font-size: 0.75rem; }
-      .premium-table th, .premium-table td { padding: 0.6rem; }
+      .premium-table th, .premium-table td { padding: 0.5rem; }
       .pyramid-wrapper { flex-direction: column; gap: 1rem; }
       .pyramid-container { width: 100%; }
+      .flow-diagram { flex-wrap: wrap; }
     }
   </style>
 </head>
 <body>
 <div class="reveal"><div class="slides">
 
-<!-- PORTADA -->
+<!-- 1. PORTADA -->
 <section>
   <span class="glass-pill"><i class="fa-solid fa-code"></i> Programa de Agentes de IA · Clase 3</span>
-  <h1 style="font-size:3rem; margin:0.6rem 0; line-height:1.15;">
+  <h1 style="font-size:2.65rem; margin:0.4rem 0 0.5rem; line-height:1.15;">
     Arquitectura <span class="text-gradient">Inteligente</span>:<br>RAG, Herramientas y <span class="text-gradient">Automatización</span>
   </h1>
-  <canvas class="clawd-stage" data-scene="hero" width="680" height="190" style="width:min(100%, 620px); height:auto;"></canvas>
-  <p style="font-size:1.15rem; color:var(--text-main); max-width:820px; margin:0.6rem auto;">
-    Documentos reales (<strong>RAG</strong>) &nbsp;·&nbsp; Herramientas (<strong>MCP</strong>) &nbsp;·&nbsp; Control humano (<strong>HITL</strong>)
-  </p>
-  <div style="margin-top:0.8rem; color:var(--text-muted); font-size:0.95rem; font-weight:600;">
+  <canvas class="clawd-stage" data-scene="hero" width="660" height="165" style="width:min(100%, 600px); height:auto;"></canvas>
+  <div style="display:flex; justify-content:center; gap:0.55rem; flex-wrap:wrap; margin:0.55rem auto;">
+    <span class="badge-mini" style="color:var(--secondary); border-color:rgba(0,242,254,0.35);">📄 Conocimiento (RAG)</span>
+    <span class="badge-mini" style="color:#e2cbff; border-color:rgba(138,43,226,0.4);">📘 Skills (Instrucciones)</span>
+    <span class="badge-mini" style="color:var(--accent); border-color:rgba(245,158,11,0.4);">🛠️ Herramientas (Tools)</span>
+    <span class="badge-mini" style="color:var(--green); border-color:rgba(34,197,94,0.4);">🔌 Conexiones (MCP)</span>
+    <span class="badge-mini" style="color:#f8fafc; border-color:rgba(255,255,255,0.25);">🎧 Control Humano (HITL)</span>
+  </div>
+  <div style="margin-top:0.65rem; color:var(--text-muted); font-size:0.86rem; font-weight:600;">
     <i class="fa-solid fa-clock"></i> 60 min + 30 min Q&amp;A &nbsp;|&nbsp;
     <i class="fa-solid fa-wand-magic-sparkles"></i> Demos en vivo &nbsp;|&nbsp;
     <i class="fa-solid fa-diagram-project"></i> NotebookLM · n8n · Chatwoot
   </div>
 </section>
 
-<!-- PRESENTACIÓN -->
+<!-- 2. PRESENTACIÓN -->
 <section>
-  <div class="grid-2" style="max-width: 1120px; align-items: center; margin: 0 auto;">
+  <div class="grid-2" style="max-width: 1040px; align-items: center; margin: 0 auto;">
     <div style="position: relative; display: flex; justify-content: center;">
-      <img src="assets/axel-laban-arzubi.png" style="border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.55); width: 100%; max-width: 390px; border: 3px solid rgba(245,158,11,0.45);" alt="Axel Laban Arzubi">
-      <div class="glass-card" style="position: absolute; bottom: -22px; right: 15px; padding: 0.7rem; width: 135px; height: 135px; display: flex; align-items: center; justify-content: center; background: rgba(15,23,42,0.85); backdrop-filter: blur(15px); border: 2px solid var(--secondary); margin: 0;">
-        <img src="assets/qr.png" style="width: 100%; border-radius: 10px;" alt="LinkedIn QR">
+      <img src="assets/axel-laban-arzubi.png" style="border-radius: 22px; box-shadow: 0 18px 42px rgba(0,0,0,0.55); width: 100%; max-width: 340px; border: 3px solid rgba(245,158,11,0.45);" alt="Axel Laban Arzubi">
+      <div class="glass-card" style="position: absolute; bottom: -16px; right: 24px; padding: 0.55rem; width: 118px; height: 118px; display: flex; align-items: center; justify-content: center; background: rgba(15,23,42,0.9); backdrop-filter: blur(15px); border: 2px solid var(--secondary); margin: 0;">
+        <img src="assets/qr.png" style="width: 100%; border-radius: 8px;" alt="LinkedIn QR">
       </div>
     </div>
-    <div style="text-align: left; padding-left: 1rem;">
+    <div style="text-align: left; padding-left: 0.5rem;">
       <span class="glass-pill">Tu personal trainer de AI</span>
-      <h2 style="margin: 0.4rem 0 1.2rem 0; font-size: 2.8rem;">Axel <span class="text-gradient">Laban Arzubi</span></h2>
-      <ul class="premium-list" style="font-size: 0.98rem;">
-        <li style="margin-bottom: 1rem;"><i class="fa-solid fa-rocket" style="color: var(--secondary); margin-right: 0.9rem;"></i> <span><strong>Emprendedor:</strong> Co-fundé HolaVeggie, un token de blockchain y TheFreshAgency.</span></li>
-        <li style="margin-bottom: 1rem;"><i class="fa-solid fa-chart-line" style="color: var(--secondary); margin-right: 0.9rem;"></i> <span><strong>Experiencia:</strong> Lideré BI &amp; eCommerce de Grupo Marquez y el área comercial de Avenida.com.</span></li>
-        <li style="margin-bottom: 1rem;"><i class="fa-solid fa-flask" style="color: var(--accent); margin-right: 0.9rem;"></i> <span><strong>Laboratorio IA:</strong> Creo productos digitales y experimentos con IA en <a href="https://a13i-lab.vercel.app/" target="_blank" style="color: var(--secondary); text-decoration: underline; font-weight: 700;">a13i-lab.vercel.app</a>.</span></li>
-        <li style="margin-bottom: 0.6rem;"><i class="fa-brands fa-youtube" style="color: #FF0000; margin-right: 0.9rem;"></i> <span><strong>YouTube:</strong> Tutoriales y flujos reales paso a paso en <a href="https://www.youtube.com/@soyaxellaban" target="_blank" style="color: var(--text-main); text-decoration: underline; font-weight: 700;">@soyaxellaban</a>.</span></li>
+      <h2 style="margin: 0.25rem 0 0.9rem 0; font-size: 2.4rem;">Axel <span class="text-gradient">Laban Arzubi</span></h2>
+      <ul class="premium-list" style="font-size: 0.92rem;">
+        <li style="margin-bottom: 0.75rem;"><i class="fa-solid fa-rocket" style="color: var(--secondary); margin-right: 0.8rem;"></i> <span><strong>Emprendedor:</strong> Co-fundé HolaVeggie, un token de blockchain y TheFreshAgency.</span></li>
+        <li style="margin-bottom: 0.75rem;"><i class="fa-solid fa-chart-line" style="color: var(--secondary); margin-right: 0.8rem;"></i> <span><strong>Experiencia:</strong> Lideré BI &amp; eCommerce de Grupo Marquez y el área comercial de Avenida.com.</span></li>
+        <li style="margin-bottom: 0.75rem;"><i class="fa-solid fa-flask" style="color: var(--accent); margin-right: 0.8rem;"></i> <span><strong>Laboratorio IA:</strong> Creo productos digitales hechos con IA en <a href="https://a13i-lab.vercel.app/" target="_blank" style="color: var(--secondary); text-decoration: underline; font-weight: 700;">a13i-lab.vercel.app</a>.</span></li>
+        <li style="margin-bottom: 0.4rem;"><i class="fa-brands fa-youtube" style="color: #FF0000; margin-right: 0.8rem;"></i> <span><strong>YouTube:</strong> Tutoriales y sistemas de IA paso a paso en <a href="https://www.youtube.com/@soyaxellaban" target="_blank" style="color: var(--text-main); text-decoration: underline; font-weight: 700;">@soyaxellaban</a>.</span></li>
       </ul>
-      <div style="margin-top: 1.4rem; font-size: 0.88rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.5rem;">
-        <i class="fa-brands fa-linkedin" style="color: #0077b5; font-size: 1.2rem;"></i> <span>Escaneá el QR para conectar en LinkedIn</span>
+      <div style="margin-top: 1rem; font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.5rem;">
+        <i class="fa-brands fa-linkedin" style="color: #0077b5; font-size: 1.1rem;"></i> <span>Escaneá el QR para conectar en LinkedIn</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ÍNDICE -->
+<!-- 3. ÍNDICE -->
 <section>
   <h2>Hoja de <span class="text-gradient">Ruta</span> — 60 min + 30 min Q&amp;A</h2>
-  <div class="grid-4" style="max-width:1060px; margin:1.5rem auto 1rem;">
-    <div class="glass-card" style="text-align:left; border-top:4px solid var(--secondary); padding:1.3rem;">
-      <span class="glass-pill cyan" style="font-size:0.7rem; margin-bottom:0.6rem;">BLOQUE 1 · 15 MIN</span>
-      <h4 style="font-size:1.1rem; margin-bottom:0.5rem;">¿Qué necesita saber?</h4>
-      <p style="font-size:0.85rem; color:var(--text-muted); margin:0;">Instrucciones, documentos (RAG) y acciones.</p>
+  <div class="grid-4" style="max-width:1040px; margin:1rem auto 0.8rem;">
+    <div class="glass-card" style="text-align:left; border-top:4px solid var(--secondary);">
+      <span class="glass-pill cyan" style="font-size:0.68rem;">BLOQUE 1 · 15 MIN</span>
+      <h4 style="font-size:1rem;">¿Qué necesita saber?</h4>
+      <p style="font-size:0.82rem; color:var(--text-muted); margin:0;">Instrucciones, documentos (RAG), acciones, orquestador y modelos.</p>
     </div>
-    <div class="glass-card" style="text-align:left; border-top:4px solid var(--accent); padding:1.3rem;">
-      <span class="glass-pill amber" style="font-size:0.7rem; margin-bottom:0.6rem;">BLOQUE 2 · 20 MIN</span>
-      <h4 style="font-size:1.1rem; margin-bottom:0.5rem;">RAG + HITL en vivo</h4>
-      <p style="font-size:0.85rem; color:var(--text-muted); margin:0;">NotebookLM, File Search en n8n y Chatwoot.</p>
+    <div class="glass-card" style="text-align:left; border-top:4px solid var(--accent);">
+      <span class="glass-pill amber" style="font-size:0.68rem;">BLOQUE 2 · 20 MIN</span>
+      <h4 style="font-size:1rem;">RAG + HITL en vivo</h4>
+      <p style="font-size:0.82rem; color:var(--text-muted); margin:0;">NotebookLM, Google File Search en n8n y derivación en Chatwoot.</p>
     </div>
-    <div class="glass-card" style="text-align:left; border-top:4px solid var(--primary); padding:1.3rem;">
-      <span class="glass-pill" style="font-size:0.7rem; margin-bottom:0.6rem;">BLOQUE 3 · 15 MIN</span>
-      <h4 style="font-size:1.1rem; margin-bottom:0.5rem;">Skills, Tools y MCP</h4>
-      <p style="font-size:0.85rem; color:var(--text-muted); margin:0;">Diferencias, demo MCP en n8n y catálogos.</p>
+    <div class="glass-card" style="text-align:left; border-top:4px solid var(--primary);">
+      <span class="glass-pill" style="font-size:0.68rem;">BLOQUE 3 · 15 MIN</span>
+      <h4 style="font-size:1rem;">Skills, Tools y MCP</h4>
+      <p style="font-size:0.82rem; color:var(--text-muted); margin:0;">Qué cumple cada uno, demo MCP en n8n y catálogos públicos.</p>
     </div>
-    <div class="glass-card" style="text-align:left; border-top:4px solid var(--green); padding:1.3rem;">
-      <span class="glass-pill green" style="font-size:0.7rem; margin-bottom:0.6rem;">BLOQUE 4 · 10 MIN</span>
-      <h4 style="font-size:1.1rem; margin-bottom:0.5rem;">Elegir y comprobar</h4>
-      <p style="font-size:0.85rem; color:var(--text-muted); margin:0;">Pasos fijos vs. agente, 3 pruebas y V/F.</p>
-    </div>
-  </div>
-  <div class="highlight-box cyan" style="max-width:1060px; margin:0 auto; text-align:center; font-size:0.95rem;">
-    <i class="fa-solid fa-comments" style="color:var(--secondary); margin-right:0.4rem;"></i> <strong>+ 30 minutos al final</strong> de preguntas, respuestas y análisis de casos reales.
-  </div>
-</section>
-
-<!-- DEFINICIÓN RAG -->
-<section>
-  <span class="glass-pill"><i class="fa-solid fa-graduation-cap"></i> Concepto Clave</span>
-  <h2>¿Qué es <span class="text-gradient">RAG</span>?</h2>
-  <p style="color:var(--text-muted); font-size:1.05rem; margin-bottom:1.2rem;">Consultar tus documentos reales <strong>antes</strong> de responder para no inventar.</p>
-  <div class="flow-diagram">
-    <div class="flow-box" style="border-color:var(--secondary);">
-      <i class="fa-solid fa-magnifying-glass" style="color:var(--secondary);"></i>
-      <strong>1. Busca</strong>
-      <span>Lee tus PDFs / Docs</span>
-    </div>
-    <div class="step-arrow">→</div>
-    <div class="flow-box" style="border-color:var(--primary);">
-      <i class="fa-solid fa-file-circle-Check" style="color:var(--primary);"></i>
-      <strong>2. Selecciona</strong>
-      <span>Extrae el párrafo exacto</span>
-    </div>
-    <div class="step-arrow">→</div>
-    <div class="flow-box" style="border-color:var(--green);">
-      <i class="fa-solid fa-comment-dots" style="color:var(--green);"></i>
-      <strong>3. Responde</strong>
-      <span>Con datos reales y cita</span>
+    <div class="glass-card" style="text-align:left; border-top:4px solid var(--green);">
+      <span class="glass-pill green" style="font-size:0.68rem;">BLOQUE 4 · 10 MIN</span>
+      <h4 style="font-size:1rem;">Elegir y comprobar</h4>
+      <p style="font-size:0.82rem; color:var(--text-muted); margin:0;">Pasos fijos vs. agente, las 3 pruebas y chequeo Verdadero/Falso.</p>
     </div>
   </div>
-  <div class="grid-3" style="max-width:950px; margin:1.2rem auto 0;">
-    <div class="glass-card" style="padding:1rem;">
-      <i class="fa-solid fa-shield-halved" style="color:var(--green); font-size:1.4rem;"></i>
-      <p style="font-size:0.88rem; margin:0.4rem 0 0;"><strong>Reduce alucinaciones</strong><br><span style="color:var(--text-muted); font-size:0.8rem;">Responde con respaldo</span></p>
-    </div>
-    <div class="glass-card" style="padding:1rem;">
-      <i class="fa-solid fa-quote-right" style="color:var(--secondary); font-size:1.4rem;"></i>
-      <p style="font-size:0.88rem; margin:0.4rem 0 0;"><strong>Verifica fuentes</strong><br><span style="color:var(--text-muted); font-size:0.8rem;">Muestra de dónde salió</span></p>
-    </div>
-    <div class="glass-card" style="padding:1rem;">
-      <i class="fa-solid fa-rotate" style="color:var(--accent); font-size:1.4rem;"></i>
-      <p style="font-size:0.88rem; margin:0.4rem 0 0;"><strong>Fácil de actualizar</strong><br><span style="color:var(--text-muted); font-size:0.8rem;">Cambiás el archivo y listo</span></p>
-    </div>
+  <div class="highlight-box cyan" style="max-width:1040px; text-align:center;">
+    <i class="fa-solid fa-comments" style="color:var(--secondary); margin-right:0.4rem;"></i> <strong>+ 30 minutos al final</strong> de preguntas, respuestas y revisión de casos reales.
   </div>
 </section>
 
-<!-- PIRÁMIDE DEL TRABAJO -->
+<!-- 4. PIRÁMIDE DEL TRABAJO -->
 <section>
   <section>
     <h2>Pirámide de <span class="text-gradient">Foco Estratégico</span></h2>
-    <p style="color:var(--text-muted); font-size:1rem;">Diferenciar dónde aportás valor real vs. dónde la IA ya está tomando el control.</p>
+    <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:0.6rem;">Diferenciar dónde aportás valor real vs. dónde la IA ya está tomando el control.</p>
     
     <div class="pyramid-wrapper">
       <div class="pyramid-container">
         <div class="pyramid-layer cima">
-          <span class="pyramid-label" style="bottom:15px; font-size:1.1rem;">CIMA: TRABAJO ESTRATÉGICO</span>
+          <span class="pyramid-label" style="bottom:12px; font-size:0.95rem;">CIMA: TRABAJO ESTRATÉGICO</span>
         </div>
         <div class="pyramid-layer medio">
-          <span class="pyramid-label" style="font-size:1rem;">MEDIO: TRABAJO ANALÍTICO</span>
+          <span class="pyramid-label" style="font-size:0.92rem;">MEDIO: TRABAJO ANALÍTICO</span>
         </div>
         <div class="pyramid-layer base">
-          <span class="pyramid-label" style="font-size:0.9rem;">BASE: TAREAS REPETITIVAS</span>
+          <span class="pyramid-label" style="font-size:0.85rem;">BASE: TAREAS REPETITIVAS</span>
         </div>
       </div>
       
@@ -265,21 +243,21 @@
           <div class="pyr-dot" style="background:#ef4444;"></div>
           <div>
             <strong style="color:#ef4444; font-size:0.9rem;">Cima: Decisión y Criterio</strong>
-            <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.4;">Decisiones con info incompleta, contexto humano, confianza y criterio forjado en la experiencia. La IA cambiará cuánto de este trabajo requiere tu intervención.</p>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin:0.15rem 0 0;">Decisiones con info incompleta, contexto humano, confianza y criterio forjado en la experiencia.</p>
           </div>
         </div>
         <div class="pyr-entry">
           <div class="pyr-dot" style="background:var(--secondary);"></div>
           <div>
             <strong style="color:var(--secondary); font-size:0.9rem;">Medio: Síntesis y Análisis</strong>
-            <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.4;">Síntesis de info, redacción técnica, análisis comparativos y coordinación operativa. La IA está llegando aquí <strong>ahora mismo</strong>.</p>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin:0.15rem 0 0;">Síntesis de info, redacción técnica, análisis comparativos y coordinación operativa. La IA está llegando aquí <strong>ahora mismo</strong>.</p>
           </div>
         </div>
-        <div class="pyr-entry">
+        <div class="pyr-entry" style="margin-bottom:0;">
           <div class="pyr-dot" style="background:var(--text-muted);"></div>
           <div>
             <strong style="color:var(--text-muted); font-size:0.9rem;">Base: Procesamiento y Reporte</strong>
-            <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.4;">Procesar datos, redactar comunicaciones estándar y armar reportes. Este nivel <strong>ya está siendo automatizado</strong>.</p>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin:0.15rem 0 0;">Procesar datos, redactar comunicaciones estándar y armar reportes. Este nivel <strong>ya está siendo automatizado</strong>.</p>
           </div>
         </div>
       </div>
@@ -289,143 +267,222 @@
   <section>
     <span class="glass-pill amber">Acción Directa</span>
     <h2>Un ejercicio simple para <span class="text-gradient">Potenciar tu valor</span></h2>
-    <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.5rem;">Dividí tus tareas de la semana en estas dos columnas. El resultado te va a sorprender.</p>
-    <div class="grid-2" style="max-width:1050px; margin:0 auto; gap:0;">
-      <div class="glass-card" style="border-radius:20px 0 0 20px; border-right:none; text-align:left; border-top:4px solid var(--text-muted); padding:1.5rem 2rem;">
-        <h4 style="color:var(--text-muted); margin-bottom:1rem; font-size:1.2rem;"><i class="fa-solid fa-robot" style="margin-right:0.5rem;"></i> Columna Izquierda</h4>
-        <p style="font-size:0.95rem; color:var(--accent); font-weight:600; margin-bottom:1rem;">Trabajo escriptado</p>
-        <ul class="premium-list" style="font-size:0.9rem;">
-          <li><i class="fa-solid fa-minus" style="color:var(--text-muted);"></i> Procesos paso a paso</li>
-          <li><i class="fa-solid fa-minus" style="color:var(--text-muted);"></i> Respuestas estándar</li>
-          <li><i class="fa-solid fa-minus" style="color:var(--text-muted);"></i> Reportes, datos, seguimiento</li>
-          <li><i class="fa-solid fa-minus" style="color:var(--text-muted);"></i> Tareas que podés documentar</li>
+    <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:0.8rem;">Dividí tus tareas de la semana en estas dos columnas. El resultado te va a sorprender.</p>
+    <div class="grid-2" style="max-width:1020px; margin:0 auto; gap:0;">
+      <div class="glass-card" style="border-radius:16px 0 0 16px; border-right:none; text-align:left; border-top:4px solid var(--text-muted); padding:1.2rem 1.6rem;">
+        <h4 style="color:var(--text-muted); margin-bottom:0.5rem; font-size:1.05rem;"><i class="fa-solid fa-robot" style="margin-right:0.4rem;"></i> Columna Izquierda · Trabajo escriptado</h4>
+        <ul class="premium-list" style="font-size:0.86rem;">
+          <li><i class="fa-solid fa-minus" style="color:var(--text-muted);"></i> Procesos paso a paso y respuestas estándar</li>
+          <li><i class="fa-solid fa-minus" style="color:var(--text-muted);"></i> Reportes, carga de datos y seguimiento</li>
+          <li><i class="fa-solid fa-minus" style="color:var(--text-muted);"></i> Tareas repetitivas que podés documentar</li>
         </ul>
-        <div style="margin-top:1.2rem; padding:0.8rem; background:rgba(239,68,68,0.08); border-radius:10px; font-size:0.85rem; text-align:center;">
-          <i class="fa-solid fa-arrow-down" style="color:var(--red);"></i> <strong style="color:var(--red);">La IA comprime esto</strong><br>
-          <span style="color:var(--text-muted);">De 3 horas → 40 minutos</span>
+        <div style="margin-top:0.8rem; padding:0.6rem; background:rgba(239,68,68,0.08); border-radius:8px; font-size:0.82rem; text-align:center;">
+          <i class="fa-solid fa-arrow-down" style="color:var(--red);"></i> <strong style="color:var(--red);">La IA comprime esto:</strong> <span style="color:var(--text-muted);">de 3 horas → 40 minutos</span>
         </div>
       </div>
-      <div class="glass-card" style="border-radius:0 20px 20px 0; border-left:2px solid var(--secondary); text-align:left; border-top:4px solid var(--secondary); padding:1.5rem 2rem;">
-        <h4 style="color:var(--secondary); margin-bottom:1rem; font-size:1.2rem;"><i class="fa-solid fa-brain" style="margin-right:0.5rem;"></i> Columna Derecha</h4>
-        <p style="font-size:0.95rem; color:var(--accent); font-weight:600; margin-bottom:1rem;">Trabajo estratégico</p>
-        <ul class="premium-list" style="font-size:0.9rem;">
-          <li><i class="fa-solid fa-star" style="color:var(--secondary);"></i> Criterio forjado en experiencia</li>
-          <li><i class="fa-solid fa-star" style="color:var(--secondary);"></i> Relaciones y confianza</li>
-          <li><i class="fa-solid fa-star" style="color:var(--secondary);"></i> Decisiones con info incompleta</li>
-          <li><i class="fa-solid fa-star" style="color:var(--secondary);"></i> Contexto humano irremplazable</li>
+      <div class="glass-card" style="border-radius:0 16px 16px 0; border-left:2px solid var(--secondary); text-align:left; border-top:4px solid var(--secondary); padding:1.2rem 1.6rem;">
+        <h4 style="color:var(--secondary); margin-bottom:0.5rem; font-size:1.05rem;"><i class="fa-solid fa-brain" style="margin-right:0.4rem;"></i> Columna Derecha · Trabajo estratégico</h4>
+        <ul class="premium-list" style="font-size:0.86rem;">
+          <li><i class="fa-solid fa-star" style="color:var(--secondary);"></i> Criterio forjado en la experiencia</li>
+          <li><i class="fa-solid fa-star" style="color:var(--secondary);"></i> Relaciones, empatía y confianza humana</li>
+          <li><i class="fa-solid fa-star" style="color:var(--secondary);"></i> Decisiones críticas con info incompleta</li>
         </ul>
-        <div style="margin-top:1.2rem; padding:0.8rem; background:rgba(0,242,254,0.06); border-radius:10px; font-size:0.85rem; text-align:center;">
-          <i class="fa-solid fa-arrow-up" style="color:var(--green);"></i> <strong style="color:var(--green);">Invertí acá tu tiempo liberado</strong><br>
-          <span style="color:var(--text-muted);">Profesional + profundidad + IA = imbatible</span>
+        <div style="margin-top:0.8rem; padding:0.6rem; background:rgba(0,242,254,0.06); border-radius:8px; font-size:0.82rem; text-align:center;">
+          <i class="fa-solid fa-arrow-up" style="color:var(--green);"></i> <strong style="color:var(--green);">Invertí acá tu tiempo liberado:</strong> <span style="color:var(--text-muted);">Humano + IA = imbatible</span>
         </div>
       </div>
     </div>
-    <div class="highlight-box cyan" style="max-width:1050px; margin: 1.5rem auto 0; font-size: 0.95rem;">
+    <div class="highlight-box cyan" style="max-width:1020px;">
       Descubrimiento común: entre el <strong>50% y 70%</strong> del tiempo profesional se gasta en la columna izquierda. Ahí está tu primera gran victoria con IA.
     </div>
   </section>
 </section>
 
-<!-- DEFINICIONES -->
+<!-- 5. TRES CONCEPTOS QUE SE CONFUNDEN -->
 <section>
   <h2>Tres conceptos que se confunden</h2>
-  <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1.2rem;">En este programa construimos las tres capas. Saber dónde está parado cada cosa evita confusión.</p>
-  <table class="glass-card" style="font-size:0.82rem; max-width:1050px; text-align:left;">
+  <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:0.8rem;">En este programa construimos las tres capas. Saber dónde está parado cada cosa evita confusión.</p>
+  <table class="glass-card" style="max-width:1040px; text-align:left; padding:0;">
     <tr style="color:var(--secondary);">
-      <th style="width:18%;"></th>
-      <th style="width:27%; text-align:center;">⚙️ Automatización</th>
-      <th style="width:27%; text-align:center;">🤖 Automatización con AI</th>
+      <th style="width:16%;"></th>
+      <th style="width:28%; text-align:center;">⚙️ Automatización</th>
+      <th style="width:28%; text-align:center;">🤖 Automatización con AI</th>
       <th style="width:28%; text-align:center;">🧠 Agente IA</th>
     </tr>
     <tr>
-      <td style="color:var(--text-muted);">Definición</td>
+      <td style="color:var(--text-muted); font-weight:600;">Definición</td>
       <td style="text-align:center;">Ejecuta tareas predefinidas con reglas fijas</td>
       <td style="text-align:center;">Llama a un LLM via API en uno o más pasos</td>
       <td style="text-align:center;">Realiza tareas no-determinísticas de forma autónoma</td>
     </tr>
     <tr style="background:rgba(255,255,255,0.03);">
-      <td style="color:var(--text-muted);">Base lógica</td>
+      <td style="color:var(--text-muted); font-weight:600;">Base lógica</td>
       <td style="text-align:center;">Lógica booleana (if/then)</td>
       <td style="text-align:center;">Booleana + razonamiento flexible</td>
       <td style="text-align:center;">Razonamiento + autonomía</td>
     </tr>
     <tr>
-      <td style="color:var(--text-muted);">Fortaleza</td>
+      <td style="color:var(--text-muted); font-weight:600;">Fortaleza</td>
       <td style="text-align:center; color:var(--green);">Rápido, confiable, predecible</td>
       <td style="text-align:center; color:var(--green);">Maneja complejidad y reconocimiento de patrones</td>
       <td style="text-align:center; color:var(--green);">Adaptable a variables nuevas, razona como humano</td>
     </tr>
     <tr style="background:rgba(255,255,255,0.03);">
-      <td style="color:var(--text-muted);">Debilidad</td>
+      <td style="color:var(--text-muted); font-weight:600;">Debilidad</td>
       <td style="text-align:center; color:var(--red);">No se adapta. Solo hace lo que fue programado.</td>
       <td style="text-align:center; color:var(--red);">Más difícil de depurar e interpretar</td>
       <td style="text-align:center; color:var(--red);">Menos predecible, puede producir resultados inesperados</td>
     </tr>
     <tr>
-      <td style="color:var(--text-muted);">Ejemplo</td>
+      <td style="color:var(--text-muted); font-weight:600;">Ejemplo</td>
       <td style="text-align:center; font-size:0.78rem; color:var(--text-muted);">Notificación en Slack cada vez que entra un lead</td>
       <td style="text-align:center; font-size:0.78rem; color:var(--text-muted);">Clasificar y puntuar cada lead con un LLM</td>
-      <td style="text-align:center; font-size:0.78rem; color:var(--text-muted);">Investigar el lead, actualizar el CRM y redactar el email de seguimiento</td>
+      <td style="text-align:center; font-size:0.78rem; color:var(--text-muted);">Investigar el lead, actualizar el CRM y redactar el email</td>
     </tr>
   </table>
-  <div class="highlight-box cyan" style="max-width:1050px; margin:1rem auto 0; font-size:0.9rem;">
-    En esta clase vemos cómo combinar <strong>pasos fijos (Automatización con AI)</strong> y <strong>decisiones autónomas (Agente IA)</strong> — sumando RAG, herramientas e intervención humana (HITL) en ambos casos. n8n orquesta las tres capas.
+  <div class="highlight-box cyan" style="max-width:1040px;">
+    En esta clase vemos cómo combinar <strong>flujos estructurados con IA</strong> y <strong>decisiones agénticas</strong> — sumando RAG, herramientas, MCP e intervención humana (HITL).
   </div>
 </section>
 
-<!-- BLOQUE 0 -->
+<!-- 6. NUEVA SLIDE: FLUJOS DETERMINISTAS/ESTRUCTURADOS (N8N + RAG) VS AGÉNTICOS/ESTOCÁSTICOS (CLAUDE CODE) -->
+<section>
+  <span class="glass-pill cyan"><i class="fa-solid fa-scale-balanced"></i> EL MAPA DE ESTA CLASE</span>
+  <h2>Dos Arquitecturas: <span class="text-gradient">Estructurada vs. Agéntica</span></h2>
+  <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:0.75rem;">Dónde usamos un chatbot predecible con RAG en <strong>n8n</strong> vs. dónde corre un agente probabilístico como <strong>Claude Code</strong>.</p>
+
+  <div class="grid-2" style="max-width:1060px; margin:0 auto; text-align:left;">
+    <!-- Lado 1: Determinista / Estructurado en n8n -->
+    <div class="glass-card" style="border-top:4px solid var(--secondary); padding:1rem 1.25rem;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.45rem;">
+        <h4 style="color:var(--secondary); margin:0; font-size:1rem;"><i class="fa-brands fa-whatsapp"></i> 1. Chatbot Estructurado (Determinista)</h4>
+        <span class="badge-mini" style="color:var(--secondary); border-color:rgba(0,242,254,0.35);">n8n · WhatsApp · Telegram</span>
+      </div>
+      <div style="background:rgba(0,242,254,0.06); border:1px solid rgba(0,242,254,0.2); border-radius:8px; padding:0.45rem 0.7rem; margin-bottom:0.65rem; font-size:0.78rem; text-align:center; color:var(--text-main);">
+        <strong>Camino fijo:</strong> Mensaje → <strong>RAG (File Search)</strong> → Sheet → Respuesta o <strong>HITL (Chatwoot)</strong>
+      </div>
+      <ul class="premium-list" style="font-size:0.83rem;">
+        <li><i class="fa-solid fa-lock" style="color:var(--secondary);"></i> <strong>Arquitectura predecible:</strong> vos definís los pasos y las fuentes en n8n; el bot no inventa caminos libres.</li>
+        <li><i class="fa-solid fa-book-open" style="color:var(--secondary);"></i> <strong>El rol del RAG:</strong> actúa como fuente de verdad obligatoria antes de contestar para evitar alucinaciones.</li>
+        <li><i class="fa-solid fa-bullseye" style="color:var(--secondary);"></i> <strong>Cuándo usarlo:</strong> atención a clientes reales en WhatsApp/Telegram donde necesitás control, rapidez y derivación humana (HITL).</li>
+      </ul>
+    </div>
+
+    <!-- Lado 2: Probabilístico / Estocástico en Claude Code -->
+    <div class="glass-card" style="border-top:4px solid var(--primary); padding:1rem 1.25rem;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.45rem;">
+        <h4 style="color:#e2cbff; margin:0; font-size:1rem;"><i class="fa-solid fa-terminal"></i> 2. Flujo Agéntico (Probabilístico / Estocástico)</h4>
+        <span class="badge-mini" style="color:#e2cbff; border-color:rgba(138,43,226,0.45);">Claude Code · Agentes IA</span>
+      </div>
+      <div style="background:rgba(138,43,226,0.1); border:1px solid rgba(138,43,226,0.3); border-radius:8px; padding:0.45rem 0.7rem; margin-bottom:0.65rem; font-size:0.78rem; text-align:center; color:var(--text-main);">
+        <strong>Bucle autónomo:</strong> Objetivo → 🔄 <em>Piensa ↔ Lee <strong>Skill</strong> ↔ Usa <strong>MCP / Tool</strong> ↔ Evalúa</em> → Resultado
+      </div>
+      <ul class="premium-list" style="font-size:0.83rem;">
+        <li><i class="fa-solid fa-shuffle" style="color:#e2cbff;"></i> <strong>Comportamiento estocástico:</strong> el agente decide en tiempo real qué herramientas usar y cuántos pasos dar.</li>
+        <li><i class="fa-solid fa-plug" style="color:#e2cbff;"></i> <strong>El rol de Skills + MCP:</strong> usa <strong>Skills</strong> (instrucciones de oficio) y <strong>MCP</strong> (enchufe universal) para explorar y actuar.</li>
+        <li><i class="fa-solid fa-compass" style="color:#e2cbff;"></i> <strong>Cuándo usarlo:</strong> tareas complejas y abiertas (programar en Claude Code, investigar, cruzar sistemas internos).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight-box amber" style="max-width:1060px;">
+    <strong>Regla de oro para tu negocio:</strong> Frente al cliente en <strong>WhatsApp o Telegram</strong> buscás <strong>estructura + RAG + HITL en n8n</strong> (previsibilidad). Para trabajo interno complejo buscás <strong>autonomía agéntica con Skills y MCP</strong>.
+  </div>
+</section>
+
+<!-- 7. ¿QUÉ ES UN RAG? (ANTES DEL PARADIGMA DE LA ALUCINACIÓN) -->
+<section>
+  <span class="glass-pill"><i class="fa-solid fa-graduation-cap"></i> Concepto Clave</span>
+  <h2>¿Qué es <span class="text-gradient">RAG</span>?</h2>
+  <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:0.8rem;"><em>Retrieval-Augmented Generation:</em> hacer que el asistente <strong>consulte tus documentos reales antes de responder</strong>.</p>
+  <div class="flow-diagram" style="max-width:920px;">
+    <div class="flow-box cyan">
+      <i class="fa-solid fa-magnifying-glass" style="color:var(--secondary);"></i>
+      <strong>1. Busca (Retrieval)</strong>
+      <span>Consulta tus PDFs, Docs o FAQs</span>
+    </div>
+    <div class="flow-connector">→</div>
+    <div class="flow-box amber">
+      <i class="fa-solid fa-highlighter" style="color:var(--accent);"></i>
+      <strong>2. Selecciona (Augment)</strong>
+      <span>Extrae solo los párrafos relevantes</span>
+    </div>
+    <div class="flow-connector">→</div>
+    <div class="flow-box green">
+      <i class="fa-solid fa-comment-dots" style="color:var(--green);"></i>
+      <strong>3. Responde (Generation)</strong>
+      <span>Redacta con datos reales + cita</span>
+    </div>
+  </div>
+  <div class="grid-3" style="max-width:920px; margin:0.8rem auto 0;">
+    <div class="glass-card" style="padding:0.85rem 1rem;">
+      <i class="fa-solid fa-shield-halved" style="color:var(--green); font-size:1.25rem;"></i>
+      <p style="font-size:0.84rem; margin:0.3rem 0 0;"><strong>Frena alucinaciones</strong><br><span style="color:var(--text-muted); font-size:0.76rem;">No improvisa políticas ni precios</span></p>
+    </div>
+    <div class="glass-card" style="padding:0.85rem 1rem;">
+      <i class="fa-solid fa-quote-right" style="color:var(--secondary); font-size:1.25rem;"></i>
+      <p style="font-size:0.84rem; margin:0.3rem 0 0;"><strong>Citas verificables</strong><br><span style="color:var(--text-muted); font-size:0.76rem;">Sabés de qué documento salió</span></p>
+    </div>
+    <div class="glass-card" style="padding:0.85rem 1rem;">
+      <i class="fa-solid fa-rotate" style="color:var(--accent); font-size:1.25rem;"></i>
+      <p style="font-size:0.84rem; margin:0.3rem 0 0;"><strong>Actualización inmediata</strong><br><span style="color:var(--text-muted); font-size:0.76rem;">Cambiás el PDF sin reentrenar</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 8. BLOQUE 0: EL PARADIGMA DE LA ALUCINACIÓN -->
 <section>
   <section>
     <span class="glass-pill"><i class="fa-solid fa-bug"></i> BLOQUE 0 · 5 MIN</span>
     <h2>El Paradigma de la <span class="text-gradient">Alucinación</span></h2>
-    <p style="font-size:1.15rem;color:var(--text-muted);max-width:800px;margin:0 auto 1.5rem;">Ya tenés un agente con rol y personalidad. El problema aparece cuando tiene que responder algo específico de tu negocio.</p>
-    <div class="grid-3" style="max-width:1050px; margin: 0 auto 2rem;">
-      <div class="glass-card stat-box" style="border-top: 4px solid var(--red); padding: 1.2rem;">
-        <div class="stat-number text-gradient-amber" style="font-size:2.8rem;">88%</div>
-        <div class="stat-label" style="font-size:0.85rem;">de los equipos que usaron IA sin RAG en producción reportaron al menos un error crítico de datos en el primer mes.</div>
+    <p style="font-size:0.92rem;color:var(--text-muted);max-width:780px;margin:0 auto 0.8rem;">Ya tenés un agente con rol y personalidad. El problema aparece cuando tiene que responder algo específico de tu negocio.</p>
+    <div class="grid-3" style="max-width:1040px; margin: 0 auto 0.8rem;">
+      <div class="glass-card stat-box" style="border-top: 4px solid var(--red);">
+        <div class="stat-number text-gradient-amber">88%</div>
+        <div class="stat-label">de los equipos que usaron IA sin RAG en producción reportaron al menos un error crítico de datos en el primer mes.</div>
       </div>
-      <div class="glass-card stat-box" style="border-top: 4px solid var(--accent); padding: 1.2rem;">
-        <div class="stat-number text-gradient-amber" style="font-size:2.8rem;">3x</div>
-        <div class="stat-label" style="font-size:0.85rem;">más tiempo tarda un equipo en limpiar un error de alucinación en producción que en prevenirlo con RAG desde el principio.</div>
+      <div class="glass-card stat-box" style="border-top: 4px solid var(--accent);">
+        <div class="stat-number text-gradient-amber">3x</div>
+        <div class="stat-label">más tiempo tarda un equipo en limpiar un error de alucinación en producción que en prevenirlo con RAG desde el principio.</div>
       </div>
-      <div class="glass-card stat-box" style="border-top: 4px solid var(--green); padding: 1.2rem;">
-        <div class="stat-number text-gradient-green" style="font-size:2.8rem;">$0</div>
-        <div class="stat-label" style="font-size:0.85rem;">cuesta agregar RAG con NotebookLM o Gemini File Search sobre un agente que ya tenés. El costo de no hacerlo es otro número.</div>
+      <div class="glass-card stat-box" style="border-top: 4px solid var(--green);">
+        <div class="stat-number text-gradient-green">$0</div>
+        <div class="stat-label">cuesta agregar RAG con NotebookLM o Gemini File Search sobre un agente que ya tenés. El costo de no hacerlo es otro número.</div>
       </div>
     </div>
-    <div class="highlight-box red" style="max-width:900px; margin: 0 auto; font-size:1.05rem;">
+    <div class="highlight-box red" style="max-width:1040px;">
       <strong>El problema:</strong> La IA generativa sin contexto propio inventa — con el mismo tono seguro y convincente que cuando tiene razón. En un proceso real, eso no es un bug menor: es un problema de confianza que se paga caro.
     </div>
-    <p style="color:var(--text-muted); font-size:0.68rem; max-width:900px; margin:0.8rem auto 0; text-align:left; line-height:1.5;">
+    <p style="color:var(--text-muted); font-size:0.65rem; max-width:1040px; margin:0.4rem auto 0; text-align:left; line-height:1.35;">
       Fuentes: (88%) Gartner AI in Production Survey 2024 — "AI Hallucination Incidents in Enterprise Deployments"; (3×) Databricks "Long Context RAG Performance of LLMs" — análisis de tiempo de corrección vs. prevención; ($0) Google AI Developer Blog, nov. 2025 — Google File Search API pricing.
     </p>
   </section>
 
   <section>
     <h2>Sin RAG vs. <span class="text-gradient">Con RAG</span></h2>
-    <canvas class="clawd-stage" data-scene="hallucination" width="660" height="145" style="margin:0 auto 0.6rem;"></canvas>
-    <div class="grid-2" style="max-width:960px;">
-      <div class="glass-card" style="border-top:4px solid var(--red); text-align:left; padding:1.2rem 1.4rem;">
-        <h4 style="color:var(--red);margin-bottom:0.6rem;">❌ Agente SIN RAG</h4>
-        <ul class="premium-list" style="font-size:0.9rem;">
-          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> <strong>Memoria general:</strong> datos viejos o genéricos</li>
-          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> <strong>Alucinación:</strong> inventa precios y reglas</li>
-          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> <strong>Sin respaldo:</strong> no cita ninguna fuente</li>
-          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> <strong>Riesgo alto:</strong> pierde confianza del cliente</li>
+    <canvas class="clawd-stage" data-scene="hallucination" width="640" height="130"></canvas>
+    <div class="grid-2" style="max-width:980px; margin:0 auto;">
+      <div class="glass-card" style="border-top:4px solid var(--red); text-align:left;">
+        <h4 style="color:var(--red);">❌ Agente SIN RAG</h4>
+        <ul class="premium-list">
+          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> <strong>Memoria genérica:</strong> responde con datos de entrenamiento viejos</li>
+          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> <strong>Alucinación:</strong> inventa precios y políticas con total seguridad</li>
+          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> <strong>Sin respaldo:</strong> imposible verificar de dónde sacó el dato</li>
+          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> <strong>Riesgo comercial:</strong> rompe la confianza del cliente</li>
         </ul>
       </div>
-      <div class="glass-card" style="border-top:4px solid var(--green); text-align:left; padding:1.2rem 1.4rem;">
-        <h4 style="color:var(--green);margin-bottom:0.6rem;">✅ Agente CON RAG</h4>
-        <ul class="premium-list" style="font-size:0.9rem;">
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> <strong>Tus documentos:</strong> lee manuales antes de hablar</li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> <strong>Honesto:</strong> avisa cuando no sabe y deriva</li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> <strong>Verificable:</strong> cita documento y sección exacta</li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> <strong>Siempre al día:</strong> actualizás el PDF y listo</li>
+      <div class="glass-card" style="border-top:4px solid var(--green); text-align:left;">
+        <h4 style="color:var(--green);">✅ Agente CON RAG</h4>
+        <ul class="premium-list">
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> <strong>Tus documentos:</strong> lee manuales y reglamentos antes de hablar</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> <strong>Honesto:</strong> reconoce cuando no sabe y deriva a humano</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> <strong>Trazable:</strong> cita el documento y párrafo exacto</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> <strong>Mantenible:</strong> actualizás el PDF y cambia la respuesta</li>
         </ul>
       </div>
     </div>
-    <div class="highlight-box cyan" style="max-width:960px;margin:0.9rem auto 0;font-size:0.9rem;padding:0.7rem 1.2rem;">
-      <strong>Regla de oro:</strong> Si el dato no está en los documentos → <strong>reconocer que no sabe</strong> y derivar a una persona (HITL).
+    <div class="highlight-box cyan" style="max-width:980px;">
+      <strong>Regla de oro:</strong> Si el dato no figura en los documentos → el asistente debe <strong>reconocer que no sabe</strong> y derivar a una persona (HITL).
     </div>
   </section>
 </section>
@@ -435,224 +492,305 @@
   <section>
     <span class="glass-pill cyan"><i class="fa-solid fa-compass"></i> BLOQUE 1 · 15 MIN</span>
     <h2>¿Qué necesita saber <span class="text-gradient">el asistente</span>?</h2>
-    <canvas class="clawd-stage" data-scene="three-pillars" width="660" height="145" style="margin:0 auto 0.6rem;"></canvas>
+    <canvas class="clawd-stage" data-scene="three-pillars" width="640" height="130"></canvas>
     <div class="grid-3" style="max-width:1020px;margin:0 auto;">
-      <div class="glass-card" style="text-align:left;border-top:4px solid var(--primary);padding:1.2rem;">
-        <h4 style="color:var(--primary);margin-bottom:0.4rem;"><i class="fa-solid fa-sliders"></i> 1. Instrucciones</h4>
-        <p style="font-size:0.88rem;color:var(--text-main);font-weight:700;margin-bottom:0.4rem;">Cómo se comporta</p>
-        <p style="font-size:0.82rem;color:var(--text-muted);margin:0;">Rol, tono, formato y límites claros.</p>
-        <div style="margin-top:0.7rem;"><span class="badge-mini" style="color:var(--accent);">System Prompt · Skills</span></div>
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--primary);">
+        <h4 style="color:var(--primary);"><i class="fa-solid fa-sliders"></i> 1. Instrucciones</h4>
+        <p style="font-size:0.86rem;color:var(--text-main);font-weight:700;margin:0 0 0.25rem;">Cómo debe comportarse</p>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">Rol, tono de voz, formato de respuesta y límites claros.</p>
+        <div style="margin-top:0.55rem;"><span class="badge-mini" style="color:var(--accent);">System Prompt · Skills</span></div>
       </div>
-      <div class="glass-card" style="text-align:left;border-top:4px solid var(--secondary);padding:1.2rem;">
-        <h4 style="color:var(--secondary);margin-bottom:0.4rem;"><i class="fa-solid fa-book-open"></i> 2. Documentos (RAG)</h4>
-        <p style="font-size:0.88rem;color:var(--text-main);font-weight:700;margin-bottom:0.4rem;">Qué fuentes consulta</p>
-        <p style="font-size:0.82rem;color:var(--text-muted);margin:0;">Manuales, FAQs, precios y políticas reales.</p>
-        <div style="margin-top:0.7rem;"><span class="badge-mini" style="color:var(--secondary);">NotebookLM · File Search</span></div>
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--secondary);">
+        <h4 style="color:var(--secondary);"><i class="fa-solid fa-book-open"></i> 2. Documentos (RAG)</h4>
+        <p style="font-size:0.86rem;color:var(--text-main);font-weight:700;margin:0 0 0.25rem;">Qué información consulta</p>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">Manuales, FAQs, precios y políticas reales del negocio.</p>
+        <div style="margin-top:0.55rem;"><span class="badge-mini" style="color:var(--secondary);">NotebookLM · File Search</span></div>
       </div>
-      <div class="glass-card" style="text-align:left;border-top:4px solid var(--green);padding:1.2rem;">
-        <h4 style="color:var(--green);margin-bottom:0.4rem;"><i class="fa-solid fa-bolt"></i> 3. Acciones</h4>
-        <p style="font-size:0.88rem;color:var(--text-main);font-weight:700;margin-bottom:0.4rem;">Qué ejecuta afuera</p>
-        <p style="font-size:0.82rem;color:var(--text-muted);margin:0;">Leer planillas, agendar o derivar a humano.</p>
-        <div style="margin-top:0.7rem;"><span class="badge-mini" style="color:var(--green);">Tools · MCP · Chatwoot</span></div>
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--green);">
+        <h4 style="color:var(--green);"><i class="fa-solid fa-bolt"></i> 3. Acciones</h4>
+        <p style="font-size:0.86rem;color:var(--text-main);font-weight:700;margin:0 0 0.25rem;">Qué ejecuta en otros sistemas</p>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">Leer planillas en vivo, agendar turnos o derivar a humano.</p>
+        <div style="margin-top:0.55rem;"><span class="badge-mini" style="color:var(--green);">Herramientas · MCP · Chatwoot</span></div>
       </div>
     </div>
-    <div class="highlight-box amber" style="max-width:1020px;margin:0.9rem auto 0;font-size:0.88rem;padding:0.7rem 1.2rem;">
-      <strong>¿Cuándo frena y pide ayuda?</strong> 1) No está en las fuentes · 2) El cliente pide humano · 3) Requiere aprobación.
+    <div class="highlight-box amber" style="max-width:1020px;">
+      <strong>¿Cuándo frena y pide ayuda?</strong> 1) El dato no está en las fuentes · 2) El cliente pide una persona · 3) Requiere aprobar una excepción.
     </div>
   </section>
 
   <section>
-    <h2>El circuito <span class="text-gradient">RAG + 3 Fuentes</span></h2>
-    <div class="flow-diagram" style="max-width:1020px;margin:0.4rem auto 1.2rem;">
-      <div class="flow-box" style="min-width:130px;padding:0.7rem 0.9rem;">
-        <i class="fa-solid fa-comment" style="color:var(--text-main);font-size:1.2rem;"></i>
-        <strong style="font-size:0.82rem;">1. Pregunta</strong>
+    <h2>El circuito <span class="text-gradient">RAG + Las 3 Fuentes</span></h2>
+    <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:0.6rem;">Cómo viaja cada consulta y qué tres tipos de información puede combinar el asistente en <strong>n8n</strong>.</p>
+    <div class="flow-diagram" style="max-width:1020px;">
+      <div class="flow-box">
+        <i class="fa-solid fa-comment" style="color:var(--text-main);"></i>
+        <strong>1. Pregunta</strong>
+        <span>Mensaje del usuario</span>
       </div>
       <div class="flow-connector">→</div>
-      <div class="flow-box cyan" style="min-width:145px;padding:0.7rem 0.9rem;">
-        <i class="fa-solid fa-magnifying-glass" style="color:var(--secondary);font-size:1.2rem;"></i>
-        <strong style="font-size:0.82rem;">2. Busca pasaje</strong>
+      <div class="flow-box cyan">
+        <i class="fa-solid fa-magnifying-glass" style="color:var(--secondary);"></i>
+        <strong>2. Búsqueda</strong>
+        <span>Encuentra el pasaje</span>
       </div>
       <div class="flow-connector">→</div>
-      <div class="flow-box amber" style="min-width:145px;padding:0.7rem 0.9rem;">
-        <i class="fa-solid fa-scissors" style="color:var(--accent);font-size:1.2rem;"></i>
-        <strong style="font-size:0.82rem;">3. Filtra contexto</strong>
+      <div class="flow-box amber">
+        <i class="fa-solid fa-scissors" style="color:var(--accent);"></i>
+        <strong>3. Contexto</strong>
+        <span>Aísla párrafos útiles</span>
       </div>
       <div class="flow-connector">→</div>
-      <div class="flow-box green" style="min-width:155px;padding:0.7rem 0.9rem;">
-        <i class="fa-solid fa-check-double" style="color:var(--green);font-size:1.2rem;"></i>
-        <strong style="font-size:0.82rem;">4. Cita o deriva</strong>
+      <div class="flow-box green">
+        <i class="fa-solid fa-check-double" style="color:var(--green);"></i>
+        <strong>4. Respuesta</strong>
+        <span>Cita fuente o deriva</span>
       </div>
     </div>
-    <div class="grid-3" style="max-width:1020px;margin:0 auto;">
-      <div class="glass-card" style="text-align:left;border-top:4px solid var(--primary);padding:1.1rem;">
-        <h4 style="color:var(--primary);margin-bottom:0.4rem;font-size:1rem;"><i class="fa-solid fa-file-pdf"></i> 1. Documentos fijos</h4>
-        <p style="font-size:0.82rem;color:var(--text-muted);margin:0;">Reglamentos, manuales y FAQs en PDF o Docs.</p>
-        <div style="margin-top:0.5rem;font-size:0.78rem;color:var(--accent);">Google File Search · NotebookLM</div>
+    <div class="grid-3" style="max-width:1020px;margin:0.7rem auto 0;">
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--primary);">
+        <h4 style="color:var(--primary);"><i class="fa-solid fa-file-pdf"></i> 1. Documentos fijos</h4>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">Reglamentos, manuales, políticas y FAQs que cambian poco.</p>
+        <div style="margin-top:0.5rem;"><span class="badge-mini" style="color:var(--accent);">PDF · Docs · File Search</span></div>
       </div>
-      <div class="glass-card" style="text-align:left;border-top:4px solid var(--secondary);padding:1.1rem;">
-        <h4 style="color:var(--secondary);margin-bottom:0.4rem;font-size:1rem;"><i class="fa-solid fa-table"></i> 2. Datos en vivo</h4>
-        <p style="font-size:0.82rem;color:var(--text-muted);margin:0;">Stock, precios del día y turnos en tiempo real.</p>
-        <div style="margin-top:0.5rem;font-size:0.78rem;color:var(--secondary);">Google Sheets · CRM · Calendario</div>
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--secondary);">
+        <h4 style="color:var(--secondary);"><i class="fa-solid fa-table"></i> 2. Datos en vivo</h4>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">Stock del día, precios dinámicos, agenda de turnos o estado de pedido.</p>
+        <div style="margin-top:0.5rem;"><span class="badge-mini" style="color:var(--secondary);">Google Sheets · CRM · Calendar</span></div>
       </div>
-      <div class="glass-card" style="text-align:left;border-top:4px solid var(--green);padding:1.1rem;">
-        <h4 style="color:var(--green);margin-bottom:0.4rem;font-size:1rem;"><i class="fa-solid fa-comments"></i> 3. Historial de charla</h4>
-        <p style="font-size:0.82rem;color:var(--text-muted);margin:0;">Memoria de la sesión para no repreguntar.</p>
-        <div style="margin-top:0.5rem;font-size:0.78rem;color:var(--green);">Memoria en n8n · Bandeja Chatwoot</div>
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--green);">
+        <h4 style="color:var(--green);"><i class="fa-solid fa-comments"></i> 3. Historial de charla</h4>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin:0;">Lo que ya dijo el usuario en esa sesión para mantener el hilo.</p>
+        <div style="margin-top:0.5rem;"><span class="badge-mini" style="color:var(--green);">Memoria n8n · Chatwoot</span></div>
       </div>
     </div>
   </section>
 
+  <!-- SLIDE SEPARADA Y CLARA: ORQUESTADOR -->
   <section>
-    <h2>Orquestadores y <span class="text-gradient">Modelos 2026</span></h2>
-    <div class="responsive-table-wrapper" style="max-height: 420px; overflow-y: auto;">
-      <table class="premium-table" style="font-size:0.82rem;max-width:1050px;text-align:left;">
-        <tr style="color:var(--secondary);">
-          <th style="width:26%;">Modelo</th>
-          <th style="width:14%; text-align:center;">Contexto</th>
-          <th style="width:16%; text-align:center;">Input (1M)</th>
-          <th style="width:44%;">Ideal para</th>
-        </tr>
-        <tr>
-          <td><i class="fa-solid fa-robot" style="color:#10a37f; margin-right:0.5rem;"></i><strong>GPT-5.6 Luna / Terra</strong></td>
-          <td style="text-align:center;">1M</td>
-          <td style="text-align:center; color:var(--green); font-weight:700;">$0.20 / $2.00</td>
-          <td>Routing rápido (Luna) o agente principal multimodal (Terra).</td>
-        </tr>
-        <tr>
-          <td><i class="fa-solid fa-cube" style="color:#d97757; margin-right:0.5rem;"></i><strong>Claude Haiku / Sonnet 5.5</strong></td>
-          <td style="text-align:center;">200K / 1M</td>
-          <td style="text-align:center; color:var(--green); font-weight:700;">$0.10 / $2.00</td>
-          <td>Extracción veloz (Haiku) o seguimiento estricto de reglas (Sonnet).</td>
-        </tr>
-        <tr>
-          <td><i class="fa-brands fa-google" style="color:#4285F4; margin-right:0.5rem;"></i><strong>Gemini 3.5 Flash-Lite</strong></td>
-          <td style="text-align:center; color:var(--secondary); font-weight:700;">1M</td>
-          <td style="text-align:center;">$0.30</td>
-          <td>RAG masivo ultra-económico sobre bases documentales extensas.</td>
-        </tr>
-        <tr>
-          <td><i class="fa-brands fa-google" style="color:#4285F4; margin-right:0.5rem;"></i><strong>Gemini 3.8 Flash ⭐</strong></td>
-          <td style="text-align:center; color:var(--secondary); font-weight:700;">1M</td>
-          <td style="text-align:center;">$0.75</td>
-          <td>Mejor balance velocidad + razonamiento + Google File Search en n8n.</td>
-        </tr>
-      </table>
+    <span class="glass-pill cyan"><i class="fa-solid fa-diagram-project"></i> LA ARQUITECTURA POR DENTRO</span>
+    <h2>1. El Orquestador: ¿Por qué <span class="text-gradient">n8n</span>?</h2>
+    <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:0.7rem;">El <strong>orquestador</strong> es la "tubería inteligente" que conecta el canal de chat con tus documentos, tus herramientas y tu equipo humano.</p>
+
+    <div class="flow-diagram" style="max-width:980px; margin-bottom:0.8rem;">
+      <div class="flow-box">
+        <strong>📱 Canal</strong>
+        <span>WhatsApp · Telegram</span>
+      </div>
+      <div class="flow-connector">↔</div>
+      <div class="flow-box cyan" style="border-width:2px;">
+        <strong style="color:var(--secondary);">⚡ n8n (Orquestador)</strong>
+        <span>Coordina todo el flujo</span>
+      </div>
+      <div class="flow-connector">↔</div>
+      <div class="flow-box amber">
+        <strong>📚 Fuentes y Tools</strong>
+        <span>File Search · Sheets · MCP</span>
+      </div>
+      <div class="flow-connector">↔</div>
+      <div class="flow-box green">
+        <strong>🎧 Humano (HITL)</strong>
+        <span>Bandeja Chatwoot</span>
+      </div>
     </div>
-    <div class="highlight-box cyan" style="max-width:1050px;margin:0.8rem auto 0;font-size:0.85rem;padding:0.65rem 1.2rem;">
-      <strong>¿Por qué orquestamos con n8n?</strong> Une en un solo lienzo <strong>documentos (File Search)</strong>, <strong>herramientas (Sheets / MCP)</strong>, <strong>canales (WhatsApp / Telegram)</strong> y <strong>humanos (Chatwoot)</strong>.
+
+    <div class="grid-3" style="max-width:1020px; margin:0 auto;">
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--green);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.35rem;">
+          <h4 style="color:var(--green); margin:0;">n8n ⭐</h4>
+          <span class="badge-mini" style="color:var(--green); border-color:rgba(34,197,94,0.4);">10/10 · Elegido</span>
+        </div>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0 0 0.45rem;">Nodos nativos de <strong>Agente IA, Memoria, RAG, MCP</strong> y control total de Chatwoot.</p>
+        <div style="font-size:0.76rem; color:var(--secondary);">💰 Gratis en servidor propio / Cloud $24/mes</div>
+      </div>
+
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--accent);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.35rem;">
+          <h4 style="color:var(--accent); margin:0;">Make.com</h4>
+          <span class="badge-mini" style="color:var(--accent);">7/10 · Lineal</span>
+        </div>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0 0 0.45rem;">Muy visual para automatizaciones fijas, pero menos flexible para agentes con memoria y MCP.</p>
+        <div style="font-size:0.76rem; color:var(--text-muted);">💰 Desde $9/mes (cobra por operación)</div>
+      </div>
+
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--red);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.35rem;">
+          <h4 style="color:var(--red); margin:0;">Zapier</h4>
+          <span class="badge-mini" style="color:var(--red);">4/10 · Básico</span>
+        </div>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0 0 0.45rem;">Excelente para conectar 2 apps en 5 minutos, pero muy caro y limitado cuando escala el volumen.</p>
+        <div style="font-size:0.76rem; color:var(--text-muted);">💰 Desde $20/mes (escala rápido en costo)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE SEPARADA Y CLARA: MODELOS LLM -->
+  <section>
+    <span class="glass-pill amber"><i class="fa-solid fa-microchip"></i> EL MOTOR DE RAZONAMIENTO</span>
+    <h2>2. El Modelo IA: ¿Cuál elegir <span class="text-gradient">según la tarea</span>?</h2>
+    <p style="color:var(--text-muted); font-size:0.88rem; margin-bottom:0.65rem;">El modelo es el <strong>cerebro</strong> que conectás dentro de n8n o Claude Code. No hace falta usar el más caro para todo.</p>
+
+    <div class="grid-3" style="max-width:1040px; margin:0 auto 0.65rem;">
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--green);">
+        <span class="badge-mini" style="color:var(--green); margin-bottom:0.3rem;">1. Rápido y Económico</span>
+        <h4 style="color:var(--green); margin-bottom:0.25rem;">Clasificar y filtrar</h4>
+        <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:0.5rem;">Para detectar intención, etiquetar un chat o responder FAQs simples a gran escala.</p>
+        <div style="font-size:0.78rem; line-height:1.5; border-top:1px solid var(--glass-border); padding-top:0.4rem;">
+          • <strong>Claude Haiku 5.5</strong> <span style="color:var(--green);">($0.10 / 1M)</span><br>
+          • <strong>GPT-5.6 Luna</strong> <span style="color:var(--green);">($0.20 / 1M)</span><br>
+          • <strong>Gemini 3.5 Flash-Lite</strong> <span style="color:var(--green);">($0.30 / 1M)</span>
+        </div>
+      </div>
+
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--secondary); background:rgba(0,242,254,0.05);">
+        <span class="badge-mini" style="color:var(--secondary); border-color:rgba(0,242,254,0.4); margin-bottom:0.3rem;">2. Ideal para RAG en n8n ⭐</span>
+        <h4 style="color:var(--secondary); margin-bottom:0.25rem;">Consultar PDFs + Sheets</h4>
+        <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:0.5rem;">El punto justo entre velocidad, ventana de <strong>1M de tokens</strong> (cientos de págs.) y bajo costo.</p>
+        <div style="font-size:0.78rem; line-height:1.5; border-top:1px solid var(--glass-border); padding-top:0.4rem;">
+          • <strong>Gemini 3.8 Flash ⭐</strong> <span style="color:var(--secondary);">($0.75 / 1M)</span><br>
+          <span style="color:var(--text-muted); font-size:0.74rem;">Se integra directo con <strong>Google File Search</strong> en nuestras demos de hoy.</span>
+        </div>
+      </div>
+
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--primary);">
+        <span class="badge-mini" style="color:#e2cbff; margin-bottom:0.3rem;">3. Razonamiento Profundo</span>
+        <h4 style="color:#e2cbff; margin-bottom:0.25rem;">Agentes y Claude Code</h4>
+        <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:0.5rem;">Cuando el agente decide en bucle qué <strong>Skills</strong> y <strong>MCP</strong> usar o resuelve tareas complejas.</p>
+        <div style="font-size:0.78rem; line-height:1.5; border-top:1px solid var(--glass-border); padding-top:0.4rem;">
+          • <strong>Claude Sonnet 5.5</strong> <span style="color:var(--accent);">($2.00 / 1M)</span><br>
+          • <strong>GPT-5.6 Terra</strong> <span style="color:var(--accent);">($2.00 / 1M)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box cyan" style="max-width:1040px;">
+      <strong>Concepto práctico:</strong> <strong>1M de tokens</strong> equivale a ~700.000 palabras. Con <strong>Google File Search + Gemini Flash</strong> no le mandás todo el libro en cada mensaje: buscás solo los párrafos útiles y gastás centavos.
     </div>
   </section>
 
   <section>
     <h2>De <span class="text-gradient">Copilot</span> a <span class="text-gradient">Autopilot</span></h2>
-    <div class="grid-2" style="max-width:980px;">
-      <div class="glass-card" style="text-align:left;border-top:4px solid var(--secondary);padding:1.3rem;">
-        <h4 style="color:var(--secondary);margin-bottom:0.6rem;">🧑‍✈️ 1. Copilot (Empezar acá)</h4>
-        <ul class="premium-list" style="font-size:0.88rem;">
-          <li><i class="fa-solid fa-check"></i> Validás documentos y citas en <strong>NotebookLM</strong></li>
-          <li><i class="fa-solid fa-check"></i> El asistente sugiere; la persona supervisa</li>
-          <li><i class="fa-solid fa-check"></i> Riesgo cero mientras ajustás las fuentes</li>
+    <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:0.8rem;">El camino seguro para llevar un asistente a producción sin arriesgar la operación.</p>
+    <div class="grid-2" style="max-width:980px; margin:0 auto;">
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--secondary);">
+        <h4 style="color:var(--secondary);">🧑‍✈️ Paso 1: Modo Copilot (Validación)</h4>
+        <ul class="premium-list">
+          <li><i class="fa-solid fa-check"></i> Probás tus documentos y citas en <strong>NotebookLM</strong></li>
+          <li><i class="fa-solid fa-check"></i> El asistente sugiere borradores; una persona supervisa</li>
+          <li><i class="fa-solid fa-check"></i> Detectás preguntas sin respuesta y corregís tus PDFs</li>
         </ul>
       </div>
-      <div class="glass-card" style="text-align:left;border-top:4px solid var(--primary);padding:1.3rem;">
-        <h4 style="color:var(--primary);margin-bottom:0.6rem;">🤖 2. Autopilot + HITL (Escalar)</h4>
-        <ul class="premium-list" style="font-size:0.88rem;">
-          <li><i class="fa-solid fa-check"></i> Atiende consultas frecuentes 24/7 en <strong>n8n</strong></li>
-          <li><i class="fa-solid fa-check"></i> Responde solo lo que está en las fuentes</li>
-          <li><i class="fa-solid fa-check"></i> Deriva a <strong>Chatwoot</strong> ante dudas o excepciones</li>
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--primary);">
+        <h4 style="color:#e2cbff;">🤖 Paso 2: Modo Autopilot + HITL (Escala)</h4>
+        <ul class="premium-list">
+          <li><i class="fa-solid fa-check"></i> Atiende consultas repetitivas 24/7 desde <strong>n8n</strong></li>
+          <li><i class="fa-solid fa-check"></i> Responde únicamente lo respaldado por tus fuentes</li>
+          <li><i class="fa-solid fa-check"></i> Deriva a un humano en <strong>Chatwoot</strong> ante dudas o reclamos</li>
         </ul>
       </div>
     </div>
   </section>
 </section>
 
-<!-- BLOQUE 2: NOTEBOOKLM + APLICACIONES -->
+<!-- BLOQUE 2: NOTEBOOKLM + DÓNDE GUARDAR EL CONOCIMIENTO (SLIDES 9 Y 9-2 REDISEÑADAS) -->
 <section>
   <section>
     <span class="glass-pill"><i class="fa-solid fa-trophy"></i> BLOQUE 2 · RAG + HITL · 20 MIN</span>
-    <h2>NotebookLM: <span class="text-gradient">validar antes de automatizar</span></h2>
-    <div class="flow-diagram" style="max-width:1000px;margin:0.4rem auto 1rem;">
-      <div class="flow-box" style="min-width:155px;padding:0.6rem 0.9rem;">
-        <strong style="font-size:0.82rem;color:var(--secondary);">1. Subir PDFs / Docs</strong>
-        <small>notebooklm.google.com</small>
-      </div>
-      <div class="flow-connector">→</div>
-      <div class="flow-box cyan" style="min-width:165px;padding:0.6rem 0.9rem;">
-        <strong style="font-size:0.82rem;color:var(--secondary);">2. Probar preguntas</strong>
-        <small>Verificar citas [1] [2]</small>
-      </div>
-      <div class="flow-connector">→</div>
-      <div class="flow-box amber" style="min-width:165px;padding:0.6rem 0.9rem;">
-        <strong style="font-size:0.82rem;color:var(--accent);">3. Detectar huecos</strong>
-        <small>Pregunta sin respuesta</small>
-      </div>
-      <div class="flow-connector">→</div>
-      <div class="flow-box green" style="min-width:165px;padding:0.6rem 0.9rem;">
-        <strong style="font-size:0.82rem;color:var(--green);">4. Llevar a n8n</strong>
-        <small>Google File Search</small>
+    <h2>NotebookLM: <span class="text-gradient">validar tus fuentes antes del bot</span></h2>
+    <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:0.75rem;">Antes de configurar flujos en n8n, comprobá gratis en 10 minutos si tus documentos realmente tienen las respuestas.</p>
+
+    <!-- Barra compacta de 4 pasos narrativos -->
+    <div class="glass-card" style="max-width:1040px; padding:0.75rem 1.1rem; margin-bottom:0.85rem; background:rgba(0,242,254,0.04); border-color:rgba(0,242,254,0.22);">
+      <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:0.75rem; text-align:left;">
+        <div style="border-right:1px solid var(--glass-border); padding-right:0.6rem;">
+          <span class="badge-mini" style="color:var(--secondary); margin-bottom:0.2rem;">Paso 1</span>
+          <strong style="display:block; font-size:0.83rem;">Subir fuentes</strong>
+          <span style="font-size:0.74rem; color:var(--text-muted);">PDFs, Docs, links o YouTube en un cuaderno.</span>
+        </div>
+        <div style="border-right:1px solid var(--glass-border); padding-right:0.6rem;">
+          <span class="badge-mini" style="color:var(--secondary); margin-bottom:0.2rem;">Paso 2</span>
+          <strong style="display:block; font-size:0.83rem;">Preguntas reales</strong>
+          <span style="font-size:0.74rem; color:var(--text-muted);">Probar las mismas dudas que hacen tus clientes.</span>
+        </div>
+        <div style="border-right:1px solid var(--glass-border); padding-right:0.6rem;">
+          <span class="badge-mini" style="color:var(--accent); margin-bottom:0.2rem;">Paso 3</span>
+          <strong style="display:block; font-size:0.83rem;">Auditar citas [1]</strong>
+          <span style="font-size:0.74rem; color:var(--text-muted);">Tocar cada número para ver el párrafo exacto.</span>
+        </div>
+        <div>
+          <span class="badge-mini" style="color:var(--green); margin-bottom:0.2rem;">Paso 4</span>
+          <strong style="display:block; font-size:0.83rem;">Detectar huecos</strong>
+          <span style="font-size:0.74rem; color:var(--text-muted);">Hacer 1 pregunta que no esté y ver si frena.</span>
+        </div>
       </div>
     </div>
-    <div class="grid-2" style="max-width:1000px;text-align:left;">
-      <div class="glass-card" style="border-top:4px solid var(--green);padding:1.1rem 1.3rem;">
-        <h4 style="color:var(--green);margin-bottom:0.5rem;font-size:1rem;">✅ Qué resuelve NotebookLM</h4>
-        <ul class="premium-list" style="font-size:0.84rem;margin:0;">
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Comprobar en 5 min si tus documentos sirven</li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Auditar el párrafo exacto de cada cita</li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Uso interno gratis (web o integrado en Gemini)</li>
+
+    <div class="grid-2" style="max-width:1040px; text-align:left;">
+      <div class="glass-card" style="border-top:4px solid var(--green);">
+        <h4 style="color:var(--green);"><i class="fa-solid fa-circle-check"></i> Para qué alcanza con NotebookLM</h4>
+        <ul class="premium-list">
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> <strong>Validar tu MVP documental:</strong> saber si tus PDFs están claros o ambiguos.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> <strong>Uso interno de equipo:</strong> consultar manuales desde la web o desde la app de Gemini.</li>
         </ul>
       </div>
-      <div class="glass-card" style="border-top:4px solid var(--accent);padding:1.1rem 1.3rem;">
-        <h4 style="color:var(--accent);margin-bottom:0.5rem;font-size:1rem;">⚠️ Por qué NO reemplaza probar el bot</h4>
-        <ul class="premium-list" style="font-size:0.84rem;margin:0;">
-          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> No atiende clientes en WhatsApp ni Telegram</li>
-          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> No ejecuta herramientas ni deriva en Chatwoot</li>
-          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> <strong>Siempre hay que probar el bot en el canal real</strong></li>
+      <div class="glass-card" style="border-top:4px solid var(--accent);">
+        <h4 style="color:var(--accent);"><i class="fa-solid fa-triangle-exclamation"></i> Por qué NO reemplaza probar el bot</h4>
+        <ul class="premium-list">
+          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> <strong>No conecta con clientes:</strong> no atiende WhatsApp ni Telegram ni usa herramientas.</li>
+          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> <strong>Regla clave:</strong> después de validar en NotebookLM, siempre hay que probar el bot en su canal real.</li>
         </ul>
       </div>
     </div>
   </section>
 
+  <!-- SLIDE 9-2 REDISEÑADA: 3 CAMINOS CLAROS CON NARRATIVA COMPLETA -->
   <section>
+    <span class="glass-pill cyan"><i class="fa-solid fa-sitemap"></i> CRITERIO DE ARQUITECTURA</span>
     <h2>¿Dónde guardar <span class="text-gradient">el conocimiento</span>?</h2>
-    <div class="grid-3" style="max-width:1020px; margin: 0 auto 1rem;">
-      <div class="glass-card" style="text-align:left; border-top: 4px solid var(--primary); padding:1.1rem;">
-        <h4 style="color:var(--primary); margin-bottom:0.4rem; font-size:0.98rem;">① Validar rápido sin bot</h4>
-        <p style="font-size:0.85rem; color:var(--text-main); font-weight:700; margin-bottom:0.3rem;">NotebookLM</p>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Subís PDFs en 5 min y verificás citas.</p>
+    <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:0.8rem;">Tres escenarios reales de negocio y qué arquitectura conviene elegir en cada uno.</p>
+
+    <div class="grid-3" style="max-width:1050px; margin:0 auto; text-align:left;">
+      <!-- Camino 1 -->
+      <div class="glass-card" style="border-top:4px solid var(--primary); display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <span class="badge-mini" style="color:#e2cbff; margin-bottom:0.4rem;">Camino 1 · Sin Bot</span>
+          <h4 style="color:#e2cbff; font-size:1rem;">¿Querés validar fuentes o consulta interna?</h4>
+          <p style="font-size:0.8rem; color:var(--text-muted); margin:0.4rem 0 0.7rem;">Necesitás que tu equipo consulte manuales o verificar si tus documentos sirven antes de automatizar.</p>
+        </div>
+        <div style="background:rgba(138,43,226,0.1); border-left:3px solid var(--primary); padding:0.55rem 0.75rem; border-radius:0 8px 8px 0;">
+          <strong style="font-size:0.82rem; color:var(--text-main); display:block;">👉 Usá NotebookLM</strong>
+          <span style="font-size:0.74rem; color:var(--text-muted);">Ej: Onboarding RRHH, contratos legales, material de estudio.</span>
+        </div>
       </div>
-      <div class="glass-card" style="text-align:left; border-top: 4px solid var(--secondary); padding:1.1rem;">
-        <h4 style="color:var(--secondary); margin-bottom:0.4rem; font-size:0.98rem;">② Poca info fija (1 producto)</h4>
-        <p style="font-size:0.85rem; color:var(--text-main); font-weight:700; margin-bottom:0.3rem;">System Prompt en n8n</p>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Precios y FAQs cortas directo en instrucciones.</p>
+
+      <!-- Camino 2 -->
+      <div class="glass-card" style="border-top:4px solid var(--green); display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <span class="badge-mini" style="color:var(--green); margin-bottom:0.4rem;">Camino 2 · Info corta y fija</span>
+          <h4 style="color:var(--green); font-size:1rem;">¿Es 1 producto único con reglas que casi no cambian?</h4>
+          <p style="font-size:0.8rem; color:var(--text-muted); margin:0.4rem 0 0.7rem;">Precios, garantía, preguntas frecuentes y link de pago caben en 2 carillas claras.</p>
+        </div>
+        <div style="background:rgba(34,197,94,0.1); border-left:3px solid var(--green); padding:0.55rem 0.75rem; border-radius:0 8px 8px 0;">
+          <strong style="font-size:0.82rem; color:var(--text-main); display:block;">👉 System Prompt en n8n + HITL</strong>
+          <span style="font-size:0.74rem; color:var(--text-muted);">Ej hoy: <strong>Demo HolaVeggie</strong> en WhatsApp + Chatwoot.</span>
+        </div>
       </div>
-      <div class="glass-card" style="text-align:left; border-top: 4px solid var(--green); padding:1.1rem;">
-        <h4 style="color:var(--green); margin-bottom:0.4rem; font-size:0.98rem;">③ Manuales + datos vivos</h4>
-        <p style="font-size:0.85rem; color:var(--text-main); font-weight:700; margin-bottom:0.3rem;">File Search + Sheets</p>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">PDFs extensos indexados + stock en vivo.</p>
+
+      <!-- Camino 3 -->
+      <div class="glass-card" style="border-top:4px solid var(--secondary); display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <span class="badge-mini" style="color:var(--secondary); margin-bottom:0.4rem;">Camino 3 · Manuales + Datos vivos</span>
+          <h4 style="color:var(--secondary); font-size:1rem;">¿Son PDFs extensos + stock o precios que cambian?</h4>
+          <p style="font-size:0.8rem; color:var(--text-muted); margin:0.4rem 0 0.7rem;">El bot debe buscar en reglamentos largos y además leer una planilla en tiempo real.</p>
+        </div>
+        <div style="background:rgba(0,242,254,0.08); border-left:3px solid var(--secondary); padding:0.55rem 0.75rem; border-radius:0 8px 8px 0;">
+          <strong style="font-size:0.82rem; color:var(--text-main); display:block;">👉 Google File Search + Sheets en n8n</strong>
+          <span style="font-size:0.74rem; color:var(--text-muted);">Ej hoy: <strong>Demo Reglas del Golf</strong> + Tienda.</span>
+        </div>
       </div>
     </div>
-    <div class="grid-4" style="max-width:1020px; margin:0 auto;">
-      <div class="glass-card" style="padding:0.8rem; text-align:center;">
-        <i class="fa-solid fa-headset" style="color:var(--secondary);font-size:1.3rem;margin-bottom:0.3rem;display:block;"></i>
-        <strong style="font-size:0.82rem;">Atención & Reclamos</strong>
-        <small style="display:block;color:var(--text-muted);font-size:0.72rem;">FAQs + Políticas + HITL</small>
-      </div>
-      <div class="glass-card" style="padding:0.8rem; text-align:center;">
-        <i class="fa-solid fa-users" style="color:var(--primary);font-size:1.3rem;margin-bottom:0.3rem;display:block;"></i>
-        <strong style="font-size:0.82rem;">Onboarding RRHH</strong>
-        <small style="display:block;color:var(--text-muted);font-size:0.72rem;">Manual interno + Licencias</small>
-      </div>
-      <div class="glass-card" style="padding:0.8rem; text-align:center;">
-        <i class="fa-solid fa-cart-shopping" style="color:var(--green);font-size:1.3rem;margin-bottom:0.3rem;display:block;"></i>
-        <strong style="font-size:0.82rem;">Catálogo & Ventas</strong>
-        <small style="display:block;color:var(--text-muted);font-size:0.72rem;">Prompt / PDF + Sheets</small>
-      </div>
-      <div class="glass-card" style="padding:0.8rem; text-align:center;">
-        <i class="fa-solid fa-scale-balanced" style="color:var(--accent);font-size:1.3rem;margin-bottom:0.3rem;display:block;"></i>
-        <strong style="font-size:0.82rem;">Reglamentos & Legal</strong>
-        <small style="display:block;color:var(--text-muted);font-size:0.72rem;">Normativas + File Search</small>
-      </div>
+
+    <div class="highlight-box cyan" style="max-width:1050px;">
+      <strong>La misma arquitectura sirve para cualquier rubro:</strong> soporte técnico, reclamos, turnos médicos o ventas. Solo cambian los documentos y las reglas de derivación.
     </div>
   </section>
 </section>
@@ -664,34 +802,34 @@
   <section>
     <span class="glass-pill amber"><i class="fa-solid fa-golf-ball-tee"></i> DEMO 1 EN VIVO · CHAT DE N8N</span>
     <h2>Reglas del Golf: <span class="text-gradient">File Search + Sheets</span></h2>
-    <canvas class="clawd-stage" data-scene="golf" width="660" height="145" style="margin:0 auto 0.5rem;"></canvas>
-    <div class="flow-diagram" style="max-width:1020px;margin:0.3rem auto 1rem;">
-      <div class="flow-box" style="min-width:150px;">
+    <canvas class="clawd-stage" data-scene="golf" width="640" height="130"></canvas>
+    <div class="flow-diagram" style="max-width:1020px;">
+      <div class="flow-box">
         <i class="fa-solid fa-comments" style="color:var(--text-main);"></i>
-        <strong style="font-size:0.82rem;">Chat de n8n</strong>
-        <small>o Telegram / WhatsApp</small>
+        <strong>1. Chat de n8n</strong>
+        <span>o Telegram / WhatsApp</span>
       </div>
       <div class="flow-connector">→</div>
-      <div class="flow-box cyan" style="min-width:165px;">
+      <div class="flow-box cyan">
         <i class="fa-solid fa-brain" style="color:var(--secondary);"></i>
-        <strong style="font-size:0.82rem;">Agente Gemini 3.8</strong>
-        <small>Decide qué fuente usar</small>
+        <strong>2. Agente Gemini 3.8</strong>
+        <span>Elige qué fuente usar</span>
       </div>
       <div class="flow-connector">→</div>
-      <div class="flow-box amber" style="min-width:175px;">
+      <div class="flow-box amber">
         <i class="fa-solid fa-file-pdf" style="color:var(--accent);"></i>
-        <strong style="font-size:0.82rem;">Google File Search</strong>
-        <small>Reglamento oficial PDF</small>
+        <strong>3. Google File Search</strong>
+        <span>Reglamento oficial PDF</span>
       </div>
       <div class="flow-connector">+</div>
-      <div class="flow-box green" style="min-width:165px;">
+      <div class="flow-box green">
         <i class="fa-solid fa-table" style="color:var(--green);"></i>
-        <strong style="font-size:0.82rem;">Google Sheets</strong>
-        <small>Stock y precios en vivo</small>
+        <strong>4. Google Sheets</strong>
+        <span>Stock y precios en vivo</span>
       </div>
     </div>
-    <div class="highlight-box amber" style="max-width:1000px;margin:0 auto;font-size:0.88rem;padding:0.7rem 1.2rem;">
-      <strong>Qué probamos en vivo en el Chat de n8n:</strong> vemos en pantalla cuándo consulta el <strong>Reglamento PDF</strong> (File Search), cuándo lee el <strong>Stock en Sheets</strong> y cómo frena si la pregunta no figura en las fuentes.
+    <div class="highlight-box amber" style="max-width:1020px;">
+      <strong>Qué probamos en vivo en el Chat de n8n:</strong> vemos en pantalla cuándo consulta el <strong>Reglamento PDF</strong> (File Search), cuándo lee el <strong>Stock en Sheets</strong> y cómo reconoce cuando un dato no está en las fuentes.
     </div>
   </section>
 
@@ -699,8 +837,9 @@
   <section>
     <span class="glass-pill green"><i class="fa-brands fa-whatsapp"></i> DEMO 2 EN VIVO · WHATSAPP + CHATWOOT</span>
     <h2>Caso Real: <span class="text-gradient-green">HolaVeggie ("Indio")</span></h2>
-    <div class="grid-2" style="max-width:1060px; text-align:left; align-items:stretch;">
-      <pre class="glass-code" style="font-size:0.72rem; margin:0; border-left:4px solid var(--secondary);">
+    <p style="color:var(--text-muted); font-size:0.88rem; margin-bottom:0.65rem;">Asistente de venta en WhatsApp con conocimiento en instrucciones + derivación humana en <strong>Chatwoot</strong>.</p>
+    <div class="grid-2" style="max-width:1040px; margin:0 auto; text-align:left; align-items:stretch;">
+      <pre class="glass-code" style="margin:0; border-left:4px solid var(--secondary);">
 <code style="color:#f8fafc;"># ROL Y PERSONALIDAD
 Sos Indio 🐾🌿, el gato asistente de HolaVeggie
 ("El Gran Recetario Plant-Based" · $19 USD).
@@ -713,12 +852,12 @@ Cálido, alegre y empático. Respuestas de 3-4 líneas.
   "PAGO HECHO" + email del comprador.
 - Si pide humano o sale del carril → derivar
   a persona en Chatwoot.</code></pre>
-      <div class="glass-card" style="border-top: 4px solid var(--green); padding:1.2rem;">
-        <h4 style="color:var(--green); margin-bottom:0.6rem; font-size:1rem;"><i class="fa-solid fa-bolt"></i> Qué hace el flujo</h4>
-        <ul class="premium-list" style="font-size:0.84rem; margin:0;">
-          <li><i class="fa-brands fa-whatsapp" style="color:#25D366;"></i> <strong>WhatsApp 24/7:</strong> responde dudas, envía muestra y pasa link de pago</li>
-          <li><i class="fa-solid fa-lock" style="color:var(--accent);"></i> <strong>Condición clara:</strong> valida pago + email antes de entregar el e-book</li>
-          <li><i class="fa-solid fa-headset" style="color:var(--secondary);"></i> <strong>Bandeja en Chatwoot:</strong> si hay reclamo o duda sensible, pasa a humano</li>
+      <div class="glass-card" style="border-top: 4px solid var(--green); margin:0;">
+        <h4 style="color:var(--green);"><i class="fa-solid fa-bolt"></i> Qué resuelve y cuándo deriva</h4>
+        <ul class="premium-list">
+          <li><i class="fa-brands fa-whatsapp" style="color:#25D366;"></i> <strong>Atención 24/7:</strong> responde dudas del recetario, envía la muestra gratis y pasa datos de pago.</li>
+          <li><i class="fa-solid fa-lock" style="color:var(--accent);"></i> <strong>Condición de entrega:</strong> exige <code>PAGO HECHO</code> + email antes de liberar el link de descarga.</li>
+          <li><i class="fa-solid fa-headset" style="color:var(--secondary);"></i> <strong>Traspaso a humano:</strong> si hay reclamo, duda de pago o pedido del cliente, deriva en <strong>Chatwoot</strong>.</li>
         </ul>
       </div>
     </div>
@@ -728,40 +867,40 @@ Cálido, alegre y empático. Respuestas de 3-4 líneas.
   <section>
     <span class="glass-pill cyan"><i class="fa-solid fa-headset"></i> INTERVENCIÓN HUMANA (HITL)</span>
     <h2>Derivación y Control <span class="text-gradient">en Chatwoot</span></h2>
-    <canvas class="clawd-stage" data-scene="hitl" width="660" height="145" style="margin:0 auto 0.5rem;"></canvas>
-    <div class="flow-diagram" style="max-width:1020px;margin:0.2rem auto 1rem;">
-      <div class="flow-box" style="min-width:145px;padding:0.6rem 0.8rem;">
-        <strong style="font-size:0.8rem;">1. Bot atiende</strong>
-        <small>Estado: <code>Pending</code></small>
+    <canvas class="clawd-stage" data-scene="hitl" width="640" height="130"></canvas>
+    <div class="flow-diagram" style="max-width:1020px;">
+      <div class="flow-box">
+        <strong>1. Bot responde</strong>
+        <span>Estado: <code>Pending</code></span>
       </div>
       <div class="flow-connector">→</div>
-      <div class="flow-box amber" style="min-width:155px;padding:0.6rem 0.8rem;">
-        <strong style="font-size:0.8rem;color:var(--accent);">2. Motivo HITL</strong>
-        <small>Etiqueta + alerta</small>
+      <div class="flow-box amber">
+        <strong style="color:var(--accent);">2. Motivo HITL</strong>
+        <span>Etiqueta + alerta</span>
       </div>
       <div class="flow-connector">→</div>
-      <div class="flow-box green" style="min-width:165px;padding:0.6rem 0.8rem;">
-        <strong style="font-size:0.8rem;color:var(--green);">3. Humano toma control</strong>
-        <small>Estado: <code>Open</code> (Bot en pausa)</small>
+      <div class="flow-box green">
+        <strong style="color:var(--green);">3. Humano al mando</strong>
+        <span>Estado: <code>Open</code> (Bot se pausa)</span>
       </div>
       <div class="flow-connector">→</div>
-      <div class="flow-box cyan" style="min-width:155px;padding:0.6rem 0.8rem;">
-        <strong style="font-size:0.8rem;color:var(--secondary);">4. Vuelve al bot</strong>
-        <small>Al resolver charla</small>
+      <div class="flow-box cyan">
+        <strong style="color:var(--secondary);">4. Vuelve al bot</strong>
+        <span>Al cerrar o devolver charla</span>
       </div>
     </div>
-    <div class="grid-3" style="max-width:1020px;margin:0 auto;">
-      <div class="glass-card" style="text-align:left;border-top:4px solid var(--red);padding:1rem;">
-        <strong style="color:var(--red);font-size:0.88rem;display:block;margin-bottom:0.3rem;"><i class="fa-solid fa-circle-question"></i> 1. Falta de info</strong>
-        <p style="font-size:0.78rem;color:var(--text-muted);margin:0;">No figura en los documentos → no adivina, deriva.</p>
+    <div class="grid-3" style="max-width:1020px;margin:0.6rem auto 0;">
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--red);">
+        <strong style="color:var(--red);font-size:0.86rem;display:block;margin-bottom:0.2rem;"><i class="fa-solid fa-circle-question"></i> 1. Falta de información</strong>
+        <p style="font-size:0.78rem;color:var(--text-muted);margin:0;">La respuesta no está en los documentos → el bot no adivina y deriva.</p>
       </div>
-      <div class="glass-card" style="text-align:left;border-top:4px solid var(--accent);padding:1rem;">
-        <strong style="color:var(--accent);font-size:0.88rem;display:block;margin-bottom:0.3rem;"><i class="fa-solid fa-hand"></i> 2. Pedido del usuario</strong>
-        <p style="font-size:0.78rem;color:var(--text-muted);margin:0;">Pide hablar con una persona o 3 mensajes sin resolver.</p>
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--accent);">
+        <strong style="color:var(--accent);font-size:0.86rem;display:block;margin-bottom:0.2rem;"><i class="fa-solid fa-hand"></i> 2. Pedido del usuario</strong>
+        <p style="font-size:0.78rem;color:var(--text-muted);margin:0;">El cliente pide hablar con una persona o lleva 3 mensajes sin resolver.</p>
       </div>
-      <div class="glass-card" style="text-align:left;border-top:4px solid var(--secondary);padding:1rem;">
-        <strong style="color:var(--secondary);font-size:0.88rem;display:block;margin-bottom:0.3rem;"><i class="fa-solid fa-stamp"></i> 3. Aprobación humana</strong>
-        <p style="font-size:0.78rem;color:var(--text-muted);margin:0;">Excepciones de pago, reembolsos o reclamos sensibles.</p>
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--secondary);">
+        <strong style="color:var(--secondary);font-size:0.86rem;display:block;margin-bottom:0.2rem;"><i class="fa-solid fa-stamp"></i> 3. Necesidad de aprobación</strong>
+        <p style="font-size:0.78rem;color:var(--text-muted);margin:0;">Descuentos, reembolsos, reclamos o excepciones sensibles.</p>
       </div>
     </div>
   </section>
@@ -769,31 +908,31 @@ Cálido, alegre y empático. Respuestas de 3-4 líneas.
   <!-- SLIDE 4: GUARDRAILS Y COSTO DEL STACK -->
   <section>
     <h2>Guardrails y <span class="text-gradient">Costo de Producción</span></h2>
-    <div class="grid-2" style="max-width:1020px; text-align:left; margin-bottom:1rem;">
-      <div class="glass-card" style="border-top:4px solid var(--red); padding:1.1rem 1.3rem;">
-        <h4 style="color:var(--red); margin-bottom:0.5rem; font-size:1rem;"><i class="fa-solid fa-ban"></i> Prohibido para el bot</h4>
-        <ul class="premium-list" style="font-size:0.84rem; margin:0;">
-          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> Confirmar datos fuera de las fuentes</li>
-          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> Inventar descuentos, links o promesas</li>
-          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> Seguir hablando cuando el humano tomó el chat</li>
+    <div class="grid-2" style="max-width:1020px; margin:0 auto 0.8rem; text-align:left;">
+      <div class="glass-card" style="border-top:4px solid var(--red);">
+        <h4 style="color:var(--red);"><i class="fa-solid fa-ban"></i> Límites estrictos (Prohibido)</h4>
+        <ul class="premium-list">
+          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> Confirmar datos que no figuren en las fuentes</li>
+          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> Inventar descuentos, links o promesas comerciales</li>
+          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> Seguir respondiendo mientras el humano tiene el control</li>
         </ul>
       </div>
-      <div class="glass-card" style="border-top:4px solid var(--green); padding:1.1rem 1.3rem;">
-        <h4 style="color:var(--green); margin-bottom:0.5rem; font-size:1rem;"><i class="fa-solid fa-shield-halved"></i> Obligatorio siempre</h4>
-        <ul class="premium-list" style="font-size:0.84rem; margin:0;">
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Respuestas breves (3–4 líneas para celular)</li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Decir "No tengo esa info" cuando falta el dato</li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Pasar todo el historial al humano en Chatwoot</li>
+      <div class="glass-card" style="border-top:4px solid var(--green);">
+        <h4 style="color:var(--green);"><i class="fa-solid fa-shield-halved"></i> Buenas prácticas (Obligatorio)</h4>
+        <ul class="premium-list">
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Respuestas breves (3–4 líneas pensadas para celular)</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Decir "No tengo esa información" cuando falta el dato</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Entregar todo el historial previo al humano en Chatwoot</li>
         </ul>
       </div>
     </div>
-    <div class="glass-card" style="max-width:1020px; padding:1rem 1.4rem; border-top:4px solid var(--secondary);">
+    <div class="glass-card" style="max-width:1020px; border-top:4px solid var(--secondary);">
       <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.8rem;">
         <div style="text-align:left;">
-          <strong style="font-size:0.95rem; color:var(--text-main);">💰 Costo total para ~2.000 consultas/mes:</strong>
-          <span style="font-size:0.82rem; color:var(--text-muted); display:block;">NotebookLM ($0) · Google File Search (~$0–2) · Sheets ($0) · Chatwoot ($0 self-hosted) · n8n + Gemini (~$25/mes)</span>
+          <strong style="font-size:0.9rem; color:var(--text-main);">💰 Costo orientativo para ~2.000 consultas/mes:</strong>
+          <span style="font-size:0.78rem; color:var(--text-muted); display:block;">NotebookLM ($0) · Google File Search (~$0–2) · Sheets ($0) · Chatwoot ($0 self-hosted) · n8n + Gemini (~$25/mes)</span>
         </div>
-        <span class="glass-pill green" style="margin:0; font-size:0.95rem;">≈ $25 – $35 USD / mes</span>
+        <span class="glass-pill green" style="margin:0; font-size:0.85rem;">≈ $25 – $35 USD / mes</span>
       </div>
     </div>
   </section>
@@ -806,77 +945,78 @@ Cálido, alegre y empático. Respuestas de 3-4 líneas.
   <section>
     <span class="glass-pill amber"><i class="fa-solid fa-plug"></i> BLOQUE 3 · SKILLS, HERRAMIENTAS Y MCP · 15 MIN</span>
     <h2>Cómo <span class="text-gradient">enseñarle y conectarlo</span></h2>
-    <canvas class="clawd-stage" data-scene="mcp" width="660" height="145" style="margin:0 auto 0.5rem;"></canvas>
+    <canvas class="clawd-stage" data-scene="mcp" width="640" height="130"></canvas>
     <div class="grid-3" style="max-width:1020px; margin:0 auto;">
-      <div class="glass-card" style="text-align:left; border-top:4px solid var(--primary); padding:1.1rem;">
-        <h4 style="color:var(--primary); margin-bottom:0.4rem;"><i class="fa-solid fa-book-bookmark"></i> 1. Skill</h4>
-        <p style="font-size:0.86rem; color:var(--text-main); font-weight:700; margin-bottom:0.3rem;">Guía reutilizable</p>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.6rem;">Instrucciones paso a paso para hacer bien una tarea.</p>
-        <div style="font-size:0.76rem; color:var(--accent);"><strong>Ej:</strong> Redactar respuestas claras en 4 líneas.</div>
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--primary);">
+        <h4 style="color:var(--primary);"><i class="fa-solid fa-book-bookmark"></i> 1. Skill (Habilidad)</h4>
+        <p style="font-size:0.84rem; color:var(--text-main); font-weight:700; margin:0 0 0.25rem;">Guía reutilizable para una tarea</p>
+        <p style="font-size:0.78rem; color:var(--text-muted); margin:0 0 0.5rem;">Reúne instrucciones y criterios paso a paso para hacer bien un trabajo.</p>
+        <div style="font-size:0.75rem; color:var(--accent);"><strong>Ej:</strong> Redactar respuestas claras en 4 líneas.</div>
       </div>
 
-      <div class="glass-card" style="text-align:left; border-top:4px solid var(--secondary); padding:1.1rem;">
-        <h4 style="color:var(--secondary); margin-bottom:0.4rem;"><i class="fa-solid fa-screwdriver-wrench"></i> 2. Herramienta</h4>
-        <p style="font-size:0.86rem; color:var(--text-main); font-weight:700; margin-bottom:0.3rem;">Acción puntual</p>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.6rem;">Función que el asistente activa en otro sistema.</p>
-        <div style="font-size:0.76rem; color:var(--secondary);"><strong>Ej:</strong> Consultar stock o agendar en Calendar.</div>
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--secondary);">
+        <h4 style="color:var(--secondary);"><i class="fa-solid fa-screwdriver-wrench"></i> 2. Herramienta (Tool)</h4>
+        <p style="font-size:0.84rem; color:var(--text-main); font-weight:700; margin:0 0 0.25rem;">Acción que el asistente ejecuta</p>
+        <p style="font-size:0.78rem; color:var(--text-muted); margin:0 0 0.5rem;">Función puntual para leer un dato o hacer un cambio en otro sistema.</p>
+        <div style="font-size:0.75rem; color:var(--secondary);"><strong>Ej:</strong> Consultar stock o crear evento en Calendar.</div>
       </div>
 
-      <div class="glass-card" style="text-align:left; border-top:4px solid var(--green); padding:1.1rem;">
-        <h4 style="color:var(--green); margin-bottom:0.4rem;"><i class="fa-solid fa-network-wired"></i> 3. Conexión MCP</h4>
-        <p style="font-size:0.86rem; color:var(--text-main); font-weight:700; margin-bottom:0.3rem;">Enchufe universal</p>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.6rem;">Estándar para conectar múltiples herramientas y datos.</p>
-        <div style="font-size:0.76rem; color:var(--green);"><strong>Ej:</strong> Conectar n8n con Sheets, Notion o CRM.</div>
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--green);">
+        <h4 style="color:var(--green);"><i class="fa-solid fa-network-wired"></i> 3. Conexión MCP</h4>
+        <p style="font-size:0.84rem; color:var(--text-main); font-weight:700; margin:0 0 0.25rem;">Estándar de conexión universal</p>
+        <p style="font-size:0.78rem; color:var(--text-muted); margin:0 0 0.5rem;">El "enchufe universal" para conectar al asistente con herramientas y datos.</p>
+        <div style="font-size:0.75rem; color:var(--green);"><strong>Ej:</strong> Conectar una hoja de cálculo o CRM vía MCP.</div>
       </div>
     </div>
-    <div class="highlight-box amber" style="max-width:1020px; margin:0.9rem auto 0; font-size:0.88rem; padding:0.65rem 1.2rem;">
-      <strong>Clave:</strong> <strong>Skill</strong> = <em>cómo trabajar</em> (instrucciones) · <strong>Herramienta</strong> = <em>qué acción ejecuta</em> · <strong>MCP</strong> = <em>el puente de conexión</em>.
+    <div class="highlight-box amber" style="max-width:1020px;">
+      <strong>Diferencia clave:</strong> <strong>Skill</strong> = <em>cómo trabajar</em> (instrucciones) · <strong>Herramienta</strong> = <em>qué acción ejecuta</em> · <strong>MCP</strong> = <em>el estándar para conectarlo</em>.
     </div>
   </section>
 
   <!-- SLIDE 2: DEMO EN VIVO MCP EN N8N + CATÁLOGOS -->
   <section>
     <span class="glass-pill amber">Demo en vivo · MCP en n8n + Catálogos</span>
-    <h2>Conexión <span class="text-gradient">MCP en n8n</span> y Directorios</h2>
-    <div class="flow-diagram" style="max-width:1020px;margin:0.3rem auto 1rem;">
-      <div class="flow-box" style="min-width:155px;padding:0.6rem 0.9rem;">
-        <strong style="font-size:0.82rem;color:var(--primary);">1. Instrucciones</strong>
-        <small>Cuándo usar cada tool</small>
+    <h2>Conexión <span class="text-gradient">MCP en n8n</span> y Catálogos</h2>
+    <p style="color:var(--text-muted); font-size:0.88rem; margin-bottom:0.65rem;">Vemos en vivo las instrucciones y la conexión MCP en n8n, y dónde explorar ejemplos listos para usar.</p>
+    <div class="flow-diagram" style="max-width:1020px;">
+      <div class="flow-box">
+        <strong style="color:#e2cbff;">1. Instrucciones</strong>
+        <span>Define cuándo usar cada herramienta</span>
       </div>
       <div class="flow-connector">→</div>
-      <div class="flow-box cyan" style="min-width:165px;padding:0.6rem 0.9rem;">
-        <strong style="font-size:0.82rem;color:var(--secondary);">2. Nodo MCP Client</strong>
-        <small>Un solo enchufe en n8n</small>
+      <div class="flow-box cyan">
+        <strong style="color:var(--secondary);">2. Nodo MCP en n8n</strong>
+        <span>Un solo enchufe al servidor MCP</span>
       </div>
       <div class="flow-connector">→</div>
-      <div class="flow-box green" style="min-width:175px;padding:0.6rem 0.9rem;">
-        <strong style="font-size:0.82rem;color:var(--green);">3. Datos / Acciones</strong>
-        <small>Planillas, CRM, Flujos</small>
+      <div class="flow-box green">
+        <strong style="color:var(--green);">3. Herramientas y Datos</strong>
+        <span>Planillas, CRM, Agenda o Flujos</span>
       </div>
     </div>
-    <div class="grid-4" style="max-width:1020px; margin:0 auto;">
+    <div class="grid-4" style="max-width:1020px; margin:0.7rem auto 0;">
       <a href="https://skills.sh/" target="_blank" style="text-decoration:none;">
-        <div class="glass-card" style="border-top:4px solid var(--primary); padding:1rem; text-align:left; height:100%;">
-          <strong style="color:var(--primary); font-size:0.9rem; display:block; margin-bottom:0.3rem;"><i class="fa-solid fa-wand-magic-sparkles"></i> skills.sh ↗</strong>
-          <p style="font-size:0.76rem; color:var(--text-muted); margin:0;">Buscador de skills listas para sumar a tu agente.</p>
+        <div class="glass-card" style="border-top:4px solid var(--primary); text-align:left; height:100%; margin:0;">
+          <strong style="color:#e2cbff; font-size:0.88rem; display:block; margin-bottom:0.25rem;"><i class="fa-solid fa-wand-magic-sparkles"></i> skills.sh ↗</strong>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin:0;">Buscador de skills reutilizables para sumar a un agente.</p>
         </div>
       </a>
       <a href="https://agentskills.io/home" target="_blank" style="text-decoration:none;">
-        <div class="glass-card" style="border-top:4px solid var(--primary); padding:1rem; text-align:left; height:100%;">
-          <strong style="color:var(--primary); font-size:0.9rem; display:block; margin-bottom:0.3rem;"><i class="fa-solid fa-book"></i> agentskills.io ↗</strong>
-          <p style="font-size:0.76rem; color:var(--text-muted); margin:0;">Estándar oficial de instrucciones reutilizables.</p>
+        <div class="glass-card" style="border-top:4px solid var(--primary); text-align:left; height:100%; margin:0;">
+          <strong style="color:#e2cbff; font-size:0.88rem; display:block; margin-bottom:0.25rem;"><i class="fa-solid fa-book"></i> agentskills.io ↗</strong>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin:0;">Guía oficial sobre cómo estructurar una skill.</p>
         </div>
       </a>
       <a href="https://smithery.ai/" target="_blank" style="text-decoration:none;">
-        <div class="glass-card" style="border-top:4px solid var(--green); padding:1rem; text-align:left; height:100%;">
-          <strong style="color:var(--green); font-size:0.9rem; display:block; margin-bottom:0.3rem;"><i class="fa-solid fa-plug-circle-bolt"></i> smithery.ai ↗</strong>
-          <p style="font-size:0.76rem; color:var(--text-muted); margin:0;">Catálogo de servidores y conexiones MCP listas.</p>
+        <div class="glass-card" style="border-top:4px solid var(--green); text-align:left; height:100%; margin:0;">
+          <strong style="color:var(--green); font-size:0.88rem; display:block; margin-bottom:0.25rem;"><i class="fa-solid fa-plug-circle-bolt"></i> smithery.ai ↗</strong>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin:0;">Catálogo de conexiones MCP con servicios y datos.</p>
         </div>
       </a>
       <a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" style="text-decoration:none;">
-        <div class="glass-card" style="border-top:4px solid var(--secondary); padding:1rem; text-align:left; height:100%;">
-          <strong style="color:var(--secondary); font-size:0.9rem; display:block; margin-bottom:0.3rem;"><i class="fa-solid fa-network-wired"></i> MCP Docs ↗</strong>
-          <p style="font-size:0.76rem; color:var(--text-muted); margin:0;">Guía oficial del Model Context Protocol.</p>
+        <div class="glass-card" style="border-top:4px solid var(--secondary); text-align:left; height:100%; margin:0;">
+          <strong style="color:var(--secondary); font-size:0.88rem; display:block; margin-bottom:0.25rem;"><i class="fa-solid fa-network-wired"></i> MCP Oficial ↗</strong>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin:0;">Documentación introductoria del protocolo MCP.</p>
         </div>
       </a>
     </div>
@@ -889,31 +1029,31 @@ Cálido, alegre y empático. Respuestas de 3-4 líneas.
   <section>
     <span class="glass-pill green"><i class="fa-solid fa-code-branch"></i> BLOQUE 4 · ELEGIR Y COMPROBAR · 10 MIN</span>
     <h2>Elegir el flujo y <span class="text-gradient">hacer las 3 pruebas</span></h2>
-    <div class="grid-2" style="max-width:1020px; text-align:left; margin-bottom:0.9rem;">
-      <div class="glass-card" style="border-top:4px solid var(--secondary); padding:1rem 1.2rem;">
-        <h4 style="color:var(--secondary); margin-bottom:0.4rem; font-size:0.98rem;"><i class="fa-solid fa-route"></i> Pasos fijos (Reglas + IA)</h4>
-        <p style="font-size:0.82rem; color:var(--text-muted); margin:0;">Camino A → B → C fijo. La IA solo redacta o clasifica. Ideal para procesos repetitivos y predecibles. <strong>Admite HITL.</strong></p>
+    <div class="grid-2" style="max-width:1020px; margin:0 auto 0.7rem; text-align:left;">
+      <div class="glass-card" style="border-top:4px solid var(--secondary); margin:0;">
+        <h4 style="color:var(--secondary);"><i class="fa-solid fa-route"></i> Flujo de pasos fijos (Reglas + IA)</h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Secuencia A → B → C predefinida. La IA redacta o clasifica, pero no cambia el orden. Ideal para procesos repetitivos. <strong>Puede incluir HITL.</strong></p>
       </div>
-      <div class="glass-card" style="border-top:4px solid var(--primary); padding:1rem 1.2rem;">
-        <h4 style="color:var(--primary); margin-bottom:0.4rem; font-size:0.98rem;"><i class="fa-solid fa-brain"></i> Flujo agéntico (El agente decide)</h4>
-        <p style="font-size:0.82rem; color:var(--text-muted); margin:0;">El agente elige qué fuente o herramienta usar según la pregunta abierta del cliente. <strong>Admite HITL.</strong></p>
+      <div class="glass-card" style="border-top:4px solid var(--primary); margin:0;">
+        <h4 style="color:#e2cbff;"><i class="fa-solid fa-brain"></i> Flujo agéntico (El agente decide)</h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">El agente elige qué fuente, herramienta o conexión MCP usar según la pregunta del usuario. <strong>También incluye HITL.</strong></p>
       </div>
     </div>
     <div class="grid-3" style="max-width:1020px; margin:0 auto;">
-      <div class="glass-card" style="text-align:left; border-top:4px solid var(--green); padding:0.9rem 1.1rem;">
-        <span class="badge-mini" style="color:var(--green);margin-bottom:0.3rem;display:inline-block;">Prueba 1</span>
-        <strong style="display:block;font-size:0.86rem;margin-bottom:0.2rem;">Dato en Fuente A</strong>
-        <p style="font-size:0.78rem; color:var(--text-muted); margin:0;">Verificar respuesta exacta + cita del documento.</p>
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--green); margin:0;">
+        <span class="badge-mini" style="color:var(--green);margin-bottom:0.25rem;">Prueba 1</span>
+        <strong style="display:block;font-size:0.84rem;margin-bottom:0.15rem;">Pregunta en Fuente A</strong>
+        <p style="font-size:0.76rem; color:var(--text-muted); margin:0;">Comprobar respuesta precisa y verificar la cita del documento.</p>
       </div>
-      <div class="glass-card" style="text-align:left; border-top:4px solid var(--secondary); padding:0.9rem 1.1rem;">
-        <span class="badge-mini" style="color:var(--secondary);margin-bottom:0.3rem;display:inline-block;">Prueba 2</span>
-        <strong style="display:block;font-size:0.86rem;margin-bottom:0.2rem;">Dato en Fuente B / Sheet</strong>
-        <p style="font-size:0.78rem; color:var(--text-muted); margin:0;">Confirmar que elige la fuente correcta sin mezclar.</p>
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--secondary); margin:0;">
+        <span class="badge-mini" style="color:var(--secondary);margin-bottom:0.25rem;">Prueba 2</span>
+        <strong style="display:block;font-size:0.84rem;margin-bottom:0.15rem;">Pregunta en Fuente B / Sheet</strong>
+        <p style="font-size:0.76rem; color:var(--text-muted); margin:0;">Confirmar que selecciona la fuente correcta sin mezclar datos.</p>
       </div>
-      <div class="glass-card" style="text-align:left; border-top:4px solid var(--red); padding:0.9rem 1.1rem;">
-        <span class="badge-mini" style="color:var(--accent);margin-bottom:0.3rem;display:inline-block;">Prueba 3 · Clave</span>
-        <strong style="display:block;font-size:0.86rem;margin-bottom:0.2rem;">Dato que NO existe</strong>
-        <p style="font-size:0.78rem; color:var(--text-muted); margin:0;">Comprobar que no inventa y deriva a humano (HITL).</p>
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--red); margin:0;">
+        <span class="badge-mini" style="color:var(--accent);margin-bottom:0.25rem;">Prueba 3 · Clave</span>
+        <strong style="display:block;font-size:0.84rem;margin-bottom:0.15rem;">Pregunta que NO figura</strong>
+        <p style="font-size:0.76rem; color:var(--text-muted); margin:0;">Verificar que no invente, avise que no sabe y derive a humano (HITL).</p>
       </div>
     </div>
   </section>
@@ -921,38 +1061,38 @@ Cálido, alegre y empático. Respuestas de 3-4 líneas.
   <!-- SLIDE 2: EVALUACIÓN VERDADERO O FALSO INTERACTIVA -->
   <section>
     <h2>Chequeo final: <span class="text-gradient">¿Verdadero o Falso?</span></h2>
-    <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:0.8rem;">Avanzá con la flecha (→) para revelar cada respuesta.</p>
-    <div class="glass-card" style="max-width:1060px; padding:0.9rem 1.3rem; text-align:left;">
-      <table style="width:100%; font-size:0.8rem; border-collapse:collapse;">
+    <p style="color:var(--text-muted); font-size:0.82rem; margin-bottom:0.6rem;">Avanzá con la flecha (→) para revelar cada respuesta y su justificación.</p>
+    <div class="glass-card" style="max-width:1050px; padding:0.7rem 1.1rem; text-align:left;">
+      <table style="width:100%; border-collapse:collapse;">
         <tr style="color:var(--secondary); border-bottom:1px solid var(--glass-border);">
-          <th style="width:45%; padding:0.45rem 0.5rem;">Afirmación</th>
-          <th style="width:13%; text-align:center; padding:0.45rem 0.5rem;">Respuesta</th>
-          <th style="width:42%; padding:0.45rem 0.5rem;">Por qué</th>
+          <th style="width:45%; padding:0.4rem 0.5rem;">Afirmación</th>
+          <th style="width:13%; text-align:center; padding:0.4rem 0.5rem;">Respuesta</th>
+          <th style="width:42%; padding:0.4rem 0.5rem;">Por qué</th>
         </tr>
         <tr style="border-bottom:1px solid var(--glass-border);">
-          <td style="padding:0.5rem;"><strong>1.</strong> Un RAG reduce las alucinaciones al consultar documentos antes de responder.</td>
-          <td class="fragment" data-fragment-index="1" style="text-align:center; padding:0.5rem;"><span style="background:rgba(34,197,94,0.2); color:var(--green); padding:0.2rem 0.6rem; border-radius:99px; font-weight:700;">Verdadero</span></td>
-          <td class="fragment" data-fragment-index="1" style="padding:0.5rem; color:var(--text-muted);">Reduce el riesgo con fuentes reales; si no está el dato, debe avisar y derivar.</td>
+          <td style="padding:0.45rem 0.5rem;"><strong>1.</strong> Un RAG reduce las alucinaciones al consultar documentos antes de responder.</td>
+          <td class="fragment" data-fragment-index="1" style="text-align:center; padding:0.45rem 0.5rem;"><span style="background:rgba(34,197,94,0.2); color:var(--green); padding:0.15rem 0.55rem; border-radius:99px; font-weight:700;">Verdadero</span></td>
+          <td class="fragment" data-fragment-index="1" style="padding:0.45rem 0.5rem; color:var(--text-muted);">Reduce el riesgo con fuentes reales; si no está el dato, debe avisar y derivar.</td>
         </tr>
         <tr style="border-bottom:1px solid var(--glass-border); background:rgba(255,255,255,0.02);">
-          <td style="padding:0.5rem;"><strong>2.</strong> Probar en NotebookLM reemplaza probar el bot en WhatsApp o Telegram.</td>
-          <td class="fragment" data-fragment-index="2" style="text-align:center; padding:0.5rem;"><span style="background:rgba(239,68,68,0.2); color:var(--red); padding:0.2rem 0.6rem; border-radius:99px; font-weight:700;">Falso</span></td>
-          <td class="fragment" data-fragment-index="2" style="padding:0.5rem; color:var(--text-muted);">NotebookLM valida los documentos; después hay que probar el bot en el canal real.</td>
+          <td style="padding:0.45rem 0.5rem;"><strong>2.</strong> Probar en NotebookLM reemplaza probar el bot en WhatsApp o Telegram.</td>
+          <td class="fragment" data-fragment-index="2" style="text-align:center; padding:0.45rem 0.5rem;"><span style="background:rgba(239,68,68,0.2); color:var(--red); padding:0.15rem 0.55rem; border-radius:99px; font-weight:700;">Falso</span></td>
+          <td class="fragment" data-fragment-index="2" style="padding:0.45rem 0.5rem; color:var(--text-muted);">NotebookLM valida los documentos; después hay que probar el bot en el canal real.</td>
         </tr>
         <tr style="border-bottom:1px solid var(--glass-border);">
-          <td style="padding:0.5rem;"><strong>3.</strong> Un flujo puede tener pasos fijos y usar IA para redactar una respuesta.</td>
-          <td class="fragment" data-fragment-index="3" style="text-align:center; padding:0.5rem;"><span style="background:rgba(34,197,94,0.2); color:var(--green); padding:0.2rem 0.6rem; border-radius:99px; font-weight:700;">Verdadero</span></td>
-          <td class="fragment" data-fragment-index="3" style="padding:0.5rem; color:var(--text-muted);">Usar IA para redactar no lo vuelve agéntico; el agente es el que decide qué herramientas usar.</td>
+          <td style="padding:0.45rem 0.5rem;"><strong>3.</strong> Un flujo puede tener pasos fijos y usar IA para redactar una respuesta.</td>
+          <td class="fragment" data-fragment-index="3" style="text-align:center; padding:0.45rem 0.5rem;"><span style="background:rgba(34,197,94,0.2); color:var(--green); padding:0.15rem 0.55rem; border-radius:99px; font-weight:700;">Verdadero</span></td>
+          <td class="fragment" data-fragment-index="3" style="padding:0.45rem 0.5rem; color:var(--text-muted);">Usar IA para redactar no lo vuelve agéntico; el agente es el que decide qué herramientas usar.</td>
         </tr>
         <tr style="border-bottom:1px solid var(--glass-border); background:rgba(255,255,255,0.02);">
-          <td style="padding:0.5rem;"><strong>4.</strong> Una Skill y una conexión MCP cumplen la misma función.</td>
-          <td class="fragment" data-fragment-index="4" style="text-align:center; padding:0.5rem;"><span style="background:rgba(239,68,68,0.2); color:var(--red); padding:0.2rem 0.6rem; border-radius:99px; font-weight:700;">Falso</span></td>
-          <td class="fragment" data-fragment-index="4" style="padding:0.5rem; color:var(--text-muted);">La Skill da instrucciones para una tarea; MCP conecta con herramientas y datos.</td>
+          <td style="padding:0.45rem 0.5rem;"><strong>4.</strong> Una Skill y una conexión MCP cumplen la misma función.</td>
+          <td class="fragment" data-fragment-index="4" style="text-align:center; padding:0.45rem 0.5rem;"><span style="background:rgba(239,68,68,0.2); color:var(--red); padding:0.15rem 0.55rem; border-radius:99px; font-weight:700;">Falso</span></td>
+          <td class="fragment" data-fragment-index="4" style="padding:0.45rem 0.5rem; color:var(--text-muted);">La Skill da instrucciones para una tarea; MCP conecta con herramientas y datos.</td>
         </tr>
         <tr>
-          <td style="padding:0.5rem;"><strong>5.</strong> HITL permite que una persona revise o continúe una charla cuando hace falta.</td>
-          <td class="fragment" data-fragment-index="5" style="text-align:center; padding:0.5rem;"><span style="background:rgba(34,197,94,0.2); color:var(--green); padding:0.2rem 0.6rem; border-radius:99px; font-weight:700;">Verdadero</span></td>
-          <td class="fragment" data-fragment-index="5" style="padding:0.5rem; color:var(--text-muted);">En Chatwoot recibe todo el historial, toma el control y el bot se pausa.</td>
+          <td style="padding:0.45rem 0.5rem;"><strong>5.</strong> HITL permite que una persona revise o continúe una charla cuando hace falta.</td>
+          <td class="fragment" data-fragment-index="5" style="text-align:center; padding:0.45rem 0.5rem;"><span style="background:rgba(34,197,94,0.2); color:var(--green); padding:0.15rem 0.55rem; border-radius:99px; font-weight:700;">Verdadero</span></td>
+          <td class="fragment" data-fragment-index="5" style="padding:0.45rem 0.5rem; color:var(--text-muted);">En Chatwoot recibe todo el historial, toma el control y el bot se pausa.</td>
         </tr>
       </table>
     </div>
@@ -961,99 +1101,99 @@ Cálido, alegre y empático. Respuestas de 3-4 líneas.
   <!-- SLIDE 3: ENTREGABLES Y FLUJOS DESCARGABLES -->
   <section>
     <h2>Flujos y plantillas <span class="text-gradient">para descargar</span></h2>
-    <div class="grid-4" style="max-width:1060px; margin:0 auto 1rem;">
+    <div class="grid-4" style="max-width:1040px; margin:0 auto 0.8rem;">
       <a href="https://github.com/axellaban/recursos/blob/main/%F0%9F%94%A5%20RAG%20System%20__%20Reglamento%20de%20Golf%20%2B%20Shop__%20GEMINI%20FILE%20SEARCH.json" target="_blank" style="text-decoration:none;">
-        <div class="glass-card" style="border-top:4px solid var(--accent); padding:1.1rem; text-align:center; height:100%;">
-          <i class="fa-solid fa-golf-ball-tee" style="font-size:1.8rem;color:var(--accent);display:block;margin-bottom:0.5rem;"></i>
-          <strong style="font-size:0.86rem;color:var(--text-main);display:block;margin-bottom:0.3rem;">Demo 1 · Golf RAG</strong>
+        <div class="glass-card" style="border-top:4px solid var(--accent); text-align:center; height:100%; margin:0;">
+          <i class="fa-solid fa-golf-ball-tee" style="font-size:1.5rem;color:var(--accent);display:block;margin-bottom:0.35rem;"></i>
+          <strong style="font-size:0.84rem;color:var(--text-main);display:block;margin-bottom:0.2rem;">Demo 1 · Golf RAG</strong>
           <p style="font-size:0.74rem;color:var(--text-muted);margin:0;">File Search + Sheets en n8n (.json)</p>
         </div>
       </a>
       <a href="https://github.com/axellaban/recursos/blob/main/Holaveggie_%20Indio%20Agente%20eBook%20Whatsapp%20(twlio)%20y%20HITL%20(Chatwoot).json" target="_blank" style="text-decoration:none;">
-        <div class="glass-card" style="border-top:4px solid var(--green); padding:1.1rem; text-align:center; height:100%;">
-          <i class="fa-solid fa-cat" style="font-size:1.8rem;color:var(--green);display:block;margin-bottom:0.5rem;"></i>
-          <strong style="font-size:0.86rem;color:var(--text-main);display:block;margin-bottom:0.3rem;">Demo 2 · HolaVeggie</strong>
+        <div class="glass-card" style="border-top:4px solid var(--green); text-align:center; height:100%; margin:0;">
+          <i class="fa-solid fa-cat" style="font-size:1.5rem;color:var(--green);display:block;margin-bottom:0.35rem;"></i>
+          <strong style="font-size:0.84rem;color:var(--text-main);display:block;margin-bottom:0.2rem;">Demo 2 · HolaVeggie</strong>
           <p style="font-size:0.74rem;color:var(--text-muted);margin:0;">WhatsApp + HITL Chatwoot (.json)</p>
         </div>
       </a>
       <a href="https://github.com/axellaban/recursos/blob/main/%F0%9F%A6%B7%20Agente%20de%20Voz%20__%20Consultorio%20Odontologico%20__%20Agenda%20en%20Calendar%20__%20ELEVENLABS.json" target="_blank" style="text-decoration:none;">
-        <div class="glass-card" style="border-top:4px solid var(--secondary); padding:1.1rem; text-align:center; height:100%;">
-          <i class="fa-solid fa-tooth" style="font-size:1.8rem;color:var(--secondary);display:block;margin-bottom:0.5rem;"></i>
-          <strong style="font-size:0.86rem;color:var(--text-main);display:block;margin-bottom:0.3rem;">Extra · Turnos Voz</strong>
+        <div class="glass-card" style="border-top:4px solid var(--secondary); text-align:center; height:100%; margin:0;">
+          <i class="fa-solid fa-tooth" style="font-size:1.5rem;color:var(--secondary);display:block;margin-bottom:0.35rem;"></i>
+          <strong style="font-size:0.84rem;color:var(--text-main);display:block;margin-bottom:0.2rem;">Extra · Turnos Voz</strong>
           <p style="font-size:0.74rem;color:var(--text-muted);margin:0;">ElevenLabs + Google Calendar (.json)</p>
         </div>
       </a>
       <a href="https://github.com/axellaban/recursos/blob/main/%F0%9F%A4%96%20WhatsApp%20Chatbot%20con%20Web%20Scraper%20__%20FIRECRAWL.json" target="_blank" style="text-decoration:none;">
-        <div class="glass-card" style="border-top:4px solid var(--primary); padding:1.1rem; text-align:center; height:100%;">
-          <i class="fa-solid fa-globe" style="font-size:1.8rem;color:var(--primary);display:block;margin-bottom:0.5rem;"></i>
-          <strong style="font-size:0.86rem;color:var(--text-main);display:block;margin-bottom:0.3rem;">Extra · Web Scraper</strong>
+        <div class="glass-card" style="border-top:4px solid var(--primary); text-align:center; height:100%; margin:0;">
+          <i class="fa-solid fa-globe" style="font-size:1.5rem;color:var(--primary);display:block;margin-bottom:0.35rem;"></i>
+          <strong style="font-size:0.84rem;color:var(--text-main);display:block;margin-bottom:0.2rem;">Extra · Web Scraper</strong>
           <p style="font-size:0.74rem;color:var(--text-muted);margin:0;">WhatsApp + Firecrawl en vivo (.json)</p>
         </div>
       </a>
     </div>
-    <div class="glass-card" style="max-width:1060px; padding:0.9rem 1.3rem; border-top:4px solid var(--primary); text-align:left; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.8rem;">
+    <div class="glass-card" style="max-width:1040px; border-top:4px solid var(--primary); text-align:left; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.8rem;">
       <div>
-        <strong style="color:var(--primary); font-size:0.9rem;"><i class="fa-solid fa-brain"></i> Skill descargable — RAG Architect:</strong>
-        <span style="font-size:0.8rem; color:var(--text-muted);"> subila a Claude para diseñar qué fuentes y flujo usar en tu caso.</span>
+        <strong style="color:#e2cbff; font-size:0.86rem;"><i class="fa-solid fa-brain"></i> Skill descargable — RAG Architect:</strong>
+        <span style="font-size:0.78rem; color:var(--text-muted);"> subila a Claude para diseñar qué fuentes y flujo usar en tu caso.</span>
       </div>
-      <code style="background:rgba(0,0,0,0.35);padding:0.35rem 0.7rem;border-radius:6px;font-size:0.7rem;color:var(--secondary);">axellaban/recursos → rag-architect.zip</code>
+      <code style="background:rgba(0,0,0,0.35);padding:0.3rem 0.65rem;border-radius:6px;font-size:0.72rem;color:var(--secondary);">axellaban/recursos → rag-architect.zip</code>
     </div>
   </section>
 
   <!-- SLIDE 4: RECURSOS DE LA CLASE -->
   <section>
     <h2>Material de lectura y <span class="text-gradient">tutoriales</span></h2>
-    <div class="grid-3" style="max-width:1080px; gap:1rem; text-align:left;">
-      <div class="glass-card" style="padding:1.1rem; border-top:4px solid var(--green);">
-        <h4 style="color:var(--green);margin-bottom:0.6rem;font-size:0.92rem;"><i class="fa-solid fa-book-open"></i> 1. RAG, NotebookLM y HITL</h4>
-        <ul style="list-style:none;padding:0;margin:0;font-size:0.76rem;line-height:1.6;">
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.4rem;margin-bottom:0.4rem;">
-            <a href="https://support.google.com/notebooklm/answer/16164461?hl=es" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-brands fa-google" style="color:var(--green);margin-right:0.4rem;"></i><strong>Guía NotebookLM (ES) ↗</strong></a><br><span style="color:var(--text-muted);">Consultar fuentes y verificar citas</span>
+    <div class="grid-3" style="max-width:1050px; gap:0.9rem; text-align:left; margin:0 auto;">
+      <div class="glass-card" style="border-top:4px solid var(--green); margin:0;">
+        <h4 style="color:var(--green);font-size:0.9rem;"><i class="fa-solid fa-book-open"></i> 1. RAG, NotebookLM y HITL</h4>
+        <ul style="list-style:none;padding:0;margin:0;font-size:0.75rem;line-height:1.5;">
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.35rem;margin-bottom:0.35rem;">
+            <a href="https://support.google.com/notebooklm/answer/16164461?hl=es" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-brands fa-google" style="color:var(--green);margin-right:0.35rem;"></i><strong>Guía NotebookLM (ES) ↗</strong></a><br><span style="color:var(--text-muted);">Consultar fuentes y verificar citas</span>
           </li>
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.4rem;margin-bottom:0.4rem;">
-            <a href="https://www.youtube.com/watch?v=KA_pExdDSUo" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-brands fa-youtube" style="color:#FF0000;margin-right:0.4rem;"></i><strong>Video NotebookLM (Google) ↗</strong></a><br><span style="color:var(--text-muted);">Transformar fuentes en materiales</span>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.35rem;margin-bottom:0.35rem;">
+            <a href="https://www.youtube.com/watch?v=KA_pExdDSUo" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-brands fa-youtube" style="color:#FF0000;margin-right:0.35rem;"></i><strong>Video NotebookLM (Google) ↗</strong></a><br><span style="color:var(--text-muted);">Transformar fuentes en materiales</span>
           </li>
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.4rem;margin-bottom:0.4rem;">
-            <a href="https://cloud.google.com/use-cases/retrieval-augmented-generation?hl=es" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-solid fa-cloud" style="color:var(--secondary);margin-right:0.4rem;"></i><strong>Google Cloud: ¿Qué es RAG? ↗</strong></a><br><span style="color:var(--text-muted);">Fundamentos fácticos y actualización</span>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.35rem;margin-bottom:0.35rem;">
+            <a href="https://cloud.google.com/use-cases/retrieval-augmented-generation?hl=es" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-solid fa-cloud" style="color:var(--secondary);margin-right:0.35rem;"></i><strong>Google Cloud: ¿Qué es RAG? ↗</strong></a><br><span style="color:var(--text-muted);">Fundamentos fácticos y actualización</span>
           </li>
           <li>
-            <a href="https://app.chatwoot.com/hc/user-guide/articles/1677497472-how-to-use-agent-bots" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-solid fa-headset" style="color:var(--accent);margin-right:0.4rem;"></i><strong>Chatwoot: Human Handoff ↗</strong></a><br><span style="color:var(--text-muted);">Cómo pasa el control del bot al humano</span>
+            <a href="https://app.chatwoot.com/hc/user-guide/articles/1677497472-how-to-use-agent-bots" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-solid fa-headset" style="color:var(--accent);margin-right:0.35rem;"></i><strong>Chatwoot: Human Handoff ↗</strong></a><br><span style="color:var(--text-muted);">Cómo pasa el control del bot al humano</span>
           </li>
         </ul>
       </div>
 
-      <div class="glass-card" style="padding:1.1rem; border-top:4px solid var(--primary);">
-        <h4 style="color:var(--primary);margin-bottom:0.6rem;font-size:0.92rem;"><i class="fa-solid fa-plug"></i> 2. Skills y Conexiones MCP</h4>
-        <ul style="list-style:none;padding:0;margin:0;font-size:0.76rem;line-height:1.6;">
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.4rem;margin-bottom:0.4rem;">
-            <a href="https://agentskills.io/home" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-solid fa-book-bookmark" style="color:var(--primary);margin-right:0.4rem;"></i><strong>Agent Skills (Oficial) ↗</strong></a><br><span style="color:var(--text-muted);">Instrucciones reutilizables por tarea</span>
+      <div class="glass-card" style="border-top:4px solid var(--primary); margin:0;">
+        <h4 style="color:#e2cbff;font-size:0.9rem;"><i class="fa-solid fa-plug"></i> 2. Skills y Conexiones MCP</h4>
+        <ul style="list-style:none;padding:0;margin:0;font-size:0.75rem;line-height:1.5;">
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.35rem;margin-bottom:0.35rem;">
+            <a href="https://agentskills.io/home" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-solid fa-book-bookmark" style="color:var(--primary);margin-right:0.35rem;"></i><strong>Agent Skills (Oficial) ↗</strong></a><br><span style="color:var(--text-muted);">Instrucciones reutilizables por tarea</span>
           </li>
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.4rem;margin-bottom:0.4rem;">
-            <a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-solid fa-network-wired" style="color:var(--secondary);margin-right:0.4rem;"></i><strong>MCP Oficial (Intro) ↗</strong></a><br><span style="color:var(--text-muted);">Estándar de conexión con herramientas</span>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.35rem;margin-bottom:0.35rem;">
+            <a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-solid fa-network-wired" style="color:var(--secondary);margin-right:0.35rem;"></i><strong>MCP Oficial (Intro) ↗</strong></a><br><span style="color:var(--text-muted);">Estándar de conexión con herramientas</span>
           </li>
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.4rem;margin-bottom:0.4rem;">
-            <a href="https://skills.sh/" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-solid fa-magnifying-glass" style="color:var(--accent);margin-right:0.4rem;"></i><strong>skills.sh (Catálogo) ↗</strong></a><br><span style="color:var(--text-muted);">Directorio de habilidades para agentes</span>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.35rem;margin-bottom:0.35rem;">
+            <a href="https://skills.sh/" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-solid fa-magnifying-glass" style="color:var(--accent);margin-right:0.35rem;"></i><strong>skills.sh (Catálogo) ↗</strong></a><br><span style="color:var(--text-muted);">Directorio de habilidades para agentes</span>
           </li>
           <li>
-            <a href="https://smithery.ai/" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-solid fa-boxes-stacked" style="color:var(--green);margin-right:0.4rem;"></i><strong>Smithery (Catálogo MCP) ↗</strong></a><br><span style="color:var(--text-muted);">Explorador de servidores MCP</span>
+            <a href="https://smithery.ai/" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-solid fa-boxes-stacked" style="color:var(--green);margin-right:0.35rem;"></i><strong>Smithery (Catálogo MCP) ↗</strong></a><br><span style="color:var(--text-muted);">Explorador de servidores MCP</span>
           </li>
         </ul>
       </div>
 
-      <div class="glass-card" style="padding:1.1rem; border-top:4px solid var(--secondary);">
-        <h4 style="color:var(--secondary);margin-bottom:0.6rem;font-size:0.92rem;"><i class="fa-brands fa-youtube"></i> 3. Tutoriales en Video</h4>
-        <ul style="list-style:none;padding:0;margin:0;font-size:0.76rem;line-height:1.6;">
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.4rem;margin-bottom:0.4rem;">
-            <a href="https://www.youtube.com/watch?v=irg-2IfAjpo" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-brands fa-google" style="color:var(--secondary);margin-right:0.4rem;"></i><strong>RAG con Google File Search ↗</strong></a><br><span style="color:var(--text-muted);">Configuración paso a paso en n8n</span>
+      <div class="glass-card" style="border-top:4px solid var(--secondary); margin:0;">
+        <h4 style="color:var(--secondary);font-size:0.9rem;"><i class="fa-brands fa-youtube"></i> 3. Tutoriales en Video</h4>
+        <ul style="list-style:none;padding:0;margin:0;font-size:0.75rem;line-height:1.5;">
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.35rem;margin-bottom:0.35rem;">
+            <a href="https://www.youtube.com/watch?v=irg-2IfAjpo" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-brands fa-google" style="color:var(--secondary);margin-right:0.35rem;"></i><strong>RAG con Google File Search ↗</strong></a><br><span style="color:var(--text-muted);">Configuración paso a paso en n8n</span>
           </li>
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.4rem;margin-bottom:0.4rem;">
-            <a href="https://youtu.be/eyY-S5Ta1bs" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-solid fa-server" style="color:var(--secondary);margin-right:0.4rem;"></i><strong>n8n: Cloud vs. Self-hosted ↗</strong></a><br><span style="color:var(--text-muted);">Cómo elegir dónde alojar tus flujos</span>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.35rem;margin-bottom:0.35rem;">
+            <a href="https://youtu.be/eyY-S5Ta1bs" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-solid fa-server" style="color:var(--secondary);margin-right:0.35rem;"></i><strong>n8n: Cloud vs. Self-hosted ↗</strong></a><br><span style="color:var(--text-muted);">Cómo elegir dónde alojar tus flujos</span>
           </li>
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.4rem;margin-bottom:0.4rem;">
-            <a href="https://youtu.be/Cm0GhnHYlVw" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-brands fa-whatsapp" style="color:#25D366;margin-right:0.4rem;"></i><strong>WhatsApp y Telegram en n8n ↗</strong></a><br><span style="color:var(--text-muted);">Conexión de canales + <a href="https://youtube.com/shorts/QO-eWeTowrw" target="_blank" style="color:var(--secondary);">Short Telegram</a></span>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.35rem;margin-bottom:0.35rem;">
+            <a href="https://youtu.be/Cm0GhnHYlVw" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-brands fa-whatsapp" style="color:#25D366;margin-right:0.35rem;"></i><strong>WhatsApp y Telegram en n8n ↗</strong></a><br><span style="color:var(--text-muted);">Conexión de canales + <a href="https://youtube.com/shorts/QO-eWeTowrw" target="_blank" style="color:var(--secondary);">Short Telegram</a></span>
           </li>
           <li>
-            <a href="https://youtu.be/Ty3JQMT96pg" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-solid fa-headset" style="color:var(--primary);margin-right:0.4rem;"></i><strong>Instalar y usar Chatwoot ↗</strong></a><br><span style="color:var(--text-muted);">Bandeja compartida para HITL</span>
+            <a href="https://youtu.be/Ty3JQMT96pg" target="_blank" style="color:var(--text-main);text-decoration:none;"><i class="fa-solid fa-headset" style="color:var(--primary);margin-right:0.35rem;"></i><strong>Instalar y usar Chatwoot ↗</strong></a><br><span style="color:var(--text-muted);">Bandeja compartida para HITL</span>
           </li>
         </ul>
       </div>
@@ -1063,26 +1203,26 @@ Cálido, alegre y empático. Respuestas de 3-4 líneas.
   <!-- SLIDE 5: Q&A Y CIERRE -->
   <section>
     <span class="glass-pill cyan"><i class="fa-solid fa-comments"></i> 30 MINUTOS · PREGUNTAS Y RESPUESTAS</span>
-    <h2 style="font-size:3rem;">Espacio de <span class="text-gradient">Preguntas y Casos</span></h2>
-    <canvas class="clawd-stage" data-scene="qa" width="660" height="150" style="margin:0 auto 0.6rem;"></canvas>
-    <div class="grid-3" style="max-width:920px; margin:0 auto 1.2rem;">
-      <div class="glass-card" style="padding:1rem;">
-        <i class="fa-solid fa-book-open" style="font-size:1.6rem; color:var(--secondary); margin-bottom:0.4rem; display:block;"></i>
-        <strong style="font-size:0.9rem;">1. Fuentes y RAG</strong>
-        <p style="font-size:0.76rem; color:var(--text-muted); margin:0.2rem 0 0;">NotebookLM + File Search</p>
+    <h2>Espacio de <span class="text-gradient">Preguntas y Casos</span></h2>
+    <canvas class="clawd-stage" data-scene="qa" width="640" height="135"></canvas>
+    <div class="grid-3" style="max-width:920px; margin:0.4rem auto 0.8rem;">
+      <div class="glass-card" style="margin:0;">
+        <i class="fa-solid fa-book-open" style="font-size:1.35rem; color:var(--secondary); margin-bottom:0.3rem; display:block;"></i>
+        <strong style="font-size:0.86rem;">1. Fuentes y RAG</strong>
+        <p style="font-size:0.74rem; color:var(--text-muted); margin:0.15rem 0 0;">NotebookLM + File Search</p>
       </div>
-      <div class="glass-card" style="padding:1rem;">
-        <i class="fa-solid fa-headset" style="font-size:1.6rem; color:var(--green); margin-bottom:0.4rem; display:block;"></i>
-        <strong style="font-size:0.9rem;">2. Control Humano (HITL)</strong>
-        <p style="font-size:0.76rem; color:var(--text-muted); margin:0.2rem 0 0;">Derivación en Chatwoot</p>
+      <div class="glass-card" style="margin:0;">
+        <i class="fa-solid fa-headset" style="font-size:1.35rem; color:var(--green); margin-bottom:0.3rem; display:block;"></i>
+        <strong style="font-size:0.86rem;">2. Control Humano (HITL)</strong>
+        <p style="font-size:0.74rem; color:var(--text-muted); margin:0.15rem 0 0;">Derivación en Chatwoot</p>
       </div>
-      <div class="glass-card" style="padding:1rem;">
-        <i class="fa-solid fa-plug" style="font-size:1.6rem; color:var(--accent); margin-bottom:0.4rem; display:block;"></i>
-        <strong style="font-size:0.9rem;">3. Skills, Tools y MCP</strong>
-        <p style="font-size:0.76rem; color:var(--text-muted); margin:0.2rem 0 0;">Conexiones en n8n</p>
+      <div class="glass-card" style="margin:0;">
+        <i class="fa-solid fa-plug" style="font-size:1.35rem; color:var(--accent); margin-bottom:0.3rem; display:block;"></i>
+        <strong style="font-size:0.86rem;">3. Skills, Tools y MCP</strong>
+        <p style="font-size:0.74rem; color:var(--text-muted); margin:0.15rem 0 0;">Conexiones en n8n y agentes</p>
       </div>
     </div>
-    <h3 class="text-gradient" style="font-size:2rem; margin-top:0.6rem;">¡Gracias! A construir.</h3>
+    <h3 class="text-gradient" style="font-size:1.75rem; margin-top:0.4rem;">¡Gracias! A construir.</h3>
   </section>
 </section>
 
@@ -1090,7 +1230,19 @@ Cálido, alegre y empático. Respuestas de 3-4 líneas.
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.js"></script>
 <script>
-  Reveal.initialize({ hash: true, transition: 'fade', backgroundTransition: 'slide', controls: true, progress: true, center: true });
+  Reveal.initialize({
+    width: 1200,
+    height: 700,
+    margin: 0.04,
+    minScale: 0.2,
+    maxScale: 2.0,
+    hash: true,
+    transition: 'fade',
+    backgroundTransition: 'slide',
+    controls: true,
+    progress: true,
+    center: true
+  });
 
   /* ============================================================================
    * CLAWD ANIMATION ENGINE (Adapted from JohnHeibel/ClaudeAnimationBase)
@@ -1243,7 +1395,7 @@ Cálido, alegre y empático. Respuestas de 3-4 líneas.
     // Main Clawd character renderer (exact 10u x 6u proportions from JohnHeibel/ClaudeAnimationBase)
     function drawClawd(ctx, x, y, scale, t, opts) {
       opts = opts || {};
-      const u = 6.2 * (scale || 1);
+      const u = 5.6 * (scale || 1);
       const sx = opts.sx || 1;
       const sy = opts.sy || 1;
       const bob = opts.bob || 0;
@@ -1273,7 +1425,7 @@ Cálido, alegre y empático. Respuestas de 3-4 líneas.
       // Ground shadow
       ctx.fillStyle = 'rgba(0, 0, 0, 0.32)';
       ctx.beginPath();
-      ctx.ellipse(0, 2, bw * 0.52 / sx, 4.5, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, 2, bw * 0.52 / sx, 4.2, 0, 0, Math.PI * 2);
       ctx.fill();
 
       // 4 stubby legs (2 outer, 2 inner) with walk cycle
@@ -1374,24 +1526,24 @@ Cálido, alegre y empático. Respuestas de 3-4 líneas.
     // Scene definitions for the 7 presentation stages
     const SCENES = {
       'hero': function(ctx, w, h, t) {
-        const groundY = h - 18;
-        sketchLine(ctx, 40, groundY, w - 40, groundY, 1, t, 'rgba(255,255,255,0.2)', 2);
+        const groundY = h - 16;
+        sketchLine(ctx, 40, groundY, w - 40, groundY, 1, t, 'rgba(30,24,38,0.25)', 2);
         // Connecting animated pulse lines
         const pulse1 = (t * 0.9) % 1;
         const pulse2 = ((t * 0.9) + 0.5) % 1;
-        sketchLine(ctx, 145, groundY - 38, w / 2 - 45, groundY - 38, 2, t, PAL.cyan, 2);
-        sketchLine(ctx, w / 2 + 45, groundY - 38, w - 145, groundY - 38, 3, t, PAL.ochre, 2);
+        sketchLine(ctx, 145, groundY - 34, w / 2 - 42, groundY - 34, 2, t, PAL.cyan, 2);
+        sketchLine(ctx, w / 2 + 42, groundY - 34, w - 145, groundY - 34, 3, t, PAL.ochre, 2);
         ctx.fillStyle = PAL.cyan;
         ctx.beginPath();
-        ctx.arc(145 + (w / 2 - 190) * pulse1, groundY - 38, 4, 0, Math.PI * 2);
+        ctx.arc(145 + (w / 2 - 187) * pulse1, groundY - 34, 4, 0, Math.PI * 2);
         ctx.fill();
         ctx.fillStyle = PAL.green;
         ctx.beginPath();
-        ctx.arc(w / 2 + 45 + (w / 2 - 190) * pulse2, groundY - 38, 4, 0, Math.PI * 2);
+        ctx.arc(w / 2 + 42 + (w / 2 - 187) * pulse2, groundY - 34, 4, 0, Math.PI * 2);
         ctx.fill();
 
-        drawStageBadge(ctx, 95, groundY - 38, 115, 42, '📄 Fuentes RAG', 'NotebookLM · PDF', PAL.cyan, 11, t);
-        drawStageBadge(ctx, w - 95, groundY - 38, 120, 42, '⚡ Tools + HITL', 'n8n · Chatwoot', PAL.green, 12, t);
+        drawStageBadge(ctx, 95, groundY - 34, 122, 40, '📄 Fuentes RAG', 'NotebookLM · PDF', PAL.cyan, 11, t);
+        drawStageBadge(ctx, w - 95, groundY - 34, 128, 40, '🛠️ Tools · MCP · HITL', 'n8n · Chatwoot', PAL.green, 12, t);
 
         // Clawd jumping with excitement in center
         const cycle = (t % 2.6) / 2.6;
@@ -1402,16 +1554,16 @@ Cálido, alegre y empático. Respuestas de 3-4 líneas.
           sy = 1 - 0.14 * Math.sin(p * Math.PI);
         } else if (cycle < 0.55) {
           const p = (cycle - 0.15) / 0.4;
-          bob = -Math.sin(p * Math.PI) * 20;
+          bob = -Math.sin(p * Math.PI) * 16;
           sx = 0.92; sy = 1.09; eyes = 'happy'; mouth = 'o';
         }
         const look = Math.sin(t * 1.8);
-        drawClawd(ctx, w / 2, groundY, 1.05, t, {
+        drawClawd(ctx, w / 2, groundY, 1.0, t, {
           bob, sx, sy, lookX: look, eyes, mouth,
           armL: -0.4 + Math.sin(t * 4) * 0.25,
           armR: 0.4 - Math.sin(t * 4) * 0.25
         });
-        drawEmote(ctx, w / 2, groundY - 82 + bob, 'bulb', t);
+        drawEmote(ctx, w / 2, groundY - 74 + bob, 'bulb', t);
       },
 
       'hallucination': function(ctx, w, h, t) {
