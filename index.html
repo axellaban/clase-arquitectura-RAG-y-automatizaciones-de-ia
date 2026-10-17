@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Arquitectura RAG y Automatización con AI · AGENTIC</title>
+  <title>Clase 3 · Arquitectura Inteligente: RAG, Herramientas y Automatización</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
@@ -71,7 +71,7 @@
     .pyr-entry { margin-bottom: 1.2rem; display: flex; gap: 1rem; }
     .pyr-dot { width: 12px; height: 12px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
     
-    /* Improved Table Responsiveness for Bloque 6 */
+    /* Improved Table Responsiveness */
     .responsive-table-wrapper { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; border: 1px solid var(--glass-border); }
     .premium-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
     .premium-table th { background: rgba(138,43,226,0.15); color: var(--secondary); text-align: left; padding: 1rem; border-bottom: 2px solid var(--glass-border); }
@@ -92,18 +92,18 @@
 
 <!-- PORTADA -->
 <section>
-  <span class="glass-pill"><i class="fa-solid fa-code"></i> Programa AGENTIC · Agentes de IA</span>
-  <h1 style="font-size:3.6rem; margin:1rem 0; line-height:1.1;">
-    Arquitectura <span class="text-gradient">RAG</span> y<br>Automatización con <span class="text-gradient">AI</span>
+  <span class="glass-pill"><i class="fa-solid fa-code"></i> Programa de Agentes de IA · Clase 3</span>
+  <h1 style="font-size:3.2rem; margin:1rem 0; line-height:1.15;">
+    Arquitectura <span class="text-gradient">Inteligente</span>:<br>RAG, Herramientas y <span class="text-gradient">Automatización</span>
   </h1>
-  <div class="glass-card" style="font-size:1.25rem; max-width:820px; line-height:1.6; padding:1.5rem 2rem;">
-    De un agente que responde desde su entrenamiento general<br>
-    a un agente que responde desde el <strong>conocimiento real de tu negocio</strong>.
+  <div class="glass-card" style="font-size:1.2rem; max-width:860px; line-height:1.6; padding:1.5rem 2rem;">
+    De un asistente que responde desde su entrenamiento general<br>
+    a uno que consulta <strong>documentos reales</strong>, usa <strong>herramientas</strong> y sabe <strong>cuándo derivar a una persona</strong>.
   </div>
   <div style="margin-top:1.5rem; color:var(--text-muted); font-size:1.05rem; font-weight:600;">
-    <i class="fa-solid fa-clock"></i> Clase 2 · 60 minutos &nbsp;|&nbsp;
-    <i class="fa-solid fa-users"></i> Para Operadores / Builders &nbsp;|&nbsp;
-    <i class="fa-solid fa-terminal"></i> n8n Live Build
+    <i class="fa-solid fa-clock"></i> Clase 3 · 60 min + 30 min Q&amp;A &nbsp;|&nbsp;
+    <i class="fa-solid fa-wand-magic-sparkles"></i> Demostraciones en vivo &nbsp;|&nbsp;
+    <i class="fa-solid fa-diagram-project"></i> NotebookLM · n8n · Chatwoot
   </div>
 </section>
 
@@ -121,7 +121,7 @@
       <h2 style="margin: 0.5rem 0 1.5rem 0; font-size: 3rem;">Axel <span class="text-gradient">Laban Arzubi</span></h2>
       <ul class="premium-list">
         <li style="margin-bottom: 1.2rem;"><i class="fa-solid fa-rocket" style="color: var(--secondary); margin-right: 1rem;"></i> <span><strong>Emprendedor:</strong> co-fundé holaveggie, un token de blockchain y thefreshagency.</span></li>
-        <li style="margin-bottom: 1.2rem;"><i class="fa-solid fa-chart-line" style="color: var(--secondary); margin-right: 1rem;"></i> <span><strong>Experiencia:</strong> Lideré BI & eCommerce de Grupo Marquez y el área comercial de Avenida.com.</span></li>
+        <li style="margin-bottom: 1.2rem;"><i class="fa-solid fa-chart-line" style="color: var(--secondary); margin-right: 1rem;"></i> <span><strong>Experiencia:</strong> Lideré BI &amp; eCommerce de Grupo Marquez y el área comercial de Avenida.com.</span></li>
         <li style="margin-bottom: 1.2rem;"><i class="fa-solid fa-brain" style="color: var(--secondary); margin-right: 1rem;"></i> <span><strong>Propósito:</strong> Fan de traducir el negocio a AI y AI a resultados concretos.</span></li>
       </ul>
       <div style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.5rem;">
@@ -134,20 +134,19 @@
 
 <!-- ÍNDICE -->
 <section>
-  <h2>Hoja de <span class="text-gradient">Ruta</span> — 60 minutos</h2>
-  <div class="glass-card" style="text-align:left; max-width:1000px; padding:1.5rem;">
+  <h2>Hoja de <span class="text-gradient">Ruta</span> — 60 min + 30 min Q&amp;A</h2>
+  <div class="glass-card" style="text-align:left; max-width:1020px; padding:1.5rem;">
     <table style="width:100%;">
       <tr>
-        <th style="width:15%;"><i class="fa-solid fa-layer-group"></i> Bloque</th>
-        <th style="width:63%;"><i class="fa-solid fa-book"></i> Eje Técnico</th>
-        <th style="width:22%; text-align:center;"><i class="fa-solid fa-clock"></i> Tiempo</th>
+        <th style="width:16%;"><i class="fa-solid fa-layer-group"></i> Bloque</th>
+        <th style="width:64%;"><i class="fa-solid fa-book"></i> Temática y Demos</th>
+        <th style="width:20%; text-align:center;"><i class="fa-solid fa-clock"></i> Tiempo</th>
       </tr>
-      <tr><td><span class="glass-pill cyan" style="margin:0;font-size:0.75rem;">BLOQUE 0</span></td><td><strong>El Problema:</strong> Alucinación y por qué RAG lo cambia todo.</td><td style="text-align:center;color:var(--text-muted);">5 min</td></tr>
-      <tr><td><span class="glass-pill cyan" style="margin:0;font-size:0.75rem;">BLOQUE 1</span></td><td><strong>El Ecosistema:</strong> Plataformas, modelos y Copilot vs. Autopilot.</td><td style="text-align:center;color:var(--text-muted);">10 min</td></tr>
-      <tr><td><span class="glass-pill cyan" style="margin:0;font-size:0.75rem;">BLOQUE 2</span></td><td><strong>Cerebro Operativo:</strong> Ciclo RAG completo y fuentes de conocimiento.</td><td style="text-align:center;color:var(--text-muted);">10 min</td></tr>
-      <tr><td><span class="glass-pill cyan" style="margin:0;font-size:0.75rem;">BLOQUE 3</span></td><td><strong>Fast Wins + Arquitectura:</strong> NotebookLM, contexto masivo, 8 casos de uso y backends RAG.</td><td style="text-align:center;color:var(--text-muted);">15 min</td></tr>
-      <tr><td><span class="glass-pill amber" style="margin:0;font-size:0.75rem;">BLOQUE 4</span></td><td><strong>⚙️ Live Build:</strong> Caso HolaVeggie · arquitectura RAG + HITL · prompts y costos.</td><td style="text-align:center;color:var(--accent);">15 min</td></tr>
-      <tr><td><span class="glass-pill green" style="margin:0;font-size:0.75rem;">BLOQUE 5</span></td><td><strong>Cierre:</strong> Entregables, recursos y puente a la Clase 3.</td><td style="text-align:center;color:var(--green);">5 min</td></tr>
+      <tr><td><span class="glass-pill cyan" style="margin:0;font-size:0.75rem;">BLOQUE 1</span></td><td><strong>¿Qué necesita saber el asistente?</strong> Instrucciones, documentos y acciones · RAG para reducir alucinaciones.</td><td style="text-align:center;color:var(--text-muted);">15 min</td></tr>
+      <tr><td><span class="glass-pill cyan" style="margin:0;font-size:0.75rem;">BLOQUE 2</span></td><td><strong>⚙️ RAG + Intervención Humana (HITL):</strong> NotebookLM, Google File Search en n8n y derivación en Chatwoot.</td><td style="text-align:center;color:var(--accent);">20 min</td></tr>
+      <tr><td><span class="glass-pill amber" style="margin:0;font-size:0.75rem;">BLOQUE 3</span></td><td><strong>⚙️ Cómo enseñarle y conectarlo:</strong> Skills, herramientas y MCP en vivo en n8n · Catálogos para explorar.</td><td style="text-align:center;color:var(--accent);">15 min</td></tr>
+      <tr><td><span class="glass-pill green" style="margin:0;font-size:0.75rem;">BLOQUE 4</span></td><td><strong>Elegir el flujo y comprobarlo:</strong> Pasos fijos vs. agente, validación de fuentes, autoevaluación y recursos.</td><td style="text-align:center;color:var(--green);">10 min</td></tr>
+      <tr><td><span class="glass-pill" style="margin:0;font-size:0.75rem;">Q&amp;A</span></td><td><strong>Espacio de preguntas y respuestas:</strong> Dudas, casos reales y aplicación a tu negocio.</td><td style="text-align:center;color:var(--secondary);">+30 min</td></tr>
     </table>
   </div>
 </section>
@@ -314,7 +313,7 @@
     </tr>
   </table>
   <div class="highlight-box cyan" style="max-width:1050px; margin:1rem auto 0; font-size:0.9rem;">
-    En esta clase construimos <strong>Automatización con AI con comportamiento agente</strong> — RAG, HITL y autonomía parcial. En la Clase 3 llegamos a <strong>Agentes IA</strong> proactivos y multiagente. n8n orquesta las tres capas.
+    En esta clase vemos cómo combinar <strong>pasos fijos (Automatización con AI)</strong> y <strong>decisiones autónomas (Agente IA)</strong> — sumando RAG, herramientas e intervención humana (HITL) en ambos casos. n8n orquesta las tres capas.
   </div>
 </section>
 
@@ -352,54 +351,125 @@
       <div class="glass-card" style="border-top:4px solid var(--red); text-align:left;">
         <h4 style="color:var(--red);margin-bottom:0.8rem;">❌ Agente SIN RAG</h4>
         <ul class="premium-list" style="font-size:0.95rem;">
-          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> Responde desde entrenamiento obsoleto.</li>
-          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> Inventa políticas y datos con total seguridad.</li>
-          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> No puede citar fuentes — no tiene de dónde.</li>
-          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> Destruye confianza en el primer error real.</li>
+          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> Responde desde entrenamiento genérico u obsoleto.</li>
+          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> Inventa políticas y datos con total seguridad (alucinación).</li>
+          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> No puede citar fuentes — no tiene de dónde respaldarlo.</li>
+          <li><i class="fa-solid fa-times" style="color:var(--red);"></i> Destruye confianza en el primer error frente al cliente.</li>
         </ul>
       </div>
       <div class="glass-card" style="border-top:4px solid var(--green); text-align:left;">
         <h4 style="color:var(--green);margin-bottom:0.8rem;">✅ Agente CON RAG</h4>
         <ul class="premium-list" style="font-size:0.95rem;">
           <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Consulta tus documentos reales antes de responder.</li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Dice "no tengo esa info" cuando no la hay.</li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Cita el documento y la sección exacta.</li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Actualizable sin reentrenar el modelo.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Reconoce cuando no tiene la info, pide aclaración o deriva.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Cita el documento y la sección exacta que respalda el dato.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Se actualiza cambiando el documento, sin reentrenar la IA.</li>
         </ul>
       </div>
     </div>
     <div class="highlight-box cyan" style="max-width:1000px;margin:1.5rem auto 0;font-size:1rem;">
-      <strong>Objetivo de la clase:</strong> Que tu agente deje de responder con información genérica y empiece a responder desde el conocimiento real de tu negocio — y sepa cuándo y cómo derivar a un humano.
+      <strong>Regla de oro:</strong> El RAG reduce drásticamente las alucinaciones al consultar fuentes reales, pero no elimina el riesgo por sí solo. Si los documentos no contienen la respuesta, el asistente debe <strong>reconocer que no sabe</strong> y pedir ayuda o derivar a una persona.
     </div>
   </section>
 </section>
 
-<!-- BLOQUE 1 -->
+<!-- BLOQUE 1: ¿QUÉ NECESITA SABER EL ASISTENTE? -->
 <section>
   <section>
-    <span class="glass-pill"><i class="fa-solid fa-chess-knight"></i> BLOQUE 1 · 10 MIN</span>
+    <span class="glass-pill cyan"><i class="fa-solid fa-compass"></i> BLOQUE 1 · 15 MIN</span>
+    <h2>¿Qué necesita saber <span class="text-gradient">el asistente</span>?</h2>
+    <p style="color:var(--text-muted);font-size:1.05rem;margin-bottom:1.5rem;">Antes de construir un flujo, hay que separar tres piezas que cumplen funciones distintas.</p>
+    <div class="grid-3" style="max-width:1050px;margin:0 auto;">
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--primary);">
+        <h4 style="color:var(--primary);margin-bottom:0.8rem;"><i class="fa-solid fa-sliders"></i> 1. Instrucciones</h4>
+        <p style="font-size:0.92rem;color:var(--text-main);font-weight:600;margin-bottom:0.5rem;">Cómo debe comportarse</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.5;">Su rol, tono de voz, formato de respuesta y límites (qué tiene prohibido inventar y cuándo debe pedir ayuda).</p>
+        <div style="margin-top:0.8rem;font-size:0.8rem;color:var(--accent);">Ej: System Prompt + Skills de redacción</div>
+      </div>
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--secondary);">
+        <h4 style="color:var(--secondary);margin-bottom:0.8rem;"><i class="fa-solid fa-book-open"></i> 2. Documentos (RAG)</h4>
+        <p style="font-size:0.92rem;color:var(--text-main);font-weight:600;margin-bottom:0.5rem;">Qué información consulta</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.5;">Manuales, FAQs, políticas, precios o reglamentos que el asistente lee antes de contestar para responder con datos reales.</p>
+        <div style="margin-top:0.8rem;font-size:0.8rem;color:var(--secondary);">Ej: NotebookLM · Google File Search</div>
+      </div>
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--green);">
+        <h4 style="color:var(--green);margin-bottom:0.8rem;"><i class="fa-solid fa-bolt"></i> 3. Acciones</h4>
+        <p style="font-size:0.92rem;color:var(--text-main);font-weight:600;margin-bottom:0.5rem;">Qué puede hacer en otros sistemas</p>
+        <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.5;">Consultar una planilla en vivo, agendar un turno, enviar un mensaje o derivar la conversación a un humano.</p>
+        <div style="margin-top:0.8rem;font-size:0.8rem;color:var(--green);">Ej: Herramientas en n8n · MCP · Chatwoot</div>
+      </div>
+    </div>
+    <div class="highlight-box amber" style="max-width:1050px;margin:1.5rem auto 0;font-size:0.95rem;">
+      <strong>¿Cuándo debe frenar el asistente?</strong> Cuando la respuesta no está en los documentos, cuando el cliente pide hablar con una persona, o cuando hace falta aprobar una excepción (descuento, reembolso, caso sensible).
+    </div>
+  </section>
+
+  <section>
+    <h2>Cómo funciona <span class="text-gradient">RAG paso a paso</span></h2>
+    <p style="color:var(--text-muted);font-size:1rem;margin-bottom:1.5rem;">Lo que pasa por detrás entre que el usuario hace una pregunta y el asistente responde con datos verificados.</p>
+    <div class="step-flow" style="flex-wrap:wrap;gap:0.8rem;max-width:1000px;margin:0 auto;">
+      <div class="step-node" style="min-width:140px;">1. Pregunta<br><small>del usuario</small></div>
+      <div class="step-arrow">→</div>
+      <div class="step-node" style="min-width:140px;background:rgba(0,242,254,0.15);border-color:var(--secondary);">2. Búsqueda<br><small>por significado</small></div>
+      <div class="step-arrow">→</div>
+      <div class="step-node" style="min-width:140px;background:rgba(0,242,254,0.15);border-color:var(--secondary);">3. Recorte<br><small>de fragmentos</small></div>
+      <div class="step-arrow">→</div>
+      <div class="step-node" style="min-width:140px;background:rgba(34,197,94,0.2);border-color:rgba(34,197,94,0.5);">4. Redacción<br><small>con la fuente</small></div>
+      <div class="step-arrow">→</div>
+      <div class="step-node" style="min-width:140px;background:rgba(34,197,94,0.2);border-color:rgba(34,197,94,0.5);">5. Respuesta<br><small>+ cita o derivación</small></div>
+    </div>
+    <div class="highlight-box green" style="max-width:950px;margin:1.5rem auto 0;font-size:0.95rem;">
+      <strong>Dos momentos simples:</strong><br>
+      1. <em>Preparación (una sola vez):</em> subís tus documentos (PDFs, Docs) y la herramienta los organiza automáticamente por temas y significado.<br>
+      2. <em>Consulta (en cada mensaje):</em> el asistente no lee todo el manual de 200 páginas; busca solo los párrafos relevantes para esa pregunta y los usa para redactar la respuesta. Si no encuentra respaldo en los textos, avisa que no tiene esa información.
+    </div>
+  </section>
+
+  <section>
+    <h2>Las 3 Fuentes de <span class="text-gradient">Información</span></h2>
+    <p style="color:var(--text-muted);font-size:1.05rem;margin-bottom:1.5rem;">Tres tipos de información que un asistente puede necesitar combinar en un flujo de n8n.</p>
+    <div class="grid-3" style="max-width:1050px;margin:0 auto;">
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--primary);">
+        <h4 style="color:var(--primary);margin-bottom:0.8rem;"><i class="fa-solid fa-file-lines"></i> 1. Documentos fijos</h4>
+        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.5;">Manuales, reglamentos, políticas de devolución, preguntas frecuentes, guías internas.</p>
+        <div style="margin-top:0.8rem;font-size:0.82rem;color:var(--accent);">PDF · Google Docs · Notion<br>Los subís una vez y los actualizás cuando cambia una regla.</div>
+      </div>
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--secondary);">
+        <h4 style="color:var(--secondary);margin-bottom:0.8rem;"><i class="fa-solid fa-table"></i> 2. Datos en vivo</h4>
+        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.5;">Stock disponible, precios del día, calendario de turnos, estado de un pedido o puntos de un cliente.</p>
+        <div style="margin-top:0.8rem;font-size:0.82rem;color:var(--accent);">Google Sheets · CRM · Tienda online<br>Se consultan en el momento mediante una herramienta o conexión.</div>
+      </div>
+      <div class="glass-card" style="text-align:left;border-top:4px solid var(--green);">
+        <h4 style="color:var(--green);margin-bottom:0.8rem;"><i class="fa-solid fa-comments"></i> 3. Historial de charla</h4>
+        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.5;">Lo que el usuario viene hablando en esa conversación para no pedirle dos veces el mismo dato.</p>
+        <div style="margin-top:0.8rem;font-size:0.82rem;color:var(--accent);">Memoria de conversación (n8n / Chatwoot)<br>Clave para que tanto el bot como una persona entiendan el contexto completo.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
     <h2 style="font-size:3.2rem;">Orquestadores: ¿Por qué <span class="text-gradient">n8n</span>?</h2>
-    <p style="color:var(--text-muted);font-size:1.05rem;margin-bottom:1.5rem;">El criterio no es cuál tiene más features — es cuál da el control necesario para RAG, HITL y multiagente.</p>
+    <p style="color:var(--text-muted);font-size:1.05rem;margin-bottom:1.5rem;">El criterio no es cuál tiene más funciones, sino cuál te permite conectar documentos, herramientas e intervención humana en un solo lugar.</p>
     <table class="glass-card" style="font-size:0.9rem;max-width:1050px;text-align:left;">
       <tr style="color:var(--secondary);">
-        <th>Plataforma</th><th>Curva</th><th>IA / RAG nativo</th><th>Costo</th><th style="text-align:center;">Score</th>
+        <th>Plataforma</th><th>Curva</th><th>IA / RAG y Herramientas</th><th>Costo</th><th style="text-align:center;">Score</th>
       </tr>
       <tr>
         <td><strong>n8n</strong> <span style="font-size:0.8rem;color:var(--green);">⭐ Recomendado</span></td>
-        <td>Media-Alta</td>
-        <td>Excelente. Nodos nativos de AI Agent, memoria y LLMs. Self-hosted gratis.</td>
-        <td>Gratis / Cloud $24/mes</td>
+        <td>Media</td>
+        <td>Excelente. Nodos nativos de Agente IA, memoria, MCP y canales (WhatsApp/Telegram).</td>
+        <td>Gratis self-hosted / Cloud $24/mes</td>
         <td style="text-align:center;color:var(--green);font-weight:700;">10/10</td>
       </tr>
       <tr>
         <td><strong>Make.com</strong></td><td>Baja</td>
-        <td>Buena. Visual potente, HTTP calls para RAG complejo.</td>
+        <td>Buena para flujos lineales, menos flexible para agentes con herramientas y memoria.</td>
         <td>Desde $9/mes</td>
         <td style="text-align:center;color:var(--accent);font-weight:700;">7/10</td>
       </tr>
       <tr>
         <td><strong>Zapier</strong></td><td>Nula</td>
-        <td>Básica. No escala para multiagente ni RAG real.</td>
+        <td>Básica. Ideal para tareas simples de 2 pasos, costosa cuando escala el volumen.</td>
         <td>Desde $20/mes</td>
         <td style="text-align:center;color:var(--red);font-weight:700;">4/10</td>
       </tr>
@@ -462,134 +532,84 @@
 
     <div style="text-align:left; max-width:1050px; margin: 0.8rem auto 0;">
       <p style="color:var(--text-muted); font-size:0.75rem; margin-bottom:0.4rem; line-height:1.4;">
-        <strong style="color:var(--secondary);">* Nota sobre RAG:</strong> La ventana de 1M de tokens permite arquitecturas de "Long Context" que simplifican el flujo, permitiendo RAG sin bases vectoriales en casos de uso de escala media.
+        <strong style="color:var(--secondary);">* Nota sobre RAG:</strong> La ventana de 1M de tokens permite cargar documentos medianos de forma directa o combinarlos con buscadores como Google File Search sin infraestructura compleja.
       </p>
       <p style="color:var(--text-muted); font-size:0.75rem; margin-bottom:0; line-height:1.4;">
-        <strong style="color:var(--secondary);">* Nota sobre Costos:</strong> El costo de <em>output</em> suele ser 3-5x mayor. El costo final depende del <em>chunking</em>, número de llamadas y políticas de <em>caching</em>.
+        <strong style="color:var(--secondary);">* Nota sobre Costos:</strong> El costo de respuesta (<em>output</em>) suele ser de 3 a 5 veces mayor que el de lectura (<em>input</em>).
       </p>
     </div>
   </section>
 
   <section>
     <h2 style="font-size:3.5rem;">De <span class="text-gradient">Copilot</span> a <span class="text-gradient">Autopilot</span></h2>
-    <p style="font-size:1.15rem;color:var(--text-muted);margin-bottom:1.5rem;">La decisión más importante antes de escribir el primer nodo.</p>
+    <p style="font-size:1.15rem;color:var(--text-muted);margin-bottom:1.5rem;">La decisión más importante antes de encender cualquier automatización.</p>
     <div class="grid-2" style="max-width:1050px;">
       <div class="glass-card" style="text-align:left;border-top:4px solid var(--secondary);">
         <h4 style="color:var(--secondary);margin-bottom:0.8rem;">🧑‍✈️ Copilot — Empezamos acá siempre</h4>
         <ul class="premium-list" style="font-size:0.92rem;">
-          <li><i class="fa-solid fa-check"></i> El agente propone — el humano aprueba y ejecuta.</li>
-          <li><i class="fa-solid fa-check"></i> Draft listo → humano revisa → humano envía.</li>
+          <li><i class="fa-solid fa-check"></i> El asistente propone o responde lo frecuente — el humano supervisa lo sensible.</li>
+          <li><i class="fa-solid fa-check"></i> Borrador o derivación a tiempo → humano revisa → humano aprueba.</li>
           <li><i class="fa-solid fa-check"></i> Riesgo bajo. Ideal para procesos nuevos o críticos.</li>
-          <li><i class="fa-solid fa-check"></i> Genera los datos que necesitamos para confiar en el sistema.</li>
+          <li><i class="fa-solid fa-check"></i> Genera la confianza necesaria antes de soltar el control.</li>
         </ul>
       </div>
       <div class="glass-card" style="text-align:left;border-top:4px solid var(--primary);">
         <h4 style="color:var(--primary);margin-bottom:0.8rem;">🤖 Autopilot — Llegamos acá con datos</h4>
         <ul class="premium-list" style="font-size:0.92rem;">
-          <li><i class="fa-solid fa-check"></i> El agente propone Y ejecuta solo.</li>
-          <li><i class="fa-solid fa-check"></i> Nadie revisa — el sistema actúa autónomamente.</li>
-          <li><i class="fa-solid fa-check"></i> Solo para procesos ya validados con métricas reales.</li>
-          <li><i class="fa-solid fa-check"></i> Requiere >95% de precisión sostenida en ese proceso.</li>
+          <li><i class="fa-solid fa-check"></i> El asistente consulta las fuentes Y responde de punta a punta.</li>
+          <li><i class="fa-solid fa-check"></i> Resuelve de forma autónoma las consultas estándar 24/7.</li>
+          <li><i class="fa-solid fa-check"></i> Solo para preguntas ya validadas sobre documentos claros.</li>
+          <li><i class="fa-solid fa-check"></i> Mantiene siempre una salida de emergencia hacia una persona (HITL).</li>
         </ul>
       </div>
     </div>
     <div class="highlight-box amber" style="max-width:1050px;margin:1.5rem auto 0;font-size:1rem;">
-      <strong>Regla del programa:</strong> Empezamos en Copilot. Pasamos a Autopilot cuando los datos muestran <strong>>95% de decisiones correctas</strong> para ese proceso específico. No antes. — Los procesos con Agentic RAG bien implementado muestran -78% de errores operativos respecto a flujos sin RAG.
+      <strong>Regla práctica:</strong> Empezamos validando los documentos en modo Copilot (por ejemplo, probando fuentes en NotebookLM) y pasamos a Autopilot en el canal real cuando sabemos que responde con precisión y deriva cuando corresponde.
     </div>
   </section>
 </section>
 
-<!-- BLOQUE 2 -->
+<!-- BLOQUE 2: NOTEBOOKLM -->
 <section>
   <section>
-    <span class="glass-pill"><i class="fa-solid fa-network-wired"></i> BLOQUE 2 · 10 MIN</span>
-    <h2>El Ciclo de <span class="text-gradient">6 Pasos RAG</span></h2>
-    <p style="color:var(--text-muted);font-size:1rem;margin-bottom:1.5rem;">Lo que pasa entre que el usuario pregunta y el agente responde con información real.</p>
-    <div class="step-flow" style="flex-wrap:wrap;gap:0.8rem;max-width:1000px;margin:0 auto;">
-      <div class="step-node" style="min-width:130px;">1. Pregunta<br><small>del usuario</small></div>
-      <div class="step-arrow">→</div>
-      <div class="step-node" style="min-width:130px;background:rgba(245,158,11,0.2);border-color:rgba(245,158,11,0.5);">2. Embedding<br><small>(vector numérico)</small></div>
-      <div class="step-arrow">→</div>
-      <div class="step-node" style="min-width:130px;background:rgba(0,242,254,0.15);border-color:var(--secondary);">3. Búsqueda<br><small>semántica</small></div>
-      <div style="width:100%;height:0;"></div>
-      <div class="step-node" style="min-width:130px;background:rgba(0,242,254,0.15);border-color:var(--secondary);">4. Recuperación<br><small>top 3-5 chunks</small></div>
-      <div class="step-arrow">→</div>
-      <div class="step-node" style="min-width:130px;background:rgba(34,197,94,0.2);border-color:rgba(34,197,94,0.5);">5. Generación<br><small>(prompt + contexto)</small></div>
-      <div class="step-arrow">→</div>
-      <div class="step-node" style="min-width:130px;background:rgba(34,197,94,0.2);border-color:rgba(34,197,94,0.5);">6. Respuesta<br><small>fundamentada</small></div>
-    </div>
-    <div class="highlight-box green" style="max-width:900px;margin:1.5rem auto 0;font-size:0.95rem;">
-      <strong>Dos momentos clave.</strong> <em>Preparación</em> (pasa una sola vez): tus docs se dividen en fragmentos → cada fragmento se convierte en un número que representa su significado → esos números se guardan en la base vectorial. <em>Consulta</em> (pasa en cada interacción): la pregunta del usuario también se convierte en número → el sistema busca los fragmentos más "cercanos" semánticamente → los inyecta en el prompt → el LLM responde con ese contexto como base. Si en el paso 4 no encuentra nada relevante → el agente responde "no tengo esa info". Eso es RAG bien implementado.
-    </div>
-  </section>
-
-
-  <section>
-    <h2>Las 3 Fuentes de <span class="text-gradient">Conocimiento RAG</span></h2>
-    <p style="color:var(--text-muted);font-size:1.05rem;margin-bottom:1.5rem;">Tres tipos de información que un agente puede necesitar. Cada una se conecta de forma distinta al flujo de n8n.</p>
-    <div class="grid-3" style="max-width:1050px;margin:0 auto;">
-      <div class="glass-card" style="text-align:left;border-top:4px solid var(--primary);">
-        <h4 style="color:var(--primary);margin-bottom:0.8rem;"><i class="fa-solid fa-file-lines"></i> Estático</h4>
-        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.5;">Manuales, políticas, FAQs, contratos tipo, guías de onboarding, compliance.</p>
-        <div style="margin-top:0.8rem;font-size:0.82rem;color:var(--accent);">PDF · Google Docs · Notion<br>Cargás una vez, actualizás cuando cambia.</div>
-      </div>
-      <div class="glass-card" style="text-align:left;border-top:4px solid var(--secondary);">
-        <h4 style="color:var(--secondary);margin-bottom:0.8rem;"><i class="fa-solid fa-database"></i> Dinámico</h4>
-        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.5;">Stock, precios, estado de pedidos, tickets abiertos, datos de CRM.</p>
-        <div style="margin-top:0.8rem;font-size:0.82rem;color:var(--accent);">Google Sheets (catálogos simples) · API REST de tu plataforma (Shopify, Tiendanube) · DB directa (Postgres/Supabase)<br>No es RAG semántico — es consulta estructurada. Nodo separado en n8n.</div>
-      </div>
-      <div class="glass-card" style="text-align:left;border-top:4px solid var(--green);">
-        <h4 style="color:var(--green);margin-bottom:0.8rem;"><i class="fa-solid fa-comments"></i> Conversacional</h4>
-        <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.5;">Historial de chats anteriores con ese usuario, transcripciones, emails previos.</p>
-        <div style="margin-top:0.8rem;font-size:0.82rem;color:var(--accent);">Base vectorial con metadata del usuario<br>Memoria persistente entre sesiones — distinto del contexto de la conversación actual que va en el prompt.<br><span style="color:var(--text-muted);">Clave de diseño: definir cada cuánto se re-indexa el historial y cómo evitar que datos stale degraden la calidad.</span></div>
-      </div>
-    </div>
-  </section>
-</section>
-
-<!-- BLOQUE 3 -->
-<section>
-  <section>
-    <span class="glass-pill"><i class="fa-solid fa-trophy"></i> BLOQUE 3 · FAST WINS · 15 MIN</span>
-    <h2>NotebookLM: tu primer RAG <span class="text-gradient">en 15 minutos</span></h2>
-    <p style="color:var(--text-muted);font-size:1.05rem;margin-bottom:1.5rem;">Sin código. Sin infraestructura vectorial. Para validar que tu base de conocimiento funciona antes de invertir en arquitectura.</p>
+    <span class="glass-pill"><i class="fa-solid fa-trophy"></i> BLOQUE 2 · RAG + HITL · 20 MIN</span>
+    <h2>NotebookLM: validar tus fuentes <span class="text-gradient">en 15 minutos</span></h2>
+    <p style="color:var(--text-muted);font-size:1.05rem;margin-bottom:1.5rem;">Sin código ni configuraciones técnicas. El primer paso para probar si tus documentos responden bien antes de armar el bot.</p>
     <div class="glass-card" style="max-width:950px;text-align:left;padding:1.5rem 2rem;">
-      <div class="step-numbered"><div class="step-num">1</div><div class="step-content"><strong>Crear el notebook</strong> → notebooklm.google.com → New notebook → nombre de tu caso de uso.</div></div>
-      <div class="step-numbered"><div class="step-num">2</div><div class="step-content"><strong>Cargar documentos</strong> → Add source: PDFs, Google Docs, links de Drive, URLs, texto pegado directo.</div></div>
-      <div class="step-numbered"><div class="step-num">3</div><div class="step-content"><strong>Esperar el procesamiento</strong> → 2-3 min para 10 docs · 5-10 min para 50 docs. Vectorización automática.</div></div>
-      <div class="step-numbered"><div class="step-num">4</div><div class="step-content"><strong>Testear con preguntas reales</strong> → Las mismas que te hacen tus clientes o tu equipo hoy.</div></div>
-      <div class="step-numbered"><div class="step-num">5</div><div class="step-content"><strong>Revisar las citas</strong> → Cada respuesta cita el doc y sección exacta. Si cita mal → ese doc necesita mejor estructura.</div></div>
-      <div class="step-numbered"><div class="step-num">6</div><div class="step-content"><strong>Compartir con tu equipo</strong> → Share → acceso directo. Ya tienen un asistente RAG funcionando hoy.</div></div>
+      <div class="step-numbered"><div class="step-num">1</div><div class="step-content"><strong>Crear el cuaderno</strong> → notebooklm.google.com → Nuevo cuaderno con el nombre de tu proyecto.</div></div>
+      <div class="step-numbered"><div class="step-num">2</div><div class="step-content"><strong>Subir las fuentes</strong> → PDFs, Google Docs, links de sitios web, videos de YouTube o texto pegado.</div></div>
+      <div class="step-numbered"><div class="step-num">3</div><div class="step-content"><strong>Hacer preguntas reales</strong> → Probá las mismas dudas que hoy hacen tus clientes o tu equipo.</div></div>
+      <div class="step-numbered"><div class="step-num">4</div><div class="step-content"><strong>Verificar las citas</strong> → Tocá cada número de cita para comprobar qué párrafo exacto respalda la respuesta.</div></div>
+      <div class="step-numbered"><div class="step-num">5</div><div class="step-content"><strong>Detectar huecos</strong> → Hacé una pregunta que NO esté en los textos y verificá que reconozca que no figura en las fuentes.</div></div>
+      <div class="step-numbered"><div class="step-num">6</div><div class="step-content"><strong>Corregir los documentos</strong> → Si una respuesta es confusa, mejorá la redacción del documento antes de llevarlo a n8n.</div></div>
     </div>
   </section>
 
   <section>
-    <h2>NotebookLM: <span class="text-gradient">cuándo usarlo y cuándo dar el salto a n8n</span></h2>
+    <h2>NotebookLM: <span class="text-gradient">cuándo usarlo y cuándo pasar a n8n</span></h2>
     <div class="grid-2" style="max-width:1050px;text-align:left;">
       <div class="glass-card" style="border-top:4px solid var(--green);">
-        <h4 style="color:var(--green);margin-bottom:0.8rem;">✅ Lo que hace bien</h4>
+        <h4 style="color:var(--green);margin-bottom:0.8rem;">✅ Para qué sirve NotebookLM</h4>
         <ul class="premium-list" style="font-size:0.9rem;">
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Cita fuentes con precisión — doc + sección exacta.</li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Hasta 50 documentos por notebook.</li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Genera FAQs, resúmenes y guías automáticamente.</li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Audio overview: podcast generado desde tus docs.</li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Cero código, cero infra, listo en 15 minutos.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Validar rápido si tus documentos sirven para responder dudas.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Revisar citas exactas (documento y pasaje original).</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Uso interno de consulta para vos o tu equipo desde la web.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Transformar fuentes en resúmenes, guías de estudio o audio.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Cero costo y listo en minutos.</li>
         </ul>
       </div>
       <div class="glass-card" style="border-top:4px solid var(--accent);">
-        <h4 style="color:var(--accent);margin-bottom:0.8rem;">⚠️ Cuándo necesitás n8n</h4>
+        <h4 style="color:var(--accent);margin-bottom:0.8rem;">⚠️ Por qué NO reemplaza probar el bot</h4>
         <ul class="premium-list" style="font-size:0.9rem;">
-          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> La versión consumer no tiene API pública — no conecta con n8n, WhatsApp ni Telegram.</li>
-          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> Solo integra con ecosistema Google (Drive, Docs, Workspace).</li>
-          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> Necesitás lógica HITL o condiciones de escalada.</li>
-          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> Necesitás registrar métricas y conversaciones.</li>
-          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> Necesitás personalización de flujo o integraciones custom.</li>
+          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> No se conecta directo a WhatsApp ni Telegram para clientes.</li>
+          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> No puede ejecutar acciones externas (consultar stock, agendar).</li>
+          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> No tiene derivación a un humano (HITL) en Chatwoot.</li>
+          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> <strong>Probar en NotebookLM valida los documentos, pero nunca reemplaza probar el bot en el canal real donde se va a usar.</strong></li>
         </ul>
       </div>
     </div>
     <div class="highlight-box green" style="max-width:1050px;margin:1.5rem auto 0;font-size:0.92rem;">
-      <strong>Victoria rápida real:</strong> Cargá tu manual de producto o política de atención en NotebookLM y compartí el link con tu equipo hoy. En 15 min tienen un asistente que cita el documento exacto.<br><br>
-      <strong>⚠️ Regla para que funcione bien:</strong> Cada doc responde UNA pregunta concreta. Los títulos son preguntas reales del cliente, no categorías internas. Las respuestas incluyen números y condiciones específicas — no generalidades. Garbage in, garbage out.
+      <strong>Regla para tus documentos:</strong> Que cada sección responda preguntas concretas con datos claros (precios, plazos, condiciones). Si el documento es ambiguo, el asistente también lo será.
     </div>
   </section>
 
@@ -598,27 +618,27 @@
     <div class="grid-2" style="max-width:1050px; text-align:left; align-items:start;">
       <div class="glass-card" style="border-top:4px solid var(--secondary);">
         <h4 style="color:var(--secondary); margin-bottom:0.8rem;"><i class="fa-solid fa-window-maximize"></i> Caso 1: NotebookLM nativo</h4>
-        <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.5; margin-bottom:0.8rem;">Uso directo desde su plataforma web. Hoy es la herramienta gratuita más poderosa para manejar grandes contextos de múltiples fuentes simultáneamente.</p>
+        <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.5; margin-bottom:0.8rem;">Uso directo desde su plataforma web. Hoy es la herramienta gratuita más poderosa para consultar múltiples fuentes al mismo tiempo.</p>
         <ul class="premium-list" style="font-size:0.85rem;">
-          <li><i class="fa-solid fa-check" style="color:var(--secondary);"></i> <strong>Poder Multimodal:</strong> Analiza PDFs, YouTube, audios y webs juntos</li>
-          <li><i class="fa-solid fa-check" style="color:var(--secondary);"></i> <strong>Audio Overview:</strong> Genera podcasts sobre tus propios documentos</li>
-          <li><i class="fa-solid fa-check" style="color:var(--secondary);"></i> Sin código, cero infra, ideal para investigar y crear</li>
-          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> No tiene API pública para conectar con WhatsApp o Telegram</li>
+          <li><i class="fa-solid fa-check" style="color:var(--secondary);"></i> <strong>Multimodal:</strong> Analiza PDFs, YouTube, audios y webs juntos</li>
+          <li><i class="fa-solid fa-check" style="color:var(--secondary);"></i> <strong>Audio Overview:</strong> Genera conversaciones de audio sobre tus documentos</li>
+          <li><i class="fa-solid fa-check" style="color:var(--secondary);"></i> Ideal para validar el MVP de tu base de conocimiento</li>
+          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> No conecta de forma directa con WhatsApp o Telegram</li>
         </ul>
       </div>
       <div class="glass-card" style="border-top:4px solid var(--accent);">
         <h4 style="color:var(--accent); margin-bottom:0.8rem;"><i class="fa-brands fa-google"></i> Caso 2: Google Gemini + NotebookLM</h4>
-        <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.5; margin-bottom:0.8rem;">Desde la app de Gemini podés conectar con un notebook de NotebookLM como fuente de grounding (respuestas ancladas).</p>
+        <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.5; margin-bottom:0.8rem;">Desde la app de Gemini podés adjuntar un cuaderno de NotebookLM como fuente de consulta verificada.</p>
         <ul class="premium-list" style="font-size:0.85rem;">
-          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> Modo conversacional directo sobre tus documentos</li>
-          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> Incorpora visualización de citas exactas en las respuestas</li>
-          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> Ventana de 1M tokens — hasta 700 páginas de contexto</li>
-          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> No escalable mediante integraciones automatizadas o n8n</li>
+          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> Conversación directa anclada en tus propios documentos</li>
+          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> Muestra citas exactas para verificar de dónde salió cada dato</li>
+          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> Ventana de 1M tokens — cientos de páginas a la vez</li>
+          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> Pensado para uso personal/equipo, no para atención automatizada</li>
         </ul>
       </div>
     </div>
     <div class="highlight-box amber" style="max-width:1050px; margin:1.2rem auto 0; font-size:0.88rem;">
-      <strong>Regla práctica:</strong> Estas herramientas nativas son imbatibles para explorar bases documentales grandes porque absorben el costo del contexto masivo y la complejidad del chunking. El verdadero desafío surge cuando querés llevar este nivel de contexto e interacción hacia un agente automatizado en n8n orientado a cliente.
+      <strong>El paso siguiente:</strong> Una vez que comprobaste en NotebookLM que tus documentos tienen las respuestas correctas, llevamos esos mismos archivos a <strong>Google File Search + n8n</strong> para atender en Telegram o WhatsApp.
     </div>
   </section>
 </section>
@@ -626,222 +646,129 @@
 <!-- USE CASES — MISMA ARQUITECTURA -->
 <section>
   <section>
-    <span class="glass-pill"><i class="fa-solid fa-arrows-split-up-and-left"></i> BLOQUE 3 · APLICACIONES</span>
-    <h2>Misma arquitectura, <span class="text-gradient">8 casos de uso distintos</span></h2>
-    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1rem;">El flujo no cambia. Lo que cambia son los documentos del RAG y el system prompt del agente.</p>
+    <span class="glass-pill"><i class="fa-solid fa-arrows-split-up-and-left"></i> BLOQUE 2 · APLICACIONES</span>
+    <h2>Misma lógica, <span class="text-gradient">8 casos de uso distintos</span></h2>
+    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1rem;">La estructura no cambia: lo que cambia son los documentos que subís y las instrucciones del asistente.</p>
     <div class="grid-2" style="max-width:1050px; gap:1rem;">
-      <table style="font-size:0.76rem; text-align:left; border:1px solid var(--glass-border); border-radius:12px; overflow:hidden; width:100%;">
+      <table style="font-size:0.78rem; text-align:left; border:1px solid var(--glass-border); border-radius:12px; overflow:hidden; width:100%;">
         <tr style="color:var(--secondary); background:rgba(255,255,255,0.08);">
           <th style="padding:0.6rem 0.8rem; width:28%;">Caso de uso</th>
-          <th style="padding:0.6rem 0.8rem; width:37%;">Documentos del RAG</th>
-          <th style="padding:0.6rem 0.8rem;">RAG recomendado</th>
+          <th style="padding:0.6rem 0.8rem; width:38%;">Qué documentos consulta</th>
+          <th style="padding:0.6rem 0.8rem;">Cómo empezar hoy</th>
         </tr>
         <tr style="border-top:1px solid var(--glass-border);">
           <td style="padding:0.6rem 0.8rem;"><strong>Atención al cliente</strong></td>
-          <td style="padding:0.6rem 0.8rem;">FAQ + políticas + catálogo (dinámico)</td>
-          <td style="padding:0.6rem 0.8rem;">File Search. +1000 SKUs → Supabase</td>
+          <td style="padding:0.6rem 0.8rem;">FAQs + políticas + planilla de productos</td>
+          <td style="padding:0.6rem 0.8rem;">Google File Search + Sheets</td>
         </tr>
         <tr style="border-top:1px solid var(--glass-border); background:rgba(255,255,255,0.03);">
           <td style="padding:0.6rem 0.8rem;"><strong>Onboarding RRHH</strong></td>
-          <td style="padding:0.6rem 0.8rem;">Manual empleado + políticas + beneficios</td>
-          <td style="padding:0.6rem 0.8rem;">NotebookLM → File Search producción</td>
+          <td style="padding:0.6rem 0.8rem;">Manual del empleado + licencias + beneficios</td>
+          <td style="padding:0.6rem 0.8rem;">NotebookLM → File Search</td>
         </tr>
         <tr style="border-top:1px solid var(--glass-border);">
-          <td style="padding:0.6rem 0.8rem;"><strong>Asistente técnico</strong></td>
-          <td style="padding:0.6rem 0.8rem;">Manuales + guías + tickets resueltos</td>
-          <td style="padding:0.6rem 0.8rem;">File Search. Muchos tickets → Supabase</td>
+          <td style="padding:0.6rem 0.8rem;"><strong>Soporte técnico</strong></td>
+          <td style="padding:0.6rem 0.8rem;">Manuales de uso + guías paso a paso</td>
+          <td style="padding:0.6rem 0.8rem;">Google File Search + HITL</td>
         </tr>
         <tr style="border-top:1px solid var(--glass-border); background:rgba(255,255,255,0.03);">
-          <td style="padding:0.6rem 0.8rem;"><strong>Asistente comercial</strong></td>
-          <td style="padding:0.6rem 0.8rem;">Catálogo + precios + casos de éxito</td>
-          <td style="padding:0.6rem 0.8rem;">System Prompt simple. Híbrido si las queries mezclan lenguaje natural con códigos exactos (SKUs, IDs)</td>
+          <td style="padding:0.6rem 0.8rem;"><strong>Venta de infoproductos</strong></td>
+          <td style="padding:0.6rem 0.8rem;">Resumen del producto + precios + garantía</td>
+          <td style="padding:0.6rem 0.8rem;">Instrucciones directas (System Prompt)</td>
         </tr>
       </table>
-      <table style="font-size:0.76rem; text-align:left; border:1px solid var(--glass-border); border-radius:12px; overflow:hidden; width:100%;">
+      <table style="font-size:0.78rem; text-align:left; border:1px solid var(--glass-border); border-radius:12px; overflow:hidden; width:100%;">
         <tr style="color:var(--secondary); background:rgba(255,255,255,0.08);">
           <th style="padding:0.6rem 0.8rem; width:28%;">Caso de uso</th>
-          <th style="padding:0.6rem 0.8rem; width:37%;">Documentos del RAG</th>
-          <th style="padding:0.6rem 0.8rem;">RAG recomendado</th>
+          <th style="padding:0.6rem 0.8rem; width:38%;">Qué documentos consulta</th>
+          <th style="padding:0.6rem 0.8rem;">Cómo empezar hoy</th>
         </tr>
         <tr style="border-top:1px solid var(--glass-border);">
-          <td style="padding:0.6rem 0.8rem;"><strong>Legal / compliance</strong></td>
-          <td style="padding:0.6rem 0.8rem;">Contratos + regulaciones + precedentes</td>
-          <td style="padding:0.6rem 0.8rem;">Supabase / Pinecone. GraphRAG si hay relaciones</td>
+          <td style="padding:0.6rem 0.8rem;"><strong>Legal / Normativas</strong></td>
+          <td style="padding:0.6rem 0.8rem;">Contratos modelo + reglamentos vigentes</td>
+          <td style="padding:0.6rem 0.8rem;">NotebookLM / File Search</td>
         </tr>
         <tr style="border-top:1px solid var(--glass-border); background:rgba(255,255,255,0.03);">
-          <td style="padding:0.6rem 0.8rem;"><strong>Soporte IT / helpdesk</strong></td>
-          <td style="padding:0.6rem 0.8rem;">Runbooks + SOPs + historial incidentes</td>
-          <td style="padding:0.6rem 0.8rem;">File Search. Alto volumen → Pinecone</td>
+          <td style="padding:0.6rem 0.8rem;"><strong>Mesa de ayuda interna</strong></td>
+          <td style="padding:0.6rem 0.8rem;">Procedimientos internos + instructivos</td>
+          <td style="padding:0.6rem 0.8rem;">Google File Search</td>
         </tr>
         <tr style="border-top:1px solid var(--glass-border);">
-          <td style="padding:0.6rem 0.8rem;"><strong>Educación / formación</strong></td>
-          <td style="padding:0.6rem 0.8rem;">Materiales + transcripciones + evaluaciones</td>
-          <td style="padding:0.6rem 0.8rem;">NotebookLM → File Search producción</td>
+          <td style="padding:0.6rem 0.8rem;"><strong>Educación y cursos</strong></td>
+          <td style="padding:0.6rem 0.8rem;">Material de clase + cronograma + lecturas</td>
+          <td style="padding:0.6rem 0.8rem;">NotebookLM → File Search</td>
         </tr>
         <tr style="border-top:1px solid var(--glass-border); background:rgba(255,255,255,0.03);">
           <td style="padding:0.6rem 0.8rem;"><strong>Reclamos y garantías</strong></td>
-          <td style="padding:0.6rem 0.8rem;">Políticas de devolución + SLAs + manuales</td>
-          <td style="padding:0.6rem 0.8rem;">File Search. Tienda online → Supabase</td>
+          <td style="padding:0.6rem 0.8rem;">Políticas de cambio + condiciones + plazos</td>
+          <td style="padding:0.6rem 0.8rem;">File Search + derivación en Chatwoot</td>
         </tr>
       </table>
     </div>
   </section>
 
   <section>
-    <h2>El criterio de decisión RAG: <span class="text-gradient">3 preguntas</span></h2>
-    <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.5rem;">La decisión no es técnica primero — es de negocio. Respondé estas tres preguntas y la respuesta es clara.</p>
+    <h2>Cómo elegir dónde guardar <span class="text-gradient">el conocimiento</span></h2>
+    <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.5rem;">Tres preguntas simples de negocio para elegir la herramienta sin complicarse.</p>
     <div class="grid-3" style="max-width:1050px; margin: 0 auto;">
       <div class="glass-card" style="text-align:left; border-top: 4px solid var(--primary);">
-        <h4 style="color:var(--primary); margin-bottom:0.8rem; font-size:1rem;">① ¿Cuántos docs y cuánto cambian?</h4>
+        <h4 style="color:var(--primary); margin-bottom:0.8rem; font-size:1rem;">① ¿Querés validar rápido sin bot?</h4>
         <ul class="premium-list" style="font-size:0.85rem;">
-          <li><i class="fa-solid fa-circle-dot" style="color:var(--primary);"></i> <strong>Pocos, estáticos:</strong> System Prompt (hack)</li>
-          <li><i class="fa-solid fa-circle-dot" style="color:var(--primary);"></i> <strong>Muchos, estáticos:</strong> Google File Search</li>
-          <li><i class="fa-solid fa-circle-dot" style="color:var(--primary);"></i> <strong>Crecen constantemente:</strong> Supabase / Pinecone</li>
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--primary);"></i> Usá <strong>NotebookLM</strong></li>
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--primary);"></i> Subís tus PDFs o Docs en 5 minutos</li>
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--primary);"></i> Probás preguntas y verificás las citas</li>
         </ul>
       </div>
       <div class="glass-card" style="text-align:left; border-top: 4px solid var(--secondary);">
-        <h4 style="color:var(--secondary); margin-bottom:0.8rem; font-size:1rem;">② ¿Necesitás datos dinámicos?</h4>
+        <h4 style="color:var(--secondary); margin-bottom:0.8rem; font-size:1rem;">② ¿Es poca info que casi no cambia?</h4>
         <ul class="premium-list" style="font-size:0.85rem;">
-          <li><i class="fa-solid fa-circle-dot" style="color:var(--secondary);"></i> Stock, pedidos, CRM en tiempo real</li>
-          <li><i class="fa-solid fa-circle-dot" style="color:var(--secondary);"></i> Si sí → nodo adicional en n8n que consulta la API</li>
-          <li><i class="fa-solid fa-circle-dot" style="color:var(--secondary);"></i> El RAG solo maneja documentos, no datos en vivo</li>
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--secondary);"></i> Ponela directo en las <strong>Instrucciones (System Prompt)</strong></li>
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--secondary);"></i> Ideal para un producto único o preguntas frecuentes cortas</li>
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--secondary);"></i> Cero configuración externa</li>
         </ul>
       </div>
-      <div class="glass-card" style="text-align:left; border-top: 4px solid var(--accent);">
-        <h4 style="color:var(--accent); margin-bottom:0.8rem; font-size:1rem;">③ ¿Cuál es el volumen de consultas?</h4>
+      <div class="glass-card" style="text-align:left; border-top: 4px solid var(--green);">
+        <h4 style="color:var(--green); margin-bottom:0.8rem; font-size:1rem;">③ ¿Son varios manuales o PDFs para el bot?</h4>
         <ul class="premium-list" style="font-size:0.85rem;">
-          <li><i class="fa-solid fa-circle-dot" style="color:var(--accent);"></i> <strong>Bajo-medio:</strong> cualquier opción</li>
-          <li><i class="fa-solid fa-circle-dot" style="color:var(--accent);"></i> <strong>Alto (miles/día):</strong> Pinecone o Supabase con HNSW</li>
-          <li><i class="fa-solid fa-circle-dot" style="color:var(--accent);"></i> <strong>Muy alto B2C:</strong> Pinecone serverless</li>
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--green);"></i> Usá <strong>Google File Search + n8n</strong></li>
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--green);"></i> Subís los archivos y Google se encarga de buscar</li>
+          <li><i class="fa-solid fa-circle-dot" style="color:var(--green);"></i> Si además hay datos en vivo, sumás Google Sheets</li>
         </ul>
       </div>
     </div>
     <div class="highlight-box cyan" style="max-width:1050px; margin:1.5rem auto 0; font-size:0.92rem;">
-      <strong>Regla práctica:</strong> Empezá con System Prompt o Google File Search — hoy, sin infra. Cuando el sistema crezca y los límites aparezcan, migrás. La migración toma horas, no semanas.
+      <strong>Regla práctica:</strong> Empezá siempre por lo más simple que resuelva el problema hoy: validá los documentos en <strong>NotebookLM</strong> y conectalos en <strong>n8n</strong> con System Prompt o Google File Search.
     </div>
   </section>
 </section>
 
-<!-- VECTOR STORES COMPARISON -->
-<section>
-  <section>
-    <span class="glass-pill"><i class="fa-solid fa-database"></i> BLOQUE 3 · INFRAESTRUCTURA</span>
-    <h2>Tabla de decisión</h2>
-    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1.2rem;">No existe una solución única — depende de tu infra, el volumen y cuánto control necesitás. MCP (Model Context Protocol) es el estándar emergente para conectar agentes con fuentes externas — lo profundizamos en la Clase 3.</p>
-    <div class="responsive-table-wrapper" style="max-height: 480px; overflow-y: auto;">
-      <table class="premium-table" style="font-size:0.8rem; text-align:left;">
-        <tr style="color:var(--secondary);">
-          <th style="width:20%;">Opción</th><th style="width:18%;">Costo base</th><th style="width:8%;">n8n</th><th style="width:20%;">Embeddings</th><th>Cuándo usarla</th>
-        </tr>
-        <tr>
-          <td><strong>System Prompt (hack)</strong></td>
-          <td style="color:var(--green);">Gratis</td>
-          <td style="color:var(--green);">✅</td>
-          <td style="font-size:0.75rem; color:var(--text-muted);">No aplica — texto plano en el prompt</td>
-          <td>Docs pequeños (~20-50K tokens óptimos, no el máximo técnico). Sin infra. Hoy. <span style="color:var(--accent);font-size:0.78rem;">⚠ A mayor contexto, mayor costo por llamada — analizá el trade-off si el volumen es alto.</span></td>
-        </tr>
-        <tr>
-          <td><strong>NotebookLM (consumer)</strong></td>
-          <td style="color:var(--green);">Gratis</td>
-          <td style="color:var(--red);">❌ solo web</td>
-          <td style="font-size:0.75rem; color:var(--text-muted);">Gestionado por Google</td>
-          <td>Uso interno del equipo vía browser. Sin API pública: no conecta con n8n, WhatsApp ni Telegram.</td>
-        </tr>
-        <tr>
-          <td><strong>Google File Search</strong></td>
-          <td>$0.15/1M al indexar<br><span style="color:var(--green);font-size:0.75rem;">Storage gratis</span></td>
-          <td style="color:var(--green);">✅</td>
-          <td style="font-size:0.75rem; color:var(--text-muted);">Gestionado por Google (automático)</td>
-          <td>RAG gestionado sin infra. Chunking y embeddings automáticos. Lanzado nov 2025.</td>
-        </tr>
-        <tr>
-          <td><strong>Supabase + pgvector</strong></td>
-          <td>Free tier disponible<br><span style="color:var(--text-muted);font-size:0.75rem;">Pro desde $25/mes</span></td>
-          <td style="color:var(--green);">✅</td>
-          <td style="font-size:0.75rem; color:var(--text-muted);">OpenAI text-embedding-3-small · $0.02/1M tokens</td>
-          <td>SQL + vectores en un lugar. Ideal B2B con filtros complejos por metadata.</td>
-        </tr>
-        <tr>
-          <td><strong>Pinecone</strong></td>
-          <td>Free tier disponible<br><span style="color:var(--text-muted);font-size:0.75rem;">Standard desde $25/mes</span></td>
-          <td style="color:var(--green);">✅</td>
-          <td style="font-size:0.75rem; color:var(--text-muted);">Cualquier modelo — OpenAI text-embedding-3-small recomendado</td>
-          <td>RAG a escala. Latencia baja y consistente. Mejor para B2C alto tráfico.</td>
-        </tr>
-        <tr>
-          <td><strong>Qdrant (self-hosted)</strong></td>
-          <td style="color:var(--green);">Gratis</td>
-          <td style="color:var(--green);">✅</td>
-          <td style="font-size:0.75rem; color:var(--text-muted);">Cualquier modelo — open-source (nomic-embed, e5) si la privacidad es crítica</td>
-          <td>Control total sin SaaS. Privacidad crítica. Integrable vía MCP (Clase 3).</td>
-        </tr>
-      </table>
-    </div>
-    <div class="highlight-box green" style="max-width:1050px; margin:1rem auto 0; font-size:0.88rem;">
-      <strong>Camino recomendado:</strong> (1) System Prompt o Google File Search — cero infra, hoy mismo. (2) Si necesitás SQL + filtros complejos → Supabase. (3) Millones de vectores, B2C alto tráfico → Pinecone o Qdrant.
-    </div>
-  </section>
-  
-  <!-- SLIDE 3: TRADE-OFFS -->
-  <section>
-    <h2>Trade-offs</h2>
-    <div class="grid-2" style="max-width:900px; margin:2rem auto;">
-      <div class="glass-card stat-box" style="padding:1.5rem;">
-        <i class="fa-solid fa-money-bill-wave" style="font-size:2.5rem; color:var(--green); margin-bottom:1rem; display:block;"></i>
-        <h3 style="margin-bottom:0.5rem;">Costo</h3>
-      </div>
-      <div class="glass-card stat-box" style="padding:1.5rem;">
-        <i class="fa-solid fa-gauge-high" style="font-size:2.5rem; color:var(--secondary); margin-bottom:1rem; display:block;"></i>
-        <h3 style="margin-bottom:0.5rem;">Velocidad</h3>
-      </div>
-      <div class="glass-card stat-box" style="padding:1.5rem;">
-        <i class="fa-solid fa-microchip" style="font-size:2.5rem; color:var(--primary); margin-bottom:1rem; display:block;"></i>
-        <h3 style="margin-bottom:0.5rem;">Performance</h3>
-      </div>
-      <div class="glass-card stat-box" style="padding:1.5rem;">
-        <i class="fa-solid fa-shield-halved" style="font-size:2.5rem; color:var(--accent); margin-bottom:1rem; display:block;"></i>
-        <h3 style="margin-bottom:0.5rem;">Seguridad</h3>
-      </div>
-    </div>
-  </section>
-</section>
-
-<!-- BLOQUE 4 — LIVE BUILD -->
+<!-- BLOQUE 2 — DEMOS EN VIVO: RAG + HITL -->
 <section>
 
   <!-- SLIDE 1: INTRO — hoja de ruta -->
   <section>
-    <span class="glass-pill"><i class="fa-solid fa-hammer"></i> BLOQUE 4 · LIVE BUILD · 15 MIN</span>
-    <h2 style="font-size:2.8rem;">3 Demos en Vivo:<br><span class="text-gradient">RAG + HITL en n8n</span></h2>
+    <span class="glass-pill"><i class="fa-solid fa-hammer"></i> BLOQUE 2 · DEMOS EN VIVO</span>
+    <h2 style="font-size:2.8rem;">Demos en Vivo:<br><span class="text-gradient">RAG + HITL en n8n y Chatwoot</span></h2>
     <div class="glass-card" style="max-width:1000px; padding:1.5rem;">
       <table style="width:100%; font-size:0.95rem;">
         <tr>
-          <th style="width:10%; text-align:center;">Min</th>
-          <th style="width:30%;">Demo</th>
-          <th style="width:30%;">Foco</th>
-          <th style="width:30%;">Stack</th>
+          <th style="width:32%;">Demo</th>
+          <th style="width:38%;">Qué vamos a ver en vivo</th>
+          <th style="width:30%;">Herramientas</th>
         </tr>
         <tr>
-          <td style="text-align:center; color:var(--accent); font-weight:700;">0–5'</td>
-          <td><strong>⛳ Reglas del Golf</strong><br><span style="color:var(--text-muted); font-size:0.85rem;">RAG con File Search</span></td>
-          <td style="font-size:0.88rem;">Google File Search + Google Sheets (datos dinámicos). <strong>Sin HITL.</strong></td>
-          <td style="font-size:0.85rem;">n8n · File Search · Sheets · Gemini</td>
+          <td><strong>⛳ Demo 1 · Reglas del Golf</strong><br><span style="color:var(--text-muted); font-size:0.85rem;">RAG con documentos + planilla</span></td>
+          <td style="font-size:0.88rem;">Mensaje → búsqueda en PDFs oficiales con <strong>Google File Search</strong> + datos en vivo en Sheets. Lo probamos en el <strong>Chat de n8n</strong> (listo para conectar a Telegram o WhatsApp).</td>
+          <td style="font-size:0.85rem;">n8n Chat · Google File Search · Google Sheets · Gemini</td>
         </tr>
         <tr>
-          <td style="text-align:center; color:var(--primary); font-weight:700;">5–10'</td>
-          <td><strong>📚 Saga Hormozi</strong><br><span style="color:var(--text-muted); font-size:0.85rem;">RAG avanzado · Telegram</span></td>
-          <td style="font-size:0.88rem;">Pinecone + <strong>reranking explícito</strong>. Control total del retrieval.</td>
-          <td style="font-size:0.85rem;">n8n · Telegram · Pinecone · OpenAI · Re-ranker</td>
-        </tr>
-        <tr>
-          <td style="text-align:center; color:var(--secondary); font-weight:700;">10–15'</td>
-          <td><strong>🌿 HolaVeggie</strong><br><span style="color:var(--text-muted); font-size:0.85rem;">Infoproducto · WA</span></td>
-          <td style="font-size:0.88rem;">System Prompt como RAG hack + <strong>HITL con Chatwoot</strong></td>
+          <td><strong>🌿 Demo 2 · HolaVeggie</strong><br><span style="color:var(--text-muted); font-size:0.85rem;">Venta en WhatsApp + HITL</span></td>
+          <td style="font-size:0.88rem;">Conocimiento en instrucciones + <strong>intervención humana (HITL) en Chatwoot</strong>: cuándo deriva, cómo llega el contexto y quién tiene el control.</td>
           <td style="font-size:0.85rem;">n8n · WhatsApp · Chatwoot</td>
         </tr>
       </table>
       <div class="highlight-box cyan" style="margin-top:1rem; font-size:0.9rem;">
-        <strong>Tres arquitecturas, tres niveles.</strong> Golf = File Search con datos dinámicos. Hormozi = Pinecone con reranking (control total). HolaVeggie = System prompt hack + HITL (sin vectores). El 60% de cada flujo ya está pre-armado.
+        <strong>Dos escenarios complementarios:</strong> En Golf vemos cómo el asistente consulta reglamentos extensos y planillas sin inventar. En HolaVeggie vemos cómo atiende en WhatsApp y cuándo le pasa la posta a una persona en Chatwoot.
       </div>
     </div>
   </section>
@@ -851,129 +778,84 @@
   <!-- SLIDE 2: CASO REGLAS DEL GOLF -->
   <section>
     <span class="glass-pill amber">Demo 1 · Reglas del Golf</span>
-    <h2>RAG con File Search: <span class="text-gradient">Asistente de Reglas del Golf</span></h2>
+    <h2>RAG con Google File Search: <span class="text-gradient">Reglas del Golf</span></h2>
     <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.2rem;">
-      Un asistente que responde preguntas sobre reglamento, handicaps y torneos — con RAG semántico sobre documentos oficiales usando Google File Search.
+      Un asistente que responde consultas sobre el reglamento oficial, torneos y tienda — probándolo en vivo desde el <strong>Chat de n8n</strong> y listo para salir por <strong>Telegram o WhatsApp</strong>.
     </p>
     <div class="glass-card" style="max-width:950px;text-align:left;padding:1.2rem 1.5rem;">
-      <h4 style="color:var(--green);margin-bottom:0.6rem;"><i class="fa-solid fa-layer-group"></i> Stack de esta demo</h4>
+      <h4 style="color:var(--green);margin-bottom:0.6rem;"><i class="fa-solid fa-layer-group"></i> Piezas de esta demo</h4>
       <div class="step-flow" style="justify-content:flex-start;flex-wrap:wrap;margin:0.4rem 0 0.8rem;">
-        <span class="tool-badge">n8n</span> +
-        <span class="tool-badge">Google File Search (RAG docs)</span> +
-        <span class="tool-badge">Google Sheets (datos dinámicos)</span> +
-        <span class="tool-badge">Gemini 3.8 Flash (agente)</span>
+        <span class="tool-badge">Chat de n8n (o WhatsApp / Telegram)</span> +
+        <span class="tool-badge">Google File Search (Reglamento PDF)</span> +
+        <span class="tool-badge">Google Sheets (Stock / Datos en vivo)</span> +
+        <span class="tool-badge">Gemini 3.8 Flash</span>
       </div>
       <div style="font-size:0.85rem; color:var(--text-muted); padding-top:0.5rem; border-top:1px solid var(--glass-border);">
-        <strong style="color:var(--secondary);">Google File Search</strong> para reglamento y documentos oficiales (semántico, sin infra) &nbsp;+&nbsp;
-        <strong style="color:var(--accent);">Google Sheets</strong> para datos dinámicos (calendario de torneos, handicaps, scores). <strong>Sin HITL</strong> — el agente resuelve todo solo.
+        <strong style="color:var(--secondary);">Google File Search</strong> busca en el reglamento oficial sin que tengas que configurar servidores &nbsp;+&nbsp;
+        <strong style="color:var(--accent);">Google Sheets</strong> aporta los datos en tiempo real (productos, precios, calendario).
       </div>
     </div>
     <div class="highlight-box amber" style="max-width:950px;margin:0.8rem auto 0;font-size:0.92rem;">
-      <strong>¿Por qué este caso?</strong> Demuestra RAG puro: documentos densos + preguntas específicas + datos dinámicos. La misma arquitectura aplica a atención al cliente, soporte técnico, onboarding o cualquier caso con base de conocimiento real.
+      <strong>¿Por qué probamos en el Chat de n8n?</strong> Porque permite ver en pantalla, al instante, qué documento consultó el asistente y qué herramienta eligió antes de conectarlo al canal final de WhatsApp o Telegram.
     </div>
   </section>
 
   <!-- SLIDE 3: ARQUITECTURA DEL FLUJO RAG -->
   <section>
-    <h2>Arquitectura del <span class="text-gradient">Flujo RAG</span></h2>
-    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1rem;">El flujo genérico de RAG con File Search + datos dinámicos. Aplicable a cualquier caso de uso.</p>
+    <h2>El Recorrido del Mensaje: <span class="text-gradient">File Search + n8n</span></h2>
+    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1rem;">Mensaje → Búsqueda → Respuesta. El mismo flujo sirve para el Chat de n8n, Telegram o WhatsApp.</p>
     <div class="glass-card" style="max-width:1000px;text-align:left;padding:1.2rem 1.5rem;">
-      <div class="step-numbered"><div class="step-num">1</div><div class="step-content"><strong>Trigger</strong> — Webhook recibe mensaje → normaliza: message_text, sender_id, chat_id.</div></div>
-      <div class="step-numbered"><div class="step-num">2</div><div class="step-content"><strong>Búsqueda RAG (Google File Search)</strong> — n8n consulta la base de conocimiento semántica con la pregunta del usuario. Si no encuentra → el agente responde "no tengo esa info" y ofrece alternativas.</div></div>
-      <div class="step-numbered"><div class="step-num">3</div><div class="step-content"><strong>Datos dinámicos (Google Sheets)</strong> — Si el caso necesita datos en tiempo real (calendario, scores, stock), n8n consulta el Sheet con los parámetros extraídos.</div></div>
-      <div class="step-numbered"><div class="step-num">4</div><div class="step-content"><strong>Generación</strong> — Agente genera respuesta con contexto RAG + datos dinámicos + historial de conversación. Máx. 4-5 líneas.</div></div>
-      <div class="step-numbered"><div class="step-num">5</div><div class="step-content"><strong>Respuesta</strong> — n8n envía la respuesta. Sin escalada humana — el agente resuelve autónomamente.</div></div>
+      <div class="step-numbered"><div class="step-num">1</div><div class="step-content"><strong>Entrada del mensaje</strong> — El usuario escribe su consulta en el Chat de n8n, Telegram o WhatsApp.</div></div>
+      <div class="step-numbered"><div class="step-num">2</div><div class="step-content"><strong>Consulta de documentos (Google File Search)</strong> — n8n busca en los PDFs los párrafos que responden a esa duda. Si no está en el documento, el asistente reconoce que no tiene esa información.</div></div>
+      <div class="step-numbered"><div class="step-num">3</div><div class="step-content"><strong>Consulta de datos en vivo (Google Sheets)</strong> — Si la pregunta requiere stock, precios o fechas actuales, consulta la hoja de cálculo.</div></div>
+      <div class="step-numbered"><div class="step-num">4</div><div class="step-content"><strong>Redacción con contexto</strong> — El modelo arma una respuesta breve y clara usando únicamente lo que encontró en las fuentes.</div></div>
+      <div class="step-numbered"><div class="step-num">5</div><div class="step-content"><strong>Respuesta al usuario</strong> — n8n devuelve el mensaje por el mismo canal donde preguntó la persona.</div></div>
     </div>
     <div class="highlight-box green" style="max-width:1000px; margin:1rem auto 0; font-size:0.88rem;">
-      <strong>File Search = RAG sin infra:</strong> El conocimiento está en documentos indexados por Google File Search, no en el system prompt. Es plug-and-play: subís los PDFs, File Search los indexa automáticamente, y el agente recupera los chunks relevantes. Zero config.
+      <strong>Ventaja clave de Google File Search:</strong> Subís tus PDFs una sola vez, Google se ocupa de indexarlos automáticamente y el asistente encuentra la sección justa en segundos.
     </div>
   </section>
 
-  <!-- ═══ DEMO 2: SAGA HORMOZI ═══ -->
+  <!-- ═══ DEMO 2: HOLAVEGGIE + HITL EN CHATWOOT ═══ -->
 
-  <!-- SLIDE 4: CASO SAGA HORMOZI -->
+  <!-- SLIDE 4: HOLAVEGGIE — el caso real -->
   <section>
-    <span class="glass-pill" style="background: rgba(138, 43, 226, 0.2); border: 1px solid rgba(138, 43, 226, 0.4); color: #e2cbff;">Demo 2 · Saga Hormozi</span>
-    <h2>RAG Avanzado: <span class="text-gradient">Saga de libros Alex Hormozi</span></h2>
+    <span class="glass-pill green">Demo 2 · HolaVeggie + Chatwoot</span>
+    <h2>Caso Real: <span class="text-gradient-green">HolaVeggie</span> — WhatsApp + HITL</h2>
     <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.2rem;">
-      Asistente en Telegram que responde preguntas sobre los 3 libros de Hormozi ($100M Offers, $100M Leads, $100M Legacy) — con RAG usando Pinecone y reranking explícito.
-    </p>
-    <div class="glass-card" style="max-width:950px;text-align:left;padding:1.2rem 1.5rem;">
-      <h4 style="color:var(--green);margin-bottom:0.6rem;"><i class="fa-solid fa-layer-group"></i> Stack de esta demo</h4>
-      <div class="step-flow" style="justify-content:flex-start;flex-wrap:wrap;margin:0.4rem 0 0.8rem;">
-        <span class="tool-badge">n8n</span> +
-        <span class="tool-badge">Telegram</span> +
-        <span class="tool-badge">Pinecone (vector store)</span> +
-        <span class="tool-badge">OpenAI (embeddings)</span> +
-        <span class="tool-badge">Re-ranker</span>
-      </div>
-      <div style="font-size:0.85rem; color:var(--text-muted); padding-top:0.5rem; border-top:1px solid var(--glass-border);">
-        <strong style="color:var(--secondary);">Pinecone</strong> para almacenar y buscar vectores de los 3 libros &nbsp;+&nbsp;
-        <strong style="color:var(--accent);">Re-ranker</strong> para reordenar resultados por relevancia. <strong>Control total</strong> — ves cada paso del retrieval: embeddings, similarity search, reranking.
-      </div>
-    </div>
-    <div class="highlight-box" style="background: rgba(138, 43, 226, 0.1); border-left: 4px solid var(--primary); max-width:950px;margin:0.8rem auto 0;font-size:0.92rem;">
-      <strong>¿Por qué este caso?</strong> Demuestra RAG con control total. A diferencia de File Search (caja negra), acá ves el scoring, podés ajustar thresholds, filtrar por metadata, y reordenar chunks antes de generar la respuesta. Misma arquitectura para docs técnicos, bases de conocimiento enterprise, o cualquier caso donde necesitás afinar el retrieval.
-    </div>
-  </section>
-
-  <!-- SLIDE 5: ARQUITECTURA PINECONE + RERANKING -->
-  <section>
-    <h2>Arquitectura <span class="text-gradient">Pinecone + Reranking</span></h2>
-    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1rem;">El flujo RAG con control total. Cada paso es visible y ajustable.</p>
-    <div class="glass-card" style="max-width:1000px;text-align:left;padding:1.2rem 1.5rem;">
-      <div class="step-numbered"><div class="step-num">1</div><div class="step-content"><strong>Trigger</strong> — Webhook recibe mensaje de Telegram → normaliza: message_text, sender_id, chat_id.</div></div>
-      <div class="step-numbered"><div class="step-num">2</div><div class="step-content"><strong>Embed Query</strong> — OpenAI convierte la pregunta del usuario en un vector (1536 dimensiones). Este vector es la representación semántica de la pregunta.</div></div>
-      <div class="step-numbered"><div class="step-num">3</div><div class="step-content"><strong>Vector Search (Pinecone)</strong> — Busca los top 10-20 chunks más similares en el vector store usando cosine similarity. Cada chunk tiene su score de 0 a 1.</div></div>
-      <div class="step-numbered"><div class="step-num">4</div><div class="step-content"><strong>Reranking</strong> — El nodo Re-ranker reordena los chunks usando un modelo especializado. Los top 3-5 chunks con mayor score pasan al agente.</div></div>
-      <div class="step-numbered"><div class="step-num">5</div><div class="step-content"><strong>Generación</strong> — Agente genera respuesta con el contexto rerankeado + historial de conversación. Máx. 4-5 líneas.</div></div>
-      <div class="step-numbered"><div class="step-num">6</div><div class="step-content"><strong>Respuesta</strong> — n8n envía la respuesta por Telegram.</div></div>
-    </div>
-    <div class="highlight-box" style="background: rgba(138, 43, 226, 0.1); border-left: 4px solid var(--primary); max-width:1000px; margin:1rem auto 0; font-size:0.88rem;">
-      <strong>Diferencia clave con File Search:</strong> File Search es plug-and-play pero caja negra. Pinecone te da control: ves los scores, podés filtrar por metadata (ej: solo capítulo 3), ajustar cuántos chunks recuperar, y el reranker mejora la precisión un 20-30% vs. similarity pura.
-    </div>
-  </section>
-
-  <!-- ═══ DEMO 3: HOLAVEGGIE ═══ -->
-
-  <!-- SLIDE 6: HOLAVEGGIE — el caso real -->
-  <section>
-    <span class="glass-pill green">Demo 3 · HolaVeggie</span>
-    <h2>Caso Real: <span class="text-gradient-green">HolaVeggie</span> — Venta autónoma 24/7</h2>
-    <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.2rem;">
-      E-book de nutrición y recetas plant-based. Venta 100% conversacional y autónoma — arranca en Instagram (CTWA), cierra en WhatsApp, responde consultas, cobra y entrega el ebook sin intervención humana.
+      E-book de nutrición y recetas plant-based. Atiende consultas en WhatsApp 24/7 con el asistente "Indio" y utiliza <strong>Chatwoot</strong> para que una persona intervenga cuando hace falta.
     </p>
     <div class="grid-2" style="max-width:1050px; text-align:left;">
       <div class="glass-card" style="border-top: 4px solid var(--accent);">
-        <h4 style="color:var(--accent); margin-bottom:0.8rem;"><i class="fa-solid fa-layer-group"></i> El stack real</h4>
+        <h4 style="color:var(--accent); margin-bottom:0.8rem;"><i class="fa-solid fa-layer-group"></i> Las piezas del sistema</h4>
         <ul class="premium-list" style="font-size:0.88rem;">
-          <li><i class="fa-brands fa-instagram" style="color:#E1306C;"></i> <strong>Entrada:</strong> Anuncio IG → CTWA → WhatsApp Business API</li>
-          <li><i class="fa-solid fa-brain"></i> <strong>Agente:</strong> Indio — el gato de HolaVeggie (personalidad de marca)</li>
-          <li><i class="fa-solid fa-file-invoice-dollar"></i> <strong>RAG:</strong> System prompt como base de conocimiento (hack) — info del ebook, precio, garantía, muestra gratuita</li>
-          <li><i class="fa-solid fa-headset"></i> <strong>HITL:</strong> Chatwoot — labels: carrito_abandonado · compró · duda_precio</li>
-          <li><i class="fa-solid fa-diagram-project"></i> <strong>Orquestación:</strong> n8n self-hosted</li>
+          <li><i class="fa-brands fa-whatsapp" style="color:#25D366;"></i> <strong>Canal:</strong> Anuncio en Instagram → WhatsApp</li>
+          <li><i class="fa-solid fa-brain"></i> <strong>Asistente:</strong> Indio — el gato de HolaVeggie (con personalidad propia)</li>
+          <li><i class="fa-solid fa-file-lines"></i> <strong>Conocimiento:</strong> Todo el detalle del e-book, precio, garantía y muestra en sus instrucciones</li>
+          <li><i class="fa-solid fa-headset"></i> <strong>HITL (Intervención humana):</strong> Bandeja compartida en <strong>Chatwoot</strong></li>
+          <li><i class="fa-solid fa-diagram-project"></i> <strong>Conexión:</strong> Flujo en n8n</li>
         </ul>
       </div>
       <div class="glass-card" style="border-top: 4px solid var(--green);">
-        <h4 style="color:var(--green); margin-bottom:0.8rem;"><i class="fa-solid fa-bolt"></i> Qué hace el agente solo</h4>
+        <h4 style="color:var(--green); margin-bottom:0.8rem;"><i class="fa-solid fa-bolt"></i> Qué resuelve el bot solo</h4>
         <ul class="premium-list" style="font-size:0.88rem;">
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Responde consultas sobre el ebook 24/7</li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Entrega la muestra gratuita cuando el usuario la pide</li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Cierra la venta y da los datos de pago ($19 USD)</li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> <strong>Al recibir "PAGO HECHO" + email → entrega el link del ebook</strong></li>
-          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Bot se desactiva si el humano toma la conv., se reactiva al cerrarla</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Responde dudas sobre el contenido del recetario 24/7</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Envía la muestra gratuita cuando la piden</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Pasa los datos de pago ($19 USD) y explica la garantía</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> <strong>Al recibir "PAGO HECHO" + email → entrega el link del e-book</strong></li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> Se pausa automáticamente si entra una persona en Chatwoot</li>
         </ul>
       </div>
     </div>
     <div class="highlight-box cyan" style="max-width:1050px; margin:1.2rem auto 0; font-size:0.88rem;">
-      <strong>El hack RAG aquí:</strong> No hay stock ni catálogo. Toda la "base de conocimiento" está en el system prompt — precio, garantía, CTA, muestra, instrucciones de entrega. El agente nunca improvisa: cada respuesta tiene una regla explícita.
+      <strong>Por qué funciona sin buscador externo:</strong> Como es un único producto con reglas fijas (precio, garantía, link de muestra), toda la información cabe en las instrucciones del asistente sin que tenga que improvisar.
     </div>
   </section>
 
-  <!-- SLIDE 7: SYSTEM PROMPT DE INDIO -->
+  <!-- SLIDE 5: SYSTEM PROMPT DE INDIO -->
   <section>
-    <h2>Indio: el agente que <span class="text-gradient">cobra y entrega solo</span></h2>
-    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1rem;">El System Prompt real en producción. Cada decisión tiene un por qué.</p>
+    <h2>Las Instrucciones de Indio <span class="text-gradient">(System Prompt)</span></h2>
+    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1rem;">Un ejemplo real de cómo combinar rol, información del negocio y límites claros.</p>
     <div class="grid-2" style="max-width:1100px; text-align:left; align-items:start;">
       <pre class="glass-code" style="font-size:0.75rem; max-height:380px; overflow-y:auto; border-left:4px solid var(--secondary);">
 <code style="color:#f8fafc;"># ROL
@@ -1008,146 +890,75 @@ Usá siempre tuteo: "cuéntame", "quieres".
 3. Al confirmar → datos de pago
 4. Al recibir "PAGO HECHO" + email → link del ebook</code></pre>
       <div style="border-left:1px solid var(--glass-border); padding-left:1.5rem;">
-        <h4 style="color:var(--accent); margin-bottom:1rem;">🔍 Por qué cada decisión</h4>
+        <h4 style="color:var(--accent); margin-bottom:1rem;">🔍 Por qué está escrito así</h4>
         <ul class="premium-list" style="font-size:0.85rem;">
-          <li><i class="fa-solid fa-cat" style="color:var(--secondary);"></i> <strong>"Indio el gato":</strong> Identidad de marca real. No parece un bot genérico. Aumenta confianza y conversión.</li>
-          <li><i class="fa-solid fa-lock" style="color:var(--red);"></i> <strong>"PAGO HECHO" + email:</strong> Guardrail anti-fraude manual. El ebook no se entrega sin confirmación explícita.</li>
-          <li><i class="fa-solid fa-text-slash" style="color:var(--accent);"></i> <strong>Texto EXACTO de la muestra:</strong> Evita que el LLM improvise el onboarding. La muestra es siempre la misma.</li>
-          <li><i class="fa-solid fa-money-bill" style="color:var(--green);"></i> <strong>Cuotas antes de descuento:</strong> El agente nunca negocia precio sin autorización.</li>
-          <li><i class="fa-solid fa-rotate-left" style="color:var(--primary);"></i> <strong>Garantía sin preguntas:</strong> Elimina la objeción de riesgo antes de que aparezca.</li>
+          <li><i class="fa-solid fa-cat" style="color:var(--secondary);"></i> <strong>Identidad clara:</strong> Tiene un tono definido para no sonar como un robot genérico.</li>
+          <li><i class="fa-solid fa-lock" style="color:var(--red);"></i> <strong>Condición de entrega:</strong> Exige "PAGO HECHO" + email antes de liberar el enlace.</li>
+          <li><i class="fa-solid fa-text-slash" style="color:var(--accent);"></i> <strong>Muestra literal:</strong> Tiene prohibido inventar recetas fuera de la muestra oficial.</li>
+          <li><i class="fa-solid fa-money-bill" style="color:var(--green);"></i> <strong>Límite comercial:</strong> No inventa descuentos ni negocia precios por su cuenta.</li>
+          <li><i class="fa-solid fa-user-check" style="color:var(--primary);"></i> <strong>Respaldo humano:</strong> Si la conversación sale de estos carriles, interviene una persona en Chatwoot.</li>
         </ul>
-        <div class="highlight-box green" style="margin-top:1rem; font-size:0.85rem;">
-          <strong>El resultado:</strong> Este agente vende, cobra y entrega el ebook sin que nadie lo atienda. Funciona a las 3 AM en cualquier país.
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- SLIDE 8: HITL CON CHATWOOT (solo en Demo 3) -->
+  <!-- SLIDE 6: HITL CON CHATWOOT -->
   <section>
-    <h2>HITL en HolaVeggie: <span class="text-gradient">Chatwoot en acción</span></h2>
-    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1.2rem;">El agente maneja el 80-90% de interacciones. Chatwoot recibe el 10-20% de mayor valor.</p>
+    <h2>Intervención Humana (HITL): <span class="text-gradient">Chatwoot en acción</span></h2>
+    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1.2rem;">Cuándo derivar una conversación a una persona y cómo asegurarse de que el bot no pise al humano.</p>
     <div class="grid-2" style="max-width:1050px;text-align:left;">
-      <div class="glass-card" style="border-top:4px solid var(--secondary);">
-        <h4 style="color:var(--secondary);margin-bottom:0.8rem;">🤖 Indio resuelve solo</h4>
+      <div class="glass-card" style="border-top:4px solid var(--accent);">
+        <h4 style="color:var(--accent);margin-bottom:0.8rem;"><i class="fa-solid fa-triangle-exclamation"></i> 3 motivos para derivar a una persona</h4>
         <ul class="premium-list" style="font-size:0.88rem;">
-          <li><i class="fa-solid fa-check"></i> Consultas sobre el ebook y contenido</li>
-          <li><i class="fa-solid fa-check"></i> Entrega de muestra gratuita</li>
-          <li><i class="fa-solid fa-check"></i> Cierre de venta y datos de pago</li>
-          <li><i class="fa-solid fa-check"></i> Entrega del ebook post-pago</li>
+          <li><i class="fa-solid fa-circle-question" style="color:var(--red);"></i> <strong>1. Falta de información:</strong> La pregunta no está en los documentos y el bot no debe adivinar.</li>
+          <li><i class="fa-solid fa-hand" style="color:var(--accent);"></i> <strong>2. Pedido del usuario:</strong> La persona pide hablar con un humano o lleva 3 mensajes sin resolver su duda.</li>
+          <li><i class="fa-solid fa-stamp" style="color:var(--secondary);"></i> <strong>3. Necesidad de aprobación:</strong> Casos sensibles, reclamos, excepciones de pago o etiquetas como <code>duda_precio</code> y <code>carrito_abandonado</code>.</li>
         </ul>
       </div>
-      <div class="glass-card" style="border-top:4px solid var(--accent);">
-        <h4 style="color:var(--accent);margin-bottom:0.8rem;">👤 Deriva a humano</h4>
+      <div class="glass-card" style="border-top:4px solid var(--green);">
+        <h4 style="color:var(--green);margin-bottom:0.8rem;"><i class="fa-solid fa-arrows-turn-to-dots"></i> Cómo pasa el control en Chatwoot</h4>
         <ul class="premium-list" style="font-size:0.88rem;">
-          <li><i class="fa-solid fa-tag" style="color:var(--red);"></i> Label <strong>"duda_precio"</strong> → vendedor humano</li>
-          <li><i class="fa-solid fa-tag" style="color:var(--accent);"></i> Label <strong>"carrito_abandonado"</strong> → secuencia de recuperación</li>
-          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> 3+ intercambios sin cierre</li>
-          <li><i class="fa-solid fa-arrow-right" style="color:var(--accent);"></i> Usuario pide hablar con persona</li>
+          <li><i class="fa-solid fa-clock-rotate-left" style="color:var(--green);"></i> <strong>Llega todo el historial:</strong> El humano ve en pantalla lo que preguntó el cliente y lo que ya respondió el bot.</li>
+          <li><i class="fa-solid fa-pause" style="color:var(--green);"></i> <strong>El bot se frena solo:</strong> Al pasar la conversación a estado <em>Abierta</em> (humano al mando), n8n detiene al bot para que no siga contestando encima.</li>
+          <li><i class="fa-solid fa-play" style="color:var(--green);"></i> <strong>Devolver el control:</strong> Cuando la persona termina y cierra/devuelve la charla, el bot vuelve a quedar activo para futuras consultas.</li>
         </ul>
       </div>
     </div>
     <div class="highlight-box cyan" style="max-width:1050px; margin:1.2rem auto 0; font-size:0.9rem;">
-      <strong>Reglas del bot en Chatwoot:</strong> Si el agente humano responde → bot se desactiva automáticamente. Si el humano cierra la conv. → bot se reactiva. Timeout: si el humano no responde en 10 min → bot retoma.
+      <strong>Recorrido en la demo:</strong> Respuesta inicial del bot → aparece un motivo de intervención humana → derivación en Chatwoot con etiqueta → la persona revisa el contexto, toma el control y continúa la charla sin que el bot interfiera.
     </div>
   </section>
 
-  <!-- ═══ CONTENIDO COMPARTIDO: GUARDRAILS + PROMPTS + COSTOS ═══ -->
-
-  <!-- SLIDE 9: GUARDRAILS -->
+  <!-- SLIDE 7: GUARDRAILS -->
   <section>
-    <h2><span class="text-gradient">Guardrails</span> — Los límites del agente</h2>
-    <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.2rem;">Aplican a las tres demos. Podemos implementarlas como reglas explícitas en el system prompt, o utilizar el <strong style="color:var(--secondary);">nuevo nodo de Guardrails nativo de n8n</strong> para validar la respuesta antes de que salga al usuario.</p>
+    <h2><span class="text-gradient">Guardrails</span> — Los límites del asistente</h2>
+    <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.2rem;">Reglas claras para proteger la confianza del cliente: qué puede responder solo y dónde debe frenar.</p>
     <div class="grid-2" style="max-width:1050px; text-align:left;">
       <div class="glass-card" style="border-top:4px solid var(--red);">
-        <h4 style="color:var(--red); margin-bottom:0.8rem;"><i class="fa-solid fa-ban"></i> Guardrails de datos</h4>
+        <h4 style="color:var(--red); margin-bottom:0.8rem;"><i class="fa-solid fa-ban"></i> Límites sobre los datos</h4>
         <ul class="premium-list" style="font-size:0.88rem;">
-          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> <strong>Stock/info:</strong> No confirmar sin consultar la fuente real</li>
-          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> <strong>Precios:</strong> No inventar descuentos ni condiciones fuera del prompt</li>
-          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> <strong>Links/alias:</strong> No generar URLs ni datos de contacto inventados</li>
-          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> <strong>Loop:</strong> Máx. 3 turnos sin resolución → escalar o redirigir</li>
+          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> <strong>Información:</strong> Prohibido confirmar un dato sin respaldo en las fuentes.</li>
+          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> <strong>Precios y promos:</strong> No inventar descuentos ni condiciones fuera de lo escrito.</li>
+          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> <strong>Links y contactos:</strong> Nunca inventar enlaces o correos que no figuren en sus reglas.</li>
+          <li><i class="fa-solid fa-xmark" style="color:var(--red);"></i> <strong>Sin bucle infinito:</strong> Si en 3 intercambios no se resolvió → derivar a una persona.</li>
         </ul>
       </div>
       <div class="glass-card" style="border-top:4px solid var(--accent);">
-        <h4 style="color:var(--accent); margin-bottom:0.8rem;"><i class="fa-solid fa-sliders"></i> Guardrails de marca</h4>
+        <h4 style="color:var(--accent); margin-bottom:0.8rem;"><i class="fa-solid fa-sliders"></i> Límites de comunicación</h4>
         <ul class="premium-list" style="font-size:0.88rem;">
-          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> <strong>Tono:</strong> El agente habla como la marca — definido en el prompt</li>
-          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> <strong>Longitud:</strong> Máx. 3-4 líneas — chats no son emails</li>
-          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> <strong>Temas off-limit:</strong> Competidores, política → redirigir siempre</li>
-          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> <strong>Fuera de scope:</strong> "No tengo esa info" → ofrecer alternativa</li>
+          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> <strong>Tono de marca:</strong> Mantener siempre el estilo definido en las instrucciones.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> <strong>Respuestas breves:</strong> 3 a 4 líneas claras pensadas para leer en el celular.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> <strong>Temas ajenos:</strong> No opinar sobre competidores ni temas fuera del negocio.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--accent);"></i> <strong>Honestidad:</strong> Decir "No tengo esa información" y ofrecer ayuda humana.</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- SLIDE 10: PROMPT AGENTE PRINCIPAL -->
-  <section>
-    <h2>Prompt: <span class="text-gradient">Agente Principal</span></h2>
-    <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1rem;">Estructura parametrizable — funciona para Golf, Hormozi, atención al cliente, soporte o cualquier agente con RAG.</p>
-    <pre class="glass-code" style="max-width:1000px; max-height:520px; overflow-y:auto;">
-<code style="color:#f8fafc;">SYSTEM:
-# ROL Y MISIÓN
-Sos [NOMBRE_AGENTE], [ROL] de [EMPRESA/TEMA].
-Tu misión: [OBJETIVO_CLARO] — [ejemplo: "responder consultas sobre 
-el reglamento", "ayudar a elegir el producto correcto", "resolver 
-dudas técnicas"].
-
-Tono: [profesional y preciso / cercano y conversacional / técnico y conciso]
-Idioma: español [o el que corresponda]
-
-# BASE DE CONOCIMIENTO
-Contexto recuperado de la base de datos (RAG):
-{{ $json.rag_context }}
-
-Datos dinámicos en tiempo real (stock, precios, calendario):
-{{ $json.dynamic_data }}
-
-# HISTORIAL DE LA CONVERSACIÓN
-{{ $json.conversation_history }}
-
-# MENSAJE ACTUAL DEL USUARIO
-{{ $json.message_text }}
-
-# REGLAS INVIOLABLES
-1. **Solo usás info de la base de conocimiento o datos dinámicos.**
-   - Si no está → "No tengo esa información disponible" + sugerí alternativa.
-   - Si el contexto RAG está vacío o irrelevante → admitilo.
-
-2. **NUNCA inventés:**
-   - Stock, precios, plazos, políticas, datos técnicos.
-   - Si el usuario pregunta algo fuera de scope → "Eso no lo manejo, 
-     pero puedo ayudarte con [X, Y, Z]."
-
-3. **Estructura de respuesta:**
-   - Máximo 3-4 líneas (excepto si listás productos/opciones).
-   - Si diste info → cerrá con próximo paso o pregunta concreta.
-   - Si derivaste → explicá por qué.
-
-4. **Guardrails de marca:**
-   - No hables de competidores.
-   - No des opiniones políticas ni temas sensibles.
-   - [AGREGAR REGLAS ESPECÍFICAS DEL NEGOCIO]
-
-5. **Manejo de casos edge:**
-   - Info contradictoria entre RAG y datos dinámicos → priorizá datos dinámicos.
-   - Usuario frustrado después de 3 intercambios sin resolver → 
-     [DERIVAR A HUMANO / ESCALAR].
-
-# EJEMPLO DE RESPUESTA CORRECTA
-Usuario: "¿Tenés las Nike Air Force en talle 42?"
-RAG context: "Nike Air Force 1 - zapatilla clásica de cuero, 
-disponible en 6 colores..."
-Dynamic data: "talle 42: sin stock | talle 41: 2 unidades | talle 43: 5 unidades"
-
-Respuesta:
-"Las Nike Air Force 1 son de cuero clásico. El talle 42 está agotado, 
-pero tengo el 41 (2 unidades) y el 43 (5 unidades). ¿Alguno de esos te sirve?"</code></pre>
-  </section>
-
-  <!-- SLIDE 11: COSTOS -->
+  <!-- SLIDE 8: COSTOS -->
   <section>
     <h2>Costos del <span class="text-gradient">Stack Completo</span></h2>
-    <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:0.6rem;">Estimación para ~2.000 consultas/mes. Punto de partida real.</p>
+    <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:0.6rem;">Estimación orientativa para ~2.000 consultas al mes en producción.</p>
     <table class="glass-card" style="font-size:0.78rem; max-width:1050px; text-align:left; margin-bottom:0.5rem;">
       <tr style="color:var(--secondary);">
         <th style="width:22%;">Herramienta</th>
@@ -1157,82 +968,271 @@ pero tengo el 41 (2 unidades) y el 43 (5 unidades). ¿Alguno de esos te sirve?"<
         <th style="width:30%;">Nota clave</th>
       </tr>
       <tr>
-        <td><strong>Meta (WhatsApp API)</strong></td><td>Canal de mensajería</td><td>Por conversación</td>
-        <td style="text-align:center; color:var(--accent);">~$0.01–0.06/conv.</td>
-        <td>Las primeras 1.000 conv. de servicio son gratis/mes</td>
+        <td><strong>WhatsApp / Telegram</strong></td><td>Canal de mensajería</td><td>Según canal</td>
+        <td style="text-align:center; color:var(--accent);">$0 / por conv.</td>
+        <td>Telegram es 100% gratis; WhatsApp cobra según tipo de conversación</td>
       </tr>
       <tr>
-        <td><strong>n8n</strong></td><td>Orquestador central</td><td>Cloud Starter</td>
-        <td style="text-align:center; color:var(--accent);">~$20/mes</td>
-        <td>Self-hosted en VPS ~$5–10/mes (más técnico)</td>
+        <td><strong>n8n</strong></td><td>Orquestador central</td><td>Cloud / Propio</td>
+        <td style="text-align:center; color:var(--accent);">~$5–20/mes</td>
+        <td>Cloud desde ~$20/mes o en servidor propio desde ~$5–10/mes</td>
       </tr>
       <tr>
-        <td><strong>Google File Search</strong></td><td>RAG de documentos</td><td>Pay per index</td>
+        <td><strong>Google File Search</strong></td><td>RAG de documentos</td><td>Pago por uso</td>
         <td style="text-align:center; color:var(--green);">~$0–2/mes</td>
-        <td>Storage gratis · $0.15/1M tokens al indexar. 100 páginas &lt;$0.02</td>
+        <td>Almacenamiento gratis · indexar 100 páginas cuesta centavos</td>
       </tr>
       <tr>
-        <td><strong>Google Sheets</strong></td><td>Datos dinámicos</td><td>Gratis</td>
+        <td><strong>Google Sheets</strong></td><td>Datos en vivo</td><td>Gratis</td>
         <td style="text-align:center; color:var(--green);">$0</td>
-        <td>Catálogo, stock, precios en tiempo real vía nodo n8n</td>
+        <td>Catálogo, stock o precios conectados directo a n8n</td>
       </tr>
       <tr>
-        <td><strong>LLM (GPT-5.6 / Gemini)</strong></td><td>Cerebro del agente</td><td>Pay per token</td>
+        <td><strong>Modelo IA (Gemini / GPT)</strong></td><td>Cerebro del asistente</td><td>Pago por uso</td>
         <td style="text-align:center; color:var(--accent);">~$5–25/mes</td>
-        <td>Gemini 3.5 Flash-Lite es ~7× más barato que GPT-5.6 Terra para el mismo resultado</td>
+        <td>Gemini 3.5 Flash-Lite o 3.8 Flash ofrecen excelente relación costo/calidad</td>
       </tr>
       <tr>
-        <td><strong>Chatwoot</strong></td><td>HITL + bandeja humana</td><td>Self-hosted</td>
+        <td><strong>Chatwoot</strong></td><td>Bandeja humana (HITL)</td><td>Self-hosted / Cloud</td>
         <td style="text-align:center; color:var(--green);">Gratis</td>
-        <td>Self-hosted gratis (recomendado). Cloud desde $19/mes con soporte.</td>
+        <td>Gratis en servidor propio o versión Cloud con soporte</td>
       </tr>
     </table>
     <div class="grid-2" style="max-width:1050px; margin-top:0.5rem; gap:0.6rem;">
       <div class="highlight-box green" style="margin:0; font-size:0.82rem; padding:0.6rem 1rem 0.6rem 1.2rem;">
-        <strong>Stack mínimo:</strong> n8n + File Search + Gemini 3.5 Flash-Lite + Chatwoot self-hosted → <strong>≈ $25–35 USD/mes</strong>
+        <strong>Punto de partida accesible:</strong> n8n + File Search + Gemini + Chatwoot permite operar un asistente real por <strong>≈ $25–35 USD/mes</strong>.
       </div>
       <div class="highlight-box amber" style="margin:0; font-size:0.82rem; padding:0.6rem 1rem 0.6rem 1.2rem;">
-        <strong>Variable clave:</strong> El LLM. Gemini 3.5 Flash-Lite vs GPT-5.6 Terra puede ser una gran diferencia de costo con resultados similares.
+        <strong>Validación inicial gratis:</strong> Antes de gastar un dólar, validás todas tus fuentes en <strong>NotebookLM</strong> a costo $0.
       </div>
     </div>
   </section>
 
 </section>
 
-<!-- BLOQUE 5 — CIERRE -->
+<!-- BLOQUE 3 — CÓMO ENSEÑARLE Y CONECTARLO: SKILLS, HERRAMIENTAS Y MCP -->
 <section>
-  <!-- SLIDE ENTREGABLES -->
+  <!-- SLIDE 1: SKILL VS HERRAMIENTA VS MCP -->
   <section>
-    <span class="glass-pill"><i class="fa-solid fa-flag-checkered"></i> BLOQUE 5 · 5 MIN</span>
-    <h2>Lo que <span class="text-gradient">construiste hoy</span></h2>
-    <div style="max-width:1100px;margin:0 auto;">
+    <span class="glass-pill amber"><i class="fa-solid fa-plug"></i> BLOQUE 3 · SKILLS, HERRAMIENTAS Y MCP · 15 MIN</span>
+    <h2>Cómo <span class="text-gradient">enseñarle y conectarlo</span></h2>
+    <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.5rem;">Tres conceptos distintos que suelen confundirse. Una <strong>Skill</strong> y una conexión <strong>MCP</strong> no cumplen la misma función.</p>
+    <div class="grid-3" style="max-width:1050px; margin:0 auto;">
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--primary);">
+        <h4 style="color:var(--primary); margin-bottom:0.6rem;"><i class="fa-solid fa-book-bookmark"></i> 1. Skill (Habilidad)</h4>
+        <p style="font-size:0.9rem; color:var(--text-main); font-weight:600; margin-bottom:0.5rem;">Guía reutilizable para una tarea</p>
+        <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.5;">Reúne instrucciones, criterios y pasos probados para que el asistente sepa <em>cómo</em> hacer bien un trabajo específico.</p>
+        <div class="highlight-box" style="margin-top:0.8rem; padding:0.6rem 0.8rem; font-size:0.8rem; border-left:3px solid var(--primary); background:rgba(138,43,226,0.1);">
+          <strong>Ejemplo:</strong> Una guía reutilizable para redactar respuestas claras, empáticas y de máximo 4 líneas ante un reclamo.
+        </div>
+      </div>
+
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--secondary);">
+        <h4 style="color:var(--secondary); margin-bottom:0.6rem;"><i class="fa-solid fa-screwdriver-wrench"></i> 2. Herramienta (Tool)</h4>
+        <p style="font-size:0.9rem; color:var(--text-main); font-weight:600; margin-bottom:0.5rem;">Acción que el asistente ejecuta</p>
+        <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.5;">Una función puntual que el asistente puede activar cuando necesita consultar un dato o realizar un cambio en otro sistema.</p>
+        <div class="highlight-box cyan" style="margin-top:0.8rem; padding:0.6rem 0.8rem; font-size:0.8rem;">
+          <strong>Ejemplo:</strong> Buscar una fila en una hoja de cálculo, crear un evento en Calendar o etiquetar un chat en Chatwoot.
+        </div>
+      </div>
+
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--green);">
+        <h4 style="color:var(--green); margin-bottom:0.6rem;"><i class="fa-solid fa-network-wired"></i> 3. Conexión MCP</h4>
+        <p style="font-size:0.9rem; color:var(--text-main); font-weight:600; margin-bottom:0.5rem;">Estándar de conexión universal</p>
+        <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.5;"><em>Model Context Protocol:</em> el "enchufe universal" que permite conectar al asistente con múltiples herramientas y datos sin armar integraciones a medida.</p>
+        <div class="highlight-box green" style="margin-top:0.8rem; padding:0.6rem 0.8rem; font-size:0.8rem;">
+          <strong>Ejemplo:</strong> Conectar tu asistente en n8n con hojas de cálculo, Notion o CRM a través de un servidor MCP listo para usar.
+        </div>
+      </div>
+    </div>
+    <div class="highlight-box amber" style="max-width:1050px; margin:1.2rem auto 0; font-size:0.92rem;">
+      <strong>En una frase:</strong> La <strong>Skill</strong> le enseña <em>cómo trabajar</em> (instrucciones), la <strong>Herramienta</strong> es la <em>acción que ejecuta</em>, y <strong>MCP</strong> es el <em>puente estándar</em> para conectarlo con esas herramientas y datos.
+    </div>
+  </section>
+
+  <!-- SLIDE 2: DEMO EN VIVO MCP EN N8N -->
+  <section>
+    <span class="glass-pill amber">Demo en vivo · MCP en n8n</span>
+    <h2>En vivo: <span class="text-gradient">Instrucciones y conexión MCP en n8n</span></h2>
+    <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.2rem;">Cómo pasamos de un asistente que solo conversa a uno conectado con herramientas y datos externos en n8n.</p>
+    <div class="grid-2" style="max-width:1050px; text-align:left;">
+      <div class="glass-card" style="border-top:4px solid var(--secondary);">
+        <h4 style="color:var(--secondary); margin-bottom:0.8rem;"><i class="fa-solid fa-diagram-project"></i> Qué vemos en el lienzo de n8n</h4>
+        <div class="step-numbered"><div class="step-num">1</div><div class="step-content"><strong>Las instrucciones del agente:</strong> Definimos qué tarea debe cumplir y cuándo tiene permitido usar una herramienta.</div></div>
+        <div class="step-numbered"><div class="step-num">2</div><div class="step-content"><strong>El nodo MCP en n8n:</strong> Conectamos el agente a herramientas externas usando el estándar MCP (<em>MCP Client / Server Trigger</em>).</div></div>
+        <div class="step-numbered"><div class="step-num">3</div><div class="step-content"><strong>La decisión en vivo:</strong> Hacemos una consulta y vemos cómo el agente elige la herramienta, lee el dato real y redacta la respuesta.</div></div>
+      </div>
+      <div class="glass-card" style="border-top:4px solid var(--green);">
+        <h4 style="color:var(--green); margin-bottom:0.8rem;"><i class="fa-solid fa-lightbulb"></i> ¿Por qué MCP cambia el juego en n8n?</h4>
+        <ul class="premium-list" style="font-size:0.88rem;">
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> <strong>Un solo enchufe:</strong> En lugar de configurar 10 nodos sueltos, conectás un catálogo de herramientas de una sola vez.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> <strong>Reutilizable:</strong> Los mismos flujos de n8n pueden exponerse como herramientas MCP para otros asistentes.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--green);"></i> <strong>Control claro:</strong> Vos decidís a qué datos puede acceder (por ejemplo, solo leer una planilla sin borrar nada).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: CATÁLOGOS PARA EXPLORAR EJEMPLOS -->
+  <section>
+    <h2>Catálogos para <span class="text-gradient">explorar Skills y MCP</span></h2>
+    <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.2rem;">No hace falta empezar desde cero: existen directorios públicos para descubrir habilidades e integraciones listas.</p>
+    <div class="grid-2" style="max-width:1050px; text-align:left;">
+      <div class="glass-card" style="border-top:4px solid var(--primary);">
+        <h4 style="color:var(--primary); margin-bottom:0.6rem;"><i class="fa-solid fa-wand-magic-sparkles"></i> Catálogo de Skills</h4>
+        <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:0.8rem;">Guías e instrucciones reutilizables para sumarle habilidades específicas a tu asistente.</p>
+        <ul class="premium-list" style="font-size:0.85rem;">
+          <li>
+            <i class="fa-solid fa-arrow-up-right-from-square" style="color:var(--primary);"></i>
+            <div><strong><a href="https://skills.sh/" target="_blank" style="color:var(--text-main); text-decoration:underline;">skills.sh</a></strong> — Buscador de skills listas para sumar a un agente (redacción, análisis, revisión, soporte).</div>
+          </li>
+          <li>
+            <i class="fa-solid fa-book" style="color:var(--primary);"></i>
+            <div><strong><a href="https://agentskills.io/home" target="_blank" style="color:var(--text-main); text-decoration:underline;">agentskills.io</a></strong> — Guía oficial que explica cómo una skill reúne instrucciones reutilizables para una tarea.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="glass-card" style="border-top:4px solid var(--green);">
+        <h4 style="color:var(--green); margin-bottom:0.6rem;"><i class="fa-solid fa-plug-circle-bolt"></i> Catálogo de Conexiones MCP</h4>
+        <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:0.8rem;">Conexiones estándar para vincular asistentes con hojas de cálculo, CRMs, agendas y bases de datos.</p>
+        <ul class="premium-list" style="font-size:0.85rem;">
+          <li>
+            <i class="fa-solid fa-arrow-up-right-from-square" style="color:var(--green);"></i>
+            <div><strong><a href="https://smithery.ai/" target="_blank" style="color:var(--text-main); text-decoration:underline;">smithery.ai</a></strong> — Catálogo de conexiones MCP con cientos de herramientas y servicios listos para explorar.</div>
+          </li>
+          <li>
+            <i class="fa-solid fa-book" style="color:var(--green);"></i>
+            <div><strong><a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" style="color:var(--text-main); text-decoration:underline;">modelcontextprotocol.io</a></strong> — Introducción oficial al estándar MCP para conectar asistentes con datos.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-box cyan" style="max-width:1050px; margin:1.2rem auto 0; font-size:0.9rem;">
+      <strong>Para explorar después de clase:</strong> Elegí <strong>una Skill</strong> en <code>skills.sh</code> y <strong>una conexión MCP</strong> en <code>Smithery</code> y pensá para qué tarea concreta de tu trabajo o negocio te servirían.
+    </div>
+  </section>
+</section>
+
+<!-- BLOQUE 4 — ELEGIR EL FLUJO Y COMPROBARLO -->
+<section>
+  <!-- SLIDE 1: PASOS FIJOS VS DECISIONES DEL AGENTE -->
+  <section>
+    <span class="glass-pill green"><i class="fa-solid fa-code-branch"></i> BLOQUE 4 · ELEGIR Y COMPROBAR · 10 MIN</span>
+    <h2>¿Pasos fijos o <span class="text-gradient">decisiones del agente</span>?</h2>
+    <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.2rem;">Usar IA para redactar un mensaje no significa que el flujo sea un agente autónomo. Elegí según la necesidad del negocio.</p>
+    <div class="grid-2" style="max-width:1050px; text-align:left;">
+      <div class="glass-card" style="border-top:4px solid var(--secondary);">
+        <h4 style="color:var(--secondary); margin-bottom:0.8rem;"><i class="fa-solid fa-route"></i> Flujo con pasos fijos (Reglas + IA)</h4>
+        <ul class="premium-list" style="font-size:0.88rem;">
+          <li><i class="fa-solid fa-check" style="color:var(--secondary);"></i> <strong>El camino está predefinido:</strong> Paso 1 → Paso 2 → Paso 3 siempre en el mismo orden.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--secondary);"></i> <strong>La IA redacta o clasifica:</strong> Usa un modelo para resumir o escribir la respuesta, pero no elige qué hacer después.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--secondary);"></i> <strong>Cuándo elegirlo:</strong> Procesos repetitivos, predecibles y donde querés control estricto de cada paso.</li>
+        </ul>
+      </div>
+      <div class="glass-card" style="border-top:4px solid var(--primary);">
+        <h4 style="color:var(--primary); margin-bottom:0.8rem;"><i class="fa-solid fa-brain"></i> Flujo agéntico (El agente decide)</h4>
+        <ul class="premium-list" style="font-size:0.88rem;">
+          <li><i class="fa-solid fa-check" style="color:var(--primary);"></i> <strong>El agente elige las herramientas:</strong> Según lo que pregunta el usuario, decide si busca en el PDF, mira el Sheet o deriva.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--primary);"></i> <strong>Se adapta a la conversación:</strong> Puede resolver preguntas abiertas que combinan varias fuentes.</li>
+          <li><i class="fa-solid fa-check" style="color:var(--primary);"></i> <strong>Cuándo elegirlo:</strong> Atención al cliente, asistentes de consulta o soporte donde cada usuario pregunta distinto.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-box green" style="max-width:1050px; margin:1.2rem auto 0; font-size:0.92rem;">
+      <strong>Punto clave:</strong> La intervención humana (<strong>HITL</strong>) puede incorporarse <strong>tanto en flujos de pasos fijos como en flujos agénticos</strong>. En ambos casos podés frenar y pasar el control a una persona en Chatwoot.
+    </div>
+  </section>
+
+  <!-- SLIDE 2: LAS 3 PRUEBAS PARA COMPROBAR EL ASISTENTE -->
+  <section>
+    <h2>Cómo comprobar tu asistente: <span class="text-gradient">Las 3 pruebas</span></h2>
+    <p style="color:var(--text-muted); font-size:1rem; margin-bottom:1.2rem;">Antes de dar por listo cualquier asistente con RAG, probalo siempre con este checklist de 3 preguntas.</p>
+    <div class="grid-3" style="max-width:1050px; margin:0 auto;">
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--green);">
+        <span class="glass-pill green" style="margin-bottom:0.6rem;">Prueba 1</span>
+        <h4 style="color:var(--green); margin-bottom:0.5rem;">Pregunta que SÍ está en los documentos</h4>
+        <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.5;">Hacé una consulta directa sobre un dato específico (precio, plazo, regla) y <strong>verificá que cite la fuente correcta</strong>.</p>
+      </div>
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--secondary);">
+        <span class="glass-pill cyan" style="margin-bottom:0.6rem;">Prueba 2</span>
+        <h4 style="color:var(--secondary); margin-bottom:0.5rem;">Segunda pregunta con respuesta en fuentes</h4>
+        <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.5;">Probá otra consulta de una sección o documento distinto para confirmar que recupera el pasaje exacto sin mezclar temas.</p>
+      </div>
+      <div class="glass-card" style="text-align:left; border-top:4px solid var(--red);">
+        <span class="glass-pill amber" style="margin-bottom:0.6rem;">Prueba 3 · Clave</span>
+        <h4 style="color:var(--accent); margin-bottom:0.5rem;">Pregunta que NO está en los documentos</h4>
+        <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.5;">Comprobá que <strong>no invente la respuesta</strong>, que reconozca que no tiene ese dato y que <strong>derive a una persona (HITL)</strong>.</p>
+      </div>
+    </div>
+    <div class="highlight-box amber" style="max-width:1050px; margin:1.2rem auto 0; font-size:0.9rem;">
+      <strong>Recordatorio:</strong> Validar las 3 preguntas en <strong>NotebookLM</strong> confirma que tus documentos sirven, pero después hay que repetir la prueba en el <strong>bot conectado al canal real</strong> (Chat de n8n, WhatsApp o Telegram) y revisar el traspaso en <strong>Chatwoot</strong>.
+    </div>
+  </section>
+
+  <!-- SLIDE 3: EVALUACIÓN VERDADERO O FALSO -->
+  <section>
+    <h2>Repaso rápido: <span class="text-gradient">¿Verdadero o Falso?</span></h2>
+    <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:1rem;">Cinco ideas clave para fijar los criterios de la clase de hoy.</p>
+    <div class="glass-card" style="max-width:1080px; padding:1rem 1.4rem; text-align:left;">
+      <table style="width:100%; font-size:0.78rem; border-collapse:collapse;">
+        <tr style="color:var(--secondary); border-bottom:1px solid var(--glass-border);">
+          <th style="width:42%; padding:0.45rem 0.6rem;">Afirmación</th>
+          <th style="width:12%; text-align:center; padding:0.45rem 0.6rem;">Respuesta</th>
+          <th style="width:46%; padding:0.45rem 0.6rem;">Por qué</th>
+        </tr>
+        <tr style="border-bottom:1px solid var(--glass-border);">
+          <td style="padding:0.55rem 0.6rem;"><strong>1.</strong> Un RAG ayuda a reducir las alucinaciones al consultar documentos antes de responder.</td>
+          <td style="text-align:center; padding:0.55rem 0.6rem;"><span style="background:rgba(34,197,94,0.2); color:var(--green); padding:0.2rem 0.6rem; border-radius:99px; font-weight:700;">Verdadero</span></td>
+          <td style="padding:0.55rem 0.6rem; color:var(--text-muted);">Reduce el riesgo al basarse en fuentes, pero no lo elimina. Si el dato no está en los documentos, debe reconocerlo y pedir aclaración o derivar a una persona.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--glass-border); background:rgba(255,255,255,0.02);">
+          <td style="padding:0.55rem 0.6rem;"><strong>2.</strong> Probar un asistente en NotebookLM reemplaza las pruebas del bot en WhatsApp o Telegram.</td>
+          <td style="text-align:center; padding:0.55rem 0.6rem;"><span style="background:rgba(239,68,68,0.2); color:var(--red); padding:0.2rem 0.6rem; border-radius:99px; font-weight:700;">Falso</span></td>
+          <td style="padding:0.55rem 0.6rem; color:var(--text-muted);">NotebookLM sirve para validar consultas y citas sobre los documentos. También hay que probar el bot y sus conexiones en el canal real donde se va a usar.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--glass-border);">
+          <td style="padding:0.55rem 0.6rem;"><strong>3.</strong> Un flujo puede tener pasos fijos y usar IA para redactar una respuesta.</td>
+          <td style="text-align:center; padding:0.55rem 0.6rem;"><span style="background:rgba(34,197,94,0.2); color:var(--green); padding:0.2rem 0.6rem; border-radius:99px; font-weight:700;">Verdadero</span></td>
+          <td style="padding:0.55rem 0.6rem; color:var(--text-muted);">Usar IA no significa que el agente elija los pasos. En un flujo agéntico, en cambio, el agente decide qué acciones o herramientas usar.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--glass-border); background:rgba(255,255,255,0.02);">
+          <td style="padding:0.55rem 0.6rem;"><strong>4.</strong> Una Skill y una conexión MCP cumplen la misma función.</td>
+          <td style="text-align:center; padding:0.55rem 0.6rem;"><span style="background:rgba(239,68,68,0.2); color:var(--red); padding:0.2rem 0.6rem; border-radius:99px; font-weight:700;">Falso</span></td>
+          <td style="padding:0.55rem 0.6rem; color:var(--text-muted);">Una Skill aporta instrucciones reutilizables para una tarea. MCP permite conectar al asistente con herramientas y datos externos.</td>
+        </tr>
+        <tr>
+          <td style="padding:0.55rem 0.6rem;"><strong>5.</strong> HITL permite que una persona revise o continúe una conversación cuando sea necesario.</td>
+          <td style="text-align:center; padding:0.55rem 0.6rem;"><span style="background:rgba(34,197,94,0.2); color:var(--green); padding:0.2rem 0.6rem; border-radius:99px; font-weight:700;">Verdadero</span></td>
+          <td style="padding:0.55rem 0.6rem; color:var(--text-muted);">La persona puede revisar, aprobar o tomar el control. En Chatwoot vemos cómo recibe todo el contexto y continúa la conversación sin que el bot interfiera.</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: ENTREGABLES -->
+  <section>
+    <h2>Materiales y flujos <span class="text-gradient">para llevarte hoy</span></h2>
+    <div style="max-width:1050px;margin:0 auto;">
       
       <!-- Flujos n8n -->
-      <div class="glass-card" style="padding:1.5rem; border-top:4px solid var(--secondary); margin-bottom:1.2rem;">
-        <h4 style="color:var(--secondary);margin-bottom:1rem;font-size:1.1rem;"><i class="fa-solid fa-diagram-project"></i> 3 Flujos n8n — listos para importar</h4>
-        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem;">
+      <div class="glass-card" style="padding:1.4rem; border-top:4px solid var(--secondary); margin-bottom:1.2rem;">
+        <h4 style="color:var(--secondary);margin-bottom:1rem;font-size:1.05rem;"><i class="fa-solid fa-diagram-project"></i> Flujos de las demos en n8n — listos para descargar e importar</h4>
+        <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:1rem;">
           
-          <a href="https://github.com/axellaban/recursos/blob/main/Holaveggie_%20Indio%20Agente%20eBook%20Whatsapp%20(twlio)%20y%20HITL%20(Chatwoot).json" target="_blank" style="text-decoration:none;">
-            <div style="background:rgba(0,242,254,0.05);border:2px solid rgba(0,242,254,0.2);border-radius:12px;padding:1rem;text-align:center;transition:all 0.3s;height:100%;" onmouseover="this.style.borderColor='rgba(0,242,254,0.5)'; this.style.background='rgba(0,242,254,0.08)';" onmouseout="this.style.borderColor='rgba(0,242,254,0.2)'; this.style.background='rgba(0,242,254,0.05)';">
-              <i class="fa-solid fa-cat" style="font-size:2rem;color:var(--green);display:block;margin-bottom:0.6rem;"></i>
-              <strong style="font-size:0.85rem;color:var(--text-main);display:block;margin-bottom:0.3rem;">HolaVeggie</strong>
-              <p style="font-size:0.7rem;color:var(--text-muted);margin:0;line-height:1.4;">Agente eBook + WhatsApp + HITL Chatwoot</p>
-            </div>
-          </a>
-
           <a href="https://github.com/axellaban/recursos/blob/main/%F0%9F%94%A5%20RAG%20System%20__%20Reglamento%20de%20Golf%20%2B%20Shop__%20GEMINI%20FILE%20SEARCH.json" target="_blank" style="text-decoration:none;">
             <div style="background:rgba(245,158,11,0.05);border:2px solid rgba(245,158,11,0.2);border-radius:12px;padding:1rem;text-align:center;transition:all 0.3s;height:100%;" onmouseover="this.style.borderColor='rgba(245,158,11,0.5)'; this.style.background='rgba(245,158,11,0.08)';" onmouseout="this.style.borderColor='rgba(245,158,11,0.2)'; this.style.background='rgba(245,158,11,0.05)';">
               <i class="fa-solid fa-golf-ball-tee" style="font-size:2rem;color:var(--accent);display:block;margin-bottom:0.6rem;"></i>
-              <strong style="font-size:0.85rem;color:var(--text-main);display:block;margin-bottom:0.3rem;">Reglas del Golf</strong>
-              <p style="font-size:0.7rem;color:var(--text-muted);margin:0;line-height:1.4;">File Search + Google Sheets + Gemini</p>
+              <strong style="font-size:0.9rem;color:var(--text-main);display:block;margin-bottom:0.3rem;">Demo 1 · Reglas del Golf</strong>
+              <p style="font-size:0.75rem;color:var(--text-muted);margin:0;line-height:1.4;">Google File Search + Google Sheets + Gemini en n8n</p>
             </div>
           </a>
 
-          <a href="https://github.com/axellaban/recursos/blob/main/%F0%9F%94%A5%20RAG%20System%20__%20Saga%20de%20libros%20de%20100M%20de%20Alex%20Hormozi%20__%20PINECONE.json" target="_blank" style="text-decoration:none;">
-            <div style="background:rgba(138,43,226,0.05);border:2px solid rgba(138,43,226,0.2);border-radius:12px;padding:1rem;text-align:center;transition:all 0.3s;height:100%;" onmouseover="this.style.borderColor='rgba(138,43,226,0.5)'; this.style.background='rgba(138,43,226,0.08)';" onmouseout="this.style.borderColor='rgba(138,43,226,0.2)'; this.style.background='rgba(138,43,226,0.05)';">
-              <i class="fa-solid fa-book" style="font-size:2rem;color:var(--primary);display:block;margin-bottom:0.6rem;"></i>
-              <strong style="font-size:0.85rem;color:var(--text-main);display:block;margin-bottom:0.3rem;">Saga Hormozi</strong>
-              <p style="font-size:0.7rem;color:var(--text-muted);margin:0;line-height:1.4;">Pinecone + Reranking + Telegram</p>
+          <a href="https://github.com/axellaban/recursos/blob/main/Holaveggie_%20Indio%20Agente%20eBook%20Whatsapp%20(twlio)%20y%20HITL%20(Chatwoot).json" target="_blank" style="text-decoration:none;">
+            <div style="background:rgba(0,242,254,0.05);border:2px solid rgba(0,242,254,0.2);border-radius:12px;padding:1rem;text-align:center;transition:all 0.3s;height:100%;" onmouseover="this.style.borderColor='rgba(0,242,254,0.5)'; this.style.background='rgba(0,242,254,0.08)';" onmouseout="this.style.borderColor='rgba(0,242,254,0.2)'; this.style.background='rgba(0,242,254,0.05)';">
+              <i class="fa-solid fa-cat" style="font-size:2rem;color:var(--green);display:block;margin-bottom:0.6rem;"></i>
+              <strong style="font-size:0.9rem;color:var(--text-main);display:block;margin-bottom:0.3rem;">Demo 2 · HolaVeggie (Indio)</strong>
+              <p style="font-size:0.75rem;color:var(--text-muted);margin:0;line-height:1.4;">Asistente en WhatsApp + Derivación HITL en Chatwoot</p>
             </div>
           </a>
 
@@ -1243,41 +1243,33 @@ pero tengo el 41 (2 unidades) y el 43 (5 unidades). ¿Alguno de esos te sirve?"<
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.2rem;">
         
         <!-- Prompts -->
-        <div class="glass-card" style="padding:1.5rem; border-top:4px solid var(--accent);">
-          <h4 style="color:var(--accent);margin-bottom:1rem;font-size:1rem;"><i class="fa-solid fa-copy"></i> System Prompts</h4>
-          <div style="display:flex;flex-direction:column;gap:0.7rem;">
-            <div style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.15);border-radius:8px;padding:0.7rem;">
-              <i class="fa-solid fa-robot" style="color:var(--accent);margin-right:0.5rem;"></i>
-              <strong style="font-size:0.8rem;">Agente Principal</strong>
-              <p style="font-size:0.7rem;color:var(--text-muted);margin:0.3rem 0 0;">Estructura genérica RAG (en SLIDE 10)</p>
-            </div>
-            <div style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.15);border-radius:8px;padding:0.7rem;">
-              <i class="fa-solid fa-cat" style="color:var(--secondary);margin-right:0.5rem;"></i>
-              <strong style="font-size:0.8rem;color:var(--text-main);">Prompt HolaVeggie (Indio)</strong>
-              <p style="font-size:0.7rem;color:var(--text-muted);margin:0.3rem 0 0;">System prompt completo de venta autónoma + HITL</p>
-            </div>
+        <div class="glass-card" style="padding:1.4rem; border-top:4px solid var(--accent); text-align:left;">
+          <h4 style="color:var(--accent);margin-bottom:0.8rem;font-size:1rem;"><i class="fa-solid fa-copy"></i> Instrucciones de ejemplo</h4>
+          <div style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.15);border-radius:8px;padding:0.9rem;">
+            <i class="fa-solid fa-cat" style="color:var(--secondary);margin-right:0.5rem;"></i>
+            <strong style="font-size:0.85rem;color:var(--text-main);">System Prompt de HolaVeggie (Indio)</strong>
+            <p style="font-size:0.78rem;color:var(--text-muted);margin:0.4rem 0 0;line-height:1.4;">Estructura lista para adaptar a tu negocio: rol, personalidad, reglas para no inventar y secuencia de atención.</p>
           </div>
         </div>
 
         <!-- RAG Architect Skill -->
-        <div class="glass-card" style="padding:1.5rem; border-top:4px solid var(--primary);">
-          <h4 style="color:var(--primary);margin-bottom:0.8rem;font-size:1rem;"><i class="fa-solid fa-brain"></i> Skill — RAG Architect</h4>
-          <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.6;margin-bottom:1rem;">Analizá tus datos, recibí la arquitectura RAG óptima y el código de implementación — en minutos.</p>
-          <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:0.7rem;font-size:0.7rem;font-family:monospace;color:var(--secondary);word-break:break-all;margin-bottom:0.7rem;">
-            raw.githubusercontent.com/axellaban/recursos/main/<br>vault_assets/160_Claude_Skills/rag-architect.zip
+        <div class="glass-card" style="padding:1.4rem; border-top:4px solid var(--primary); text-align:left;">
+          <h4 style="color:var(--primary);margin-bottom:0.6rem;font-size:1rem;"><i class="fa-solid fa-brain"></i> Ejemplo de Skill — RAG Architect</h4>
+          <p style="font-size:0.82rem;color:var(--text-muted);line-height:1.5;margin-bottom:0.8rem;">Una Skill lista para subir a Claude que te ayuda a definir qué documentos y flujo conviene usar en tu proyecto.</p>
+          <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:0.6rem;font-size:0.68rem;font-family:monospace;color:var(--secondary);word-break:break-all;">
+            raw.githubusercontent.com/axellaban/recursos/main/vault_assets/160_Claude_Skills/rag-architect.zip
           </div>
-          <p style="font-size:0.75rem;color:var(--text-muted);margin:0;">Claude → Settings → Skills → Upload ZIP</p>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- SLIDE FLUJOS EXTRA -->
+  <!-- SLIDE 5: FLUJOS EXTRA -->
   <section>
-    <span class="glass-pill cyan"><i class="fa-solid fa-circle-plus"></i> Flujos de referencia</span>
-    <h2>Casos adicionales: <span class="text-gradient">flujos listos para importar</span></h2>
-    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1.5rem; max-width:900px; margin-left:auto; margin-right:auto;">No los cubrimos en detalle hoy, pero si tu negocio encaja en alguno de estos casos — el flujo completo y el video de configuración están disponibles.</p>
+    <span class="glass-pill cyan"><i class="fa-solid fa-circle-plus"></i> Flujos adicionales</span>
+    <h2>Más ejemplos: <span class="text-gradient">flujos listos para explorar</span></h2>
+    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:1.5rem; max-width:900px; margin-left:auto; margin-right:auto;">Si tu caso de negocio incluye reservas de turnos o lectura de sitios web, acá tenés el flujo y el paso a paso en video.</p>
 
     <div class="grid-2" style="max-width:1000px; margin:0 auto; gap:1.5rem; align-items:stretch;">
 
@@ -1314,14 +1306,14 @@ pero tengo el 41 (2 unidades) y el 43 (5 unidades). ¿Alguno de esos te sirve?"<
         <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.3rem;">
           <span style="font-size:2rem;">🤖</span>
           <div>
-            <strong style="font-size:1rem; color:var(--text-main); display:block;">WhatsApp chatbot con web scraper</strong>
-            <span style="font-size:0.78rem; color:var(--text-muted);">Pequeños negocios · Info siempre actualizada de tu web</span>
+            <strong style="font-size:1rem; color:var(--text-main); display:block;">WhatsApp chatbot con lectura web</strong>
+            <span style="font-size:0.78rem; color:var(--text-muted);">Negocios · Info siempre actualizada de tu sitio web</span>
           </div>
         </div>
         <ul class="premium-list" style="font-size:0.82rem; margin:0;">
-          <li><i class="fa-brands fa-whatsapp" style="color:#25D366;"></i> Agente de <strong>WhatsApp</strong> que responde 24/7</li>
-          <li><i class="fa-solid fa-spider" style="color:var(--accent);"></i> Usa <strong>Firecrawl</strong> para scrapear tu web en tiempo real</li>
-          <li><i class="fa-solid fa-rotate" style="color:var(--accent);"></i> Responde con info actualizada sin reconfigurar el agente</li>
+          <li><i class="fa-brands fa-whatsapp" style="color:#25D366;"></i> Asistente de <strong>WhatsApp</strong> que responde 24/7</li>
+          <li><i class="fa-solid fa-globe" style="color:var(--accent);"></i> Usa <strong>Firecrawl</strong> para leer tu web en tiempo real</li>
+          <li><i class="fa-solid fa-rotate" style="color:var(--accent);"></i> Responde con info actualizada sin reconfigurar el bot</li>
         </ul>
         <div style="display:flex; gap:0.6rem; margin-top:auto; padding-top:0.8rem; border-top:1px solid var(--glass-border); flex-wrap:wrap;">
           <a href="https://youtu.be/IpWx1ubSnH4" target="_blank" style="text-decoration:none; flex:1; min-width:120px;">
@@ -1338,99 +1330,90 @@ pero tengo el 41 (2 unidades) y el 43 (5 unidades). ¿Alguno de esos te sirve?"<
       </div>
 
     </div>
-
-    <div class="highlight-box cyan" style="max-width:1000px; margin:1.2rem auto 0; font-size:0.88rem;">
-      <strong>¿Cómo usarlos?</strong> Descargá el JSON → en n8n: <em>Workflows → Import from file</em>. Mirá el tutorial del caso antes de importar para entender las credenciales necesarias.
-    </div>
   </section>
 
-  <!-- SLIDE RECURSOS -->
+  <!-- SLIDE 6: RECURSOS DE LA CLASE -->
   <section>
-    <h2>Recursos de la <span class="text-gradient">clase</span></h2>
-    <div class="grid-3" style="max-width:1050px; gap:1rem;">
+    <h2>Material de lectura y <span class="text-gradient">recursos de la clase</span></h2>
+    <div class="grid-3" style="max-width:1080px; gap:1rem; text-align:left;">
 
-      <!-- Columna 1: Stack técnico -->
-      <div class="glass-card" style="padding:1.2rem; border-top:4px solid var(--secondary);">
-        <h4 style="color:var(--secondary);margin-bottom:0.8rem;font-size:0.95rem;"><i class="fa-brands fa-youtube"></i> Setup del stack</h4>
-        <ul style="list-style:none;padding:0;margin:0;font-size:0.78rem;line-height:1.7;">
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.45rem;margin-bottom:0.45rem;">
-            <a href="https://youtu.be/eyY-S5Ta1bs" style="color:var(--text-main);text-decoration:none;">
-              <i class="fa-solid fa-server" style="color:var(--secondary);margin-right:0.4rem;"></i><strong>n8n: self-hosted vs. cloud vs. local</strong>
-            </a><br><span style="color:var(--text-muted);">Comparativa completa para elegir tu setup</span>
-          </li>
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.45rem;margin-bottom:0.45rem;">
-            <a href="https://youtu.be/Cm0GhnHYlVw" style="color:var(--text-main);text-decoration:none;">
-              <i class="fa-brands fa-whatsapp" style="color:#25D366;margin-right:0.4rem;"></i><strong>Conectar API WhatsApp Business</strong>
-            </a><br><span style="color:var(--text-muted);">Setup completo paso a paso en n8n</span>
-          </li>
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.45rem;margin-bottom:0.45rem;">
-            <a href="https://youtube.com/shorts/QO-eWeTowrw" style="color:var(--text-main);text-decoration:none;">
-              <i class="fa-brands fa-telegram" style="color:#2AABEE;margin-right:0.4rem;"></i><strong>Conectar API Telegram en n8n</strong>
-            </a><br><span style="color:var(--text-muted);">Alternativa a WhatsApp — más simple de configurar</span>
-          </li>
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.45rem;margin-bottom:0.45rem;">
-            <a href="https://youtu.be/g_LUH-W45PQ" style="color:var(--text-main);text-decoration:none;">
-              <i class="fa-solid fa-key" style="color:var(--accent);margin-right:0.4rem;"></i><strong>Token permanente Meta (WhatsApp API)</strong>
-            </a><br><span style="color:var(--text-muted);">Evitá que el token expire cada 60 días</span>
-          </li>
-          <li>
-            <a href="https://youtu.be/Ty3JQMT96pg" style="color:var(--text-main);text-decoration:none;">
-              <i class="fa-solid fa-headset" style="color:var(--primary);margin-right:0.4rem;"></i><strong>Instalar Chatwoot en VPS (HITL)</strong>
-            </a><br><span style="color:var(--text-muted);">Self-hosted gratis para bandeja unificada</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Columna 2: RAG y flujos -->
-      <div class="glass-card" style="padding:1.2rem; border-top:4px solid var(--accent);">
-        <h4 style="color:var(--accent);margin-bottom:0.8rem;font-size:0.95rem;"><i class="fa-solid fa-database"></i> RAG y flujos</h4>
-        <ul style="list-style:none;padding:0;margin:0;font-size:0.8rem;line-height:1.8;">
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.5rem;margin-bottom:0.5rem;">
-            <a href="https://www.notion.so/103-Powerful-AI-RAG-System-32ac7845a1f581058501defeb9ab5052" style="color:var(--text-main);text-decoration:none;">
-              <i class="fa-solid fa-diagram-project" style="color:var(--accent);margin-right:0.4rem;"></i><strong>Flujo RAG con Pinecone en n8n</strong>
-            </a><br><span style="color:var(--text-muted);">Sistema RAG completo para escalar a vector store dedicado</span>
-          </li>
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.5rem;margin-bottom:0.5rem;">
-            <a href="https://ai.google.dev/gemini-api/docs/file-search" style="color:var(--text-main);text-decoration:none;">
-              <i class="fa-brands fa-google" style="color:var(--secondary);margin-right:0.4rem;"></i><strong>Google File Search — docs oficiales</strong>
-            </a><br><span style="color:var(--text-muted);">API de RAG gestionado de Gemini (nov 2025)</span>
-          </li>
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.5rem;margin-bottom:0.5rem;">
-            <a href="https://www.youtube.com/watch?v=irg-2IfAjpo" style="color:var(--text-main);text-decoration:none;">
-              <i class="fa-brands fa-youtube" style="color:#FF0000;margin-right:0.4rem;"></i><strong>Flujo RAG de Google File Search en n8n</strong>
-            </a><br><span style="color:var(--text-muted);">Tutorial paso a paso del flujo completo</span>
-          </li>
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.5rem;margin-bottom:0.5rem;">
-            <a href="https://support.claude.com/en/articles/12123587-import-and-export-your-memory-from-claude" style="color:var(--text-main);text-decoration:none;">
-              <i class="fa-solid fa-brain" style="color:var(--primary);margin-right:0.4rem;"></i><strong>Importar / exportar memoria de Claude</strong>
-            </a><br><span style="color:var(--text-muted);">Prompt para migrar la memoria completa entre instancias</span>
-          </li>
-          <li>
-            <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview" style="color:var(--text-main);text-decoration:none;">
-              <i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent);margin-right:0.4rem;"></i><strong>Claude Prompt Engineering Guide</strong>
-            </a><br><span style="color:var(--text-muted);">Guía oficial de Anthropic para dominar prompts complejos</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Columna 3: Modelos y evaluación -->
+      <!-- Columna 1: Lecturas del Programa (RAG, NotebookLM y HITL) -->
       <div class="glass-card" style="padding:1.2rem; border-top:4px solid var(--green);">
-        <h4 style="color:var(--green);margin-bottom:0.8rem;font-size:0.95rem;"><i class="fa-solid fa-chart-bar"></i> Comparar y elegir modelos</h4>
-        <ul style="list-style:none;padding:0;margin:0;font-size:0.8rem;line-height:1.8;">
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.5rem;margin-bottom:0.5rem;">
-            <a href="https://artificialanalysis.ai" style="color:var(--text-main);text-decoration:none;">
-              <i class="fa-solid fa-magnifying-glass-chart" style="color:var(--green);margin-right:0.4rem;"></i><strong>Artificial Analysis</strong>
-            </a><br><span style="color:var(--text-muted);">Benchmarks de performance, latencia y costo por modelo. La referencia para elegir.</span>
+        <h4 style="color:var(--green);margin-bottom:0.8rem;font-size:0.95rem;"><i class="fa-solid fa-book-open"></i> Lecturas · RAG, NotebookLM y HITL</h4>
+        <ul style="list-style:none;padding:0;margin:0;font-size:0.78rem;line-height:1.65;">
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.45rem;margin-bottom:0.45rem;">
+            <a href="https://support.google.com/notebooklm/answer/16164461?hl=es" target="_blank" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-brands fa-google" style="color:var(--green);margin-right:0.4rem;"></i><strong>Guía oficial de NotebookLM (ES)</strong>
+            </a><br><span style="color:var(--text-muted);">Cómo consultar fuentes y revisar las citas que respaldan cada respuesta</span>
           </li>
-          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.5rem;margin-bottom:0.5rem;">
-            <a href="https://lmarena.ai" style="color:var(--text-main);text-decoration:none;">
-              <i class="fa-solid fa-trophy" style="color:var(--accent);margin-right:0.4rem;"></i><strong>LM Arena</strong>
-            </a><br><span style="color:var(--text-muted);">Probá modelos en ciego y votá cuál responde mejor a tu caso.</span>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.45rem;margin-bottom:0.45rem;">
+            <a href="https://www.youtube.com/watch?v=KA_pExdDSUo" target="_blank" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-brands fa-youtube" style="color:#FF0000;margin-right:0.4rem;"></i><strong>Video opcional: NotebookLM (Google)</strong>
+            </a><br><span style="color:var(--text-muted);">Ejemplo de cómo transformar fuentes en materiales de consulta</span>
+          </li>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.45rem;margin-bottom:0.45rem;">
+            <a href="https://cloud.google.com/use-cases/retrieval-augmented-generation?hl=es" target="_blank" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-solid fa-cloud" style="color:var(--secondary);margin-right:0.4rem;"></i><strong>Google Cloud: ¿Qué es RAG? (ES)</strong>
+            </a><br><span style="color:var(--text-muted);">Introducción, «Acceso a información actualizada» y «Fundamentos fácticos»</span>
           </li>
           <li>
-            <div style="color:var(--text-muted);font-size:0.78rem;margin-top:0.5rem;padding:0.6rem;background:rgba(0,242,254,0.05);border-radius:8px;border:1px solid var(--glass-border);">
-              <strong style="color:var(--secondary);">Tip:</strong> Antes de elegir el LLM para tu agente, testeá tu prompt exacto en LM Arena con tus datos reales. Lo que funciona en el benchmark puede no ser lo mejor para tu caso de uso específico.
-            </div>
+            <a href="https://app.chatwoot.com/hc/user-guide/articles/1677497472-how-to-use-agent-bots" target="_blank" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-solid fa-headset" style="color:var(--accent);margin-right:0.4rem;"></i><strong>Guía de Chatwoot: Agent Bots & Handoff</strong>
+            </a><br><span style="color:var(--text-muted);">Apartado «How does the Human-Agent handoff work?» (paso a humano)</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Columna 2: Skills y MCP -->
+      <div class="glass-card" style="padding:1.2rem; border-top:4px solid var(--primary);">
+        <h4 style="color:var(--primary);margin-bottom:0.8rem;font-size:0.95rem;"><i class="fa-solid fa-plug"></i> Guías y Catálogos · Skills y MCP</h4>
+        <ul style="list-style:none;padding:0;margin:0;font-size:0.78rem;line-height:1.65;">
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.45rem;margin-bottom:0.45rem;">
+            <a href="https://agentskills.io/home" target="_blank" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-solid fa-book-bookmark" style="color:var(--primary);margin-right:0.4rem;"></i><strong>Agent Skills (Guía oficial)</strong>
+            </a><br><span style="color:var(--text-muted);">Cómo una skill reúne instrucciones reutilizables para una tarea</span>
+          </li>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.45rem;margin-bottom:0.45rem;">
+            <a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-solid fa-network-wired" style="color:var(--secondary);margin-right:0.4rem;"></i><strong>MCP Oficial — Introducción</strong>
+            </a><br><span style="color:var(--text-muted);">Cómo conectar asistentes con herramientas y datos externos</span>
+          </li>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.45rem;margin-bottom:0.45rem;">
+            <a href="https://skills.sh/" target="_blank" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-solid fa-magnifying-glass" style="color:var(--accent);margin-right:0.4rem;"></i><strong>skills.sh (Catálogo de Skills)</strong>
+            </a><br><span style="color:var(--text-muted);">Buscador de habilidades reutilizables para sumar a un agente</span>
+          </li>
+          <li>
+            <a href="https://smithery.ai/" target="_blank" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-solid fa-boxes-stacked" style="color:var(--green);margin-right:0.4rem;"></i><strong>Smithery (Catálogo MCP)</strong>
+            </a><br><span style="color:var(--text-muted);">Directorio de conexiones MCP con herramientas y servicios</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Tutoriales paso a paso -->
+      <div class="glass-card" style="padding:1.2rem; border-top:4px solid var(--secondary);">
+        <h4 style="color:var(--secondary);margin-bottom:0.8rem;font-size:0.95rem;"><i class="fa-brands fa-youtube"></i> Tutoriales de configuración</h4>
+        <ul style="list-style:none;padding:0;margin:0;font-size:0.78rem;line-height:1.65;">
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.45rem;margin-bottom:0.45rem;">
+            <a href="https://www.youtube.com/watch?v=irg-2IfAjpo" target="_blank" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-brands fa-google" style="color:var(--secondary);margin-right:0.4rem;"></i><strong>Flujo RAG con Google File Search en n8n</strong>
+            </a><br><span style="color:var(--text-muted);">Paso a paso del flujo de documentos</span>
+          </li>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.45rem;margin-bottom:0.45rem;">
+            <a href="https://youtu.be/eyY-S5Ta1bs" target="_blank" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-solid fa-server" style="color:var(--secondary);margin-right:0.4rem;"></i><strong>n8n: cloud vs. servidor propio vs. local</strong>
+            </a><br><span style="color:var(--text-muted);">Comparativa para elegir dónde correr tus flujos</span>
+          </li>
+          <li style="border-bottom:1px solid var(--glass-border);padding-bottom:0.45rem;margin-bottom:0.45rem;">
+            <a href="https://youtu.be/Cm0GhnHYlVw" target="_blank" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-brands fa-whatsapp" style="color:#25D366;margin-right:0.4rem;"></i><strong>Conectar WhatsApp y Telegram en n8n</strong>
+            </a><br><span style="color:var(--text-muted);">También disponible el <a href="https://youtube.com/shorts/QO-eWeTowrw" target="_blank" style="color:var(--secondary);">short de Telegram</a></span>
+          </li>
+          <li>
+            <a href="https://youtu.be/Ty3JQMT96pg" target="_blank" style="color:var(--text-main);text-decoration:none;">
+              <i class="fa-solid fa-headset" style="color:var(--primary);margin-right:0.4rem;"></i><strong>Instalar y usar Chatwoot (HITL)</strong>
+            </a><br><span style="color:var(--text-muted);">Configuración de bandeja compartida para tu equipo</span>
           </li>
         </ul>
       </div>
@@ -1438,125 +1421,31 @@ pero tengo el 41 (2 unidades) y el 43 (5 unidades). ¿Alguno de esos te sirve?"<
     </div>
   </section>
 
+  <!-- SLIDE 7: Q&A Y CIERRE -->
   <section>
-    <h2>KPIs: cómo medís el <span class="text-gradient">impacto real</span></h2>
-
-    <!-- Cards con jerarquía clara por tipo de agente -->
-    <div class="grid-4" style="max-width:1050px;margin:1.2rem auto 0;">
-      <div class="glass-card stat-box" style="padding:1.2rem; border-top:3px solid var(--secondary);">
-        <div style="font-size:0.68rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--secondary); margin-bottom:0.4rem;">Agente de atención</div>
-        <div class="stat-number text-gradient" style="font-size:2.4rem;">&gt;70%</div>
-        <div class="stat-label" style="font-size:0.82rem; margin-top:0.3rem;">Consultas resueltas<br>sin intervención humana</div>
-      </div>
-      <div class="glass-card stat-box" style="padding:1.2rem; border-top:3px solid var(--green);">
-        <div style="font-size:0.68rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--green); margin-bottom:0.4rem;">Enrutamiento · <span style="color:var(--text-muted); font-weight:400; text-transform:none;">precisión</span></div>
-        <div class="stat-number text-gradient-green" style="font-size:2.4rem;">&gt;95%</div>
-        <div class="stat-label" style="font-size:0.82rem; margin-top:0.3rem;">Clasificar y derivar<br>con precisión automática</div>
-      </div>
-      <div class="glass-card stat-box" style="padding:1.2rem; border-top:3px solid var(--accent);">
-        <div style="font-size:0.68rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:0.4rem;">Calidad del RAG</div>
-        <div class="stat-number text-gradient-amber" style="font-size:2.4rem;">&lt;5%</div>
-        <div class="stat-label" style="font-size:0.82rem; margin-top:0.3rem;">Falsos positivos<br><em style="font-size:0.75rem; color:var(--text-muted);">Requiere revisión de muestras</em></div>
-      </div>
-      <div class="glass-card stat-box" style="padding:1.2rem; border-top:3px solid var(--primary);">
-        <div style="font-size:0.68rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#c4b5fd; margin-bottom:0.4rem;">Respuesta end-to-end · <span style="color:var(--text-muted); font-weight:400; text-transform:none;">externo</span></div>
-        <div class="stat-number text-gradient" style="font-size:2.4rem;">-50%</div>
-        <div class="stat-label" style="font-size:0.82rem; margin-top:0.3rem;">Tiempo primer contacto<br>→ resolución al cliente</div>
-      </div>
-    </div>
-
-    <!-- Puente visual: bisagra entre cards y tabla -->
-    <p style="color:var(--text-muted); font-size:0.88rem; max-width:1050px; margin:0.8rem auto 0.5rem; text-align:left; padding-left:0.2rem;">
-      Estos son tus 4 targets. Si alguno no se cumple, acá está dónde mirar:
+    <span class="glass-pill cyan"><i class="fa-solid fa-comments"></i> 30 MINUTOS · PREGUNTAS Y RESPUESTAS</span>
+    <h2 style="font-size:3.2rem;">Espacio de <span class="text-gradient">Preguntas y Casos</span></h2>
+    <p style="color:var(--text-muted); font-size:1.1rem; max-width:750px; margin:0 auto 1.5rem;">
+      Abrimos los últimos 30 minutos para revisar dudas sobre las demos, elegir qué flujo conviene para tu negocio o ver cómo aplicar RAG, MCP y Chatwoot en tu caso real.
     </p>
-
-    <!-- Tabla 2 columnas, acción dominante (70%) -->
-    <div class="glass-card" style="max-width:1050px; margin:0 auto; padding:0; text-align:left; overflow:hidden;">
-      <div class="responsive-table-wrapper">
-        <table class="premium-table" style="table-layout:fixed;">
-          <colgroup>
-            <col style="width:32%;">
-            <col style="width:68%;">
-          </colgroup>
-          <thead>
-            <tr>
-              <th style="color:var(--green); font-size:0.88rem;">✓ Si está bien</th>
-              <th style="color:#f87171; font-size:0.88rem;">⚠ Si está mal → acción inmediata</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="color:var(--green); font-size:0.88rem;">El RAG está funcionando</td>
-              <td style="font-size:0.88rem;">Revisá los chunks donde falló — los docs probablemente están mal estructurados o son demasiado largos</td>
-            </tr>
-            <tr>
-              <td style="color:var(--green); font-size:0.88rem;">El clasificador es preciso</td>
-              <td style="font-size:0.88rem;">Revisá las categorías del prompt — puede haber una intención mal definida o solapada con otra</td>
-            </tr>
-            <tr>
-              <td style="color:var(--green); font-size:0.88rem;">Los guardrails funcionan</td>
-              <td style="font-size:0.88rem;">Reforzá las restricciones absolutas en el system prompt — y revisá la última muestra manualmente</td>
-            </tr>
-            <tr>
-              <td style="color:var(--green); font-size:0.88rem;">El HITL está bien calibrado</td>
-              <td style="font-size:0.88rem;">Revisá si el agente escala demasiado — ajustá las condiciones del IF en el nodo de enrutamiento</td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="grid-3" style="max-width:950px; margin:0 auto 1.5rem;">
+      <div class="glass-card" style="padding:1.2rem;">
+        <i class="fa-solid fa-book-open" style="font-size:1.8rem; color:var(--secondary); margin-bottom:0.5rem; display:block;"></i>
+        <strong>1. Fuentes y RAG</strong>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0.3rem 0 0;">NotebookLM y Google File Search</p>
+      </div>
+      <div class="glass-card" style="padding:1.2rem;">
+        <i class="fa-solid fa-headset" style="font-size:1.8rem; color:var(--green); margin-bottom:0.5rem; display:block;"></i>
+        <strong>2. Control Humano (HITL)</strong>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0.3rem 0 0;">Derivación y contexto en Chatwoot</p>
+      </div>
+      <div class="glass-card" style="padding:1.2rem;">
+        <i class="fa-solid fa-plug" style="font-size:1.8rem; color:var(--accent); margin-bottom:0.5rem; display:block;"></i>
+        <strong>3. Skills, Tools y MCP</strong>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin:0.3rem 0 0;">Instrucciones y conexiones en n8n</p>
       </div>
     </div>
-
-    <!-- Callout verde como cierre real, más prominente -->
-    <div class="highlight-box green" style="max-width:1050px; margin:0.8rem auto 0; font-size:1rem; padding:1.1rem 1.5rem;">
-      <strong>Antes de lanzar, registrá tu línea de base.</strong> Sin ese punto de partida no podés demostrar nada — ni el impacto, ni el retorno, ni el progreso.
-    </div>
-  </section>
-
-  <section>
-    <h2>El puente a la <span class="text-gradient">Clase 3</span></h2>
-    <div class="glass-card" style="max-width:900px;text-align:left;padding:1.8rem 2rem;">
-      <div class="highlight-box cyan" style="margin-top:0;font-size:1.05rem;">
-        En esta clase construiste <strong>agentes reactivos</strong> — responden cuando los llaman.
-      </div>
-      <p style="font-size:1.1rem;line-height:1.7;margin-top:1.2rem;">En la Clase 3 construís <strong>agentes proactivos y sistemas multiagente</strong>:</p>
-      <ul class="premium-list" style="font-size:0.95rem;margin-top:0.8rem;">
-        <li><i class="fa-solid fa-calendar-check"></i> <strong>Meeting Prep Agent</strong> — trabaja a las 7 AM sin que nadie lo llame. Revisa tu calendario, investiga participantes y publica un briefing antes de la reunión.</li>
-        <li><i class="fa-solid fa-robot"></i> <strong>Crew de agentes</strong> — múltiples IAs con roles distintos que colaboran para resolver un proceso completo de forma autónoma.</li>
-      </ul>
-      <div class="highlight-box amber" style="margin-top:1.2rem;font-size:0.95rem;">
-        El RAG que armaste hoy es la memoria de largo plazo de esos sistemas. Todo lo que construiste hoy se reutiliza en la Clase 3.
-      </div>
-    </div>
-  </section>
-
-  <!-- APÉNDICE: CANVAS -->
-  <section>
-    <h2>Apéndice: <span class="text-gradient">Canvas de Diseño RAG</span></h2>
-    <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1rem;">Completalo ANTES de construir cualquier agente. Define el norte del sistema.</p>
-    <div class="responsive-table-wrapper" style="max-width:1050px; margin: 0 auto;">
-      <table class="premium-table">
-        <thead>
-          <tr>
-            <th style="width:34%;">Campo del Canvas</th>
-            <th style="width:66%;">Guía</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td><strong>1. El problema que resuelve</strong></td><td>¿Qué proceso duele hoy? Sé específico.</td></tr>
-          <tr><td><strong>2. Canal de entrada</strong></td><td>WhatsApp · Telegram · Email · Slack · API interna</td></tr>
-          <tr><td><strong>3. Nombre y rol del agente</strong></td><td>Ej. "Nina, especialista en soporte técnico de [EMPRESA]"</td></tr>
-          <tr><td><strong>4. Fuentes de conocimiento</strong></td><td>¿Qué docs va a consultar? Lista los 3 principales.</td></tr>
-          <tr><td><strong>5. Arquitectura RAG</strong></td><td>Naive · Re-ranking · Híbrido · GraphRAG · Agentic RAG</td></tr>
-          <tr><td><strong>6. Herramienta RAG</strong></td><td>System Prompt · File Search · Supabase · Pinecone · Qdrant</td></tr>
-          <tr><td><strong>7. Datos dinámicos necesarios</strong></td><td>¿Stock, pedidos, calendario o CRM en tiempo real?</td></tr>
-          <tr><td><strong>8. Condición de HITL</strong></td><td>¿Cuándo y cómo deriva? Define la regla exacta.</td></tr>
-          <tr><td><strong>9. Modo de inicio</strong></td><td>Copilot (humano aprueba) · Autopilot (ejecuta solo)</td></tr>
-          <tr><td><strong>10. KPI primario de éxito</strong></td><td>¿Cómo medís si funciona? Métrica + objetivo.</td></tr>
-          <tr><td><strong>11. Responsable de mantenimiento</strong></td><td>¿Quién actualiza la base de conocimiento?</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <h2 class="text-gradient" style="margin-top:1.5rem;font-size:2.8rem;">Gracias. A construir.</h2>
+    <h3 class="text-gradient" style="font-size:2.2rem; margin-top:1rem;">¡Gracias! A construir.</h3>
   </section>
 </section>
 
